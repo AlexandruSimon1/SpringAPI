@@ -9,8 +9,8 @@ public class WaiterDTO {
     private Integer waiterId;
     private String firstName;
     private String lastName;
-    private DateTimeFormatter dateOfBirth;
+    private int dateOfBirth;
     private String address;
-    private Integer phoneNumber;
+    private Long phoneNumber;
     private String email;
 }
