@@ -9,17 +9,17 @@ import java.util.Set;
 public interface OrderService {
     List<OrderDTO> getAllOrders();
 
-    OrderDTO getOrderById(int orderId);
+    OrderDTO getOrderById(int orderNumber);
 
-    OrderDTO deleteOrderById(int orderId);
+    OrderDTO deleteOrderById(int orderNumber);
 
     OrderDTO createOrder(OrderDTO orderDTO);
 
-    OrderDTO update(OrderDTO orderDTO, int orderId);
+    OrderDTO update(OrderDTO orderDTO, int orderNumber);
 
-    Set<MenuDTO> findAllProductByOrderId(int orderId);
+    Set<MenuDTO> findAllProductByOrderId(int orderNumber);
 
-    MenuDTO updateProductByOrderId(int orderId, int removed_productId, MenuDTO newMenuDTO);
+    MenuDTO updateProductByOrderId(int orderNumber, int removed_productId, MenuDTO newMenuDTO);
 
-    MenuDTO deleteProductByOrderId(int orderId, int removed_productId);
+    MenuDTO deleteProductByOrderId(int orderNumber, int removed_productId);
 }

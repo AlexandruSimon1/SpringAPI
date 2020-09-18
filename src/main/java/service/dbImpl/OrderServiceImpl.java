@@ -38,15 +38,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDTO getOrderById(int orderId) {
-        final Order getOrder = orderRepository.findById(orderId).
+    public OrderDTO getOrderById(int orderNumber) {
+        final Order getOrder = orderRepository.findById(orderNumber).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
         return OrderMapper.INSTANCE.toOrderDto(getOrder, new NotificatorMappingContext());
     }
 
     @Override
-    public OrderDTO deleteOrderById(int orderId) {
-        final Order deleteOrder = orderRepository.findById(orderId).
+    public OrderDTO deleteOrderById(int orderNumber) {
+        final Order deleteOrder = orderRepository.findById(orderNumber).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
         return OrderMapper.INSTANCE.toOrderDto(deleteOrder, new NotificatorMappingContext());
     }
@@ -59,8 +59,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderDTO update(OrderDTO orderDTO, int orderId) {
-        final Order updateOrder = orderRepository.findById(orderId).
+    public OrderDTO update(OrderDTO orderDTO, int orderNumber) {
+        final Order updateOrder = orderRepository.findById(orderNumber).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
         updateOrder.setQuantity(orderDTO.getQuantity());
         updateOrder.addMenu(MenuMapper.INSTANCE.fromMenuDto(orderDTO.getMenuDTO(), new NotificatorMappingContext()));
@@ -70,16 +70,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Set<MenuDTO> findAllProductByOrderId(int orderId) {
-        Order order = orderRepository.findById(orderId).
+    public Set<MenuDTO> findAllProductByOrderId(int orderNumber) {
+        Order order = orderRepository.findById(orderNumber).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
         return order.getMenus().stream().filter(Objects::isNull).
                 map(menu -> MenuMapper.INSTANCE.toMenuDto(menu, new NotificatorMappingContext())).collect(Collectors.toSet());
     }
 
     @Override
-    public MenuDTO updateProductByOrderId(int orderId, int removed_productId, MenuDTO newMenuDTO) {
-        Order order = orderRepository.findById(orderId).
+    public MenuDTO updateProductByOrderId(int orderNumber, int removed_productId, MenuDTO newMenuDTO) {
+        Order order = orderRepository.findById(orderNumber).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
         Optional<Menu> deleteProduct = order.getMenus().stream().
                 filter(menu -> Objects.equals(menu.getMenuId(), removed_productId)).findFirst();
@@ -96,8 +96,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public MenuDTO deleteProductByOrderId(int orderId, int removed_productId) {
-        final Order order = orderRepository.findById(orderId).
+    public MenuDTO deleteProductByOrderId(int orderNumber, int removed_productId) {
+        final Order order = orderRepository.findById(orderNumber).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
         final Menu deleteProduct = menuRepository.findById(removed_productId).
                 orElseThrow(() -> new ApplicationException(ExceptionType.PRODUCT_NOT_FOUND));

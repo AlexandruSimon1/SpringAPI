@@ -19,10 +19,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private int orderId;
-
+    @Column(name = "order_number")
+    private int orderNumber;
     @Column(name = "quantity")
     private int quantity;
-
     @Column(name = "menuId")
     private int menuId;
 
