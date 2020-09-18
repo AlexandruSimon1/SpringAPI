@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import javax.persistence.Table;
-import java.time.format.DateTimeFormatter;
 
 @Data
 @RequiredArgsConstructor
@@ -24,7 +23,7 @@ public class Waiter {
     private String lastName;
 
     @Column(name = "date_of_birth")
-    private DateTimeFormatter dateOfBirth;
+    private int dateOfBirth;
 
     @Column(name = "address")
     private String address;
