@@ -37,6 +37,13 @@ public class Order {
     @JoinColumn(name = "table_id", referencedColumnName = "table_id")
     private model.Table table;
 
+    public void addMenu(Menu menu) {
+        if (menus == null) {
+            menus = new HashSet<>();
+        }
+        menus.add(menu);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
