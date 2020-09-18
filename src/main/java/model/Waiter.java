@@ -29,7 +29,7 @@ public class Waiter {
     private String address;
 
     @Column(name = "phone_number")
-    private int phoneNumber;
+    private Long phoneNumber;
 
     @Column(name = "email")
     private String email;
