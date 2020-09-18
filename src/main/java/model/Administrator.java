@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import javax.persistence.Table;
 import java.time.format.DateTimeFormatter;
 @Data
 @RequiredArgsConstructor
