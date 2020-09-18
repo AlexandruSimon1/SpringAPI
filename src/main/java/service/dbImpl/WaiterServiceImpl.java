@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 @Transactional
 public class WaiterServiceImpl implements WaiterService {
     private final WaiterRepository waiterRepository;
-    private final OrderRepository orderRepository;
+    //private final OrderRepository orderRepository;
 
     @Override
     public List<WaiterDTO> getAllWaiters() {

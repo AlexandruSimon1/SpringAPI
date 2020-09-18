@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class AdministratorImpl implements AdministratorService {
+public class AdministratorServiceImpl implements AdministratorService {
     private final AdministratorRepository administratorRepository;
 
 
