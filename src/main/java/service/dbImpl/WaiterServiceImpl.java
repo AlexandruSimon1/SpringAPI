@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 @Transactional
 public class WaiterServiceImpl implements WaiterService {
     private final WaiterRepository waiterRepository;
-    //private final OrderRepository orderRepository;
 
     @Override
     public List<WaiterDTO> getAllWaiters() {
@@ -69,12 +68,4 @@ public class WaiterServiceImpl implements WaiterService {
         waiterRepository.save(updateWaiter);
         return WaiterMapper.INSTANCE.toWaiterDto(updateWaiter, new NotificatorMappingContext());
     }
-
-//    @Override check how you can implement that waiter can check all his orders
-//    public Set<OrderDTO> findAllOrders(int waiterId) {
-//        Waiter waiter =waiterRepository.findById(waiterId).
-//                orElseThrow(()->new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
-//        return waiter.getMenus().stream().filter(Objects::isNull).
-//                map(OrderMapper.INSTANCE.toOrderDto(waiter,new NotificatorMappingContext())).collect(Collectors.toSet());
-//    }
 }
