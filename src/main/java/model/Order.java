@@ -11,7 +11,6 @@ import java.util.Set;
 
 @Data
 @RequiredArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "orders")
 public class Order {
