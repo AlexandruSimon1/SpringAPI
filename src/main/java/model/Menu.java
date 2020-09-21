@@ -16,7 +16,7 @@ public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "product_id")
-    private int menuId;
+    private int productId;
 
     @Enumerated(EnumType.STRING)
     @Column (name = "category")

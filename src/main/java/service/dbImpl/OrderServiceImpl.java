@@ -82,7 +82,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.findById(orderNumber).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
         Optional<Menu> deleteProduct = order.getMenus().stream().
-                filter(menu -> Objects.equals(menu.getMenuId(), removed_productId)).findFirst();
+                filter(menu -> Objects.equals(menu.getProductId(), removed_productId)).findFirst();
         if (!deleteProduct.isPresent()) {
             throw new ApplicationException(ExceptionType.PRODUCT_NOT_FOUND);
         }
