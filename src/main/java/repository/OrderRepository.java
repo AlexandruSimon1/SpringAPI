@@ -3,5 +3,9 @@ package repository;
 import model.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrderRepository extends JpaRepository<Order,Integer> {
+import java.util.HashSet;
+import java.util.Set;
+
+public interface OrderRepository extends JpaRepository<Order, Integer> {
+    Set<Order> findAllByTableID(int tableId);
 }

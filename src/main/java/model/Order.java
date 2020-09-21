@@ -22,8 +22,6 @@ public class Order {
     private int orderNumber;
     @Column(name = "quantity")
     private int quantity;
-    @Column(name = "menuId")
-    private int menuId;
 
     @OneToOne(mappedBy = "order")
     private CheckOut checkOut;
@@ -50,7 +48,6 @@ public class Order {
         Order order = (Order) o;
         return getOrderId() == order.getOrderId() &&
                 getQuantity() == order.getQuantity() &&
-                getMenuId() == order.getMenuId() &&
                 getCheckOut().equals(order.getCheckOut()) &&
                 getMenus().equals(order.getMenus()) &&
                 getTable().equals(order.getTable());
@@ -58,6 +55,6 @@ public class Order {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getOrderId(), getQuantity(), getMenuId(), getCheckOut(), getMenus(), getTable());
+        return Objects.hash(getOrderId(), getQuantity(), getCheckOut(), getMenus(), getTable());
     }
 }
