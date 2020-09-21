@@ -21,7 +21,7 @@ public class CheckOutServiceImpl implements CheckOutService {
 
     @Override
     public List<CheckOutDTO> getAllCheckOut() {
-        return checkOutRepository.findAll().stream().filter(Objects::isNull).
+        return checkOutRepository.findAll().stream().
                 map(checkOut -> CheckOutMapper.INSTANCE.toCheckOutDto(checkOut, new NotificatorMappingContext())).
                 collect(Collectors.toList());
     }

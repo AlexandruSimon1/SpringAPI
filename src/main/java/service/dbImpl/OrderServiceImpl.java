@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import repository.MenuRepository;
 import repository.OrderRepository;
+import repository.TableRepository;
 import service.OrderService;
 
 import java.util.List;
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final MenuRepository menuRepository;
+    private final TableRepository tableRepository;
 
     @Override
     public List<OrderDTO> getAllOrders() {

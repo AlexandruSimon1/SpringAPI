@@ -26,7 +26,7 @@ public class AdministratorServiceImpl implements AdministratorService {
 
     @Override
     public List<AdminDTO> getAllAdministrators() {
-        return administratorRepository.findAll().stream().filter(Objects::isNull).
+        return administratorRepository.findAll().stream().
                 map(administrator -> AdministratorMapper.INSTANCE.
                         toAdministratorDto(administrator, new NotificatorMappingContext())).collect(Collectors.toList());
     }

@@ -25,7 +25,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<MenuDTO> getAllMenu() {
-        return menuRepository.findAll().stream().filter(Objects::isNull).
+        return menuRepository.findAll().stream().
                 map(menu -> MenuMapper.INSTANCE.toMenuDto(menu, new NotificatorMappingContext())).collect(Collectors.toList());
     }
 

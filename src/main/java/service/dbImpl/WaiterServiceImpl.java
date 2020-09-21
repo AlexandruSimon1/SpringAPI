@@ -30,7 +30,7 @@ public class WaiterServiceImpl implements WaiterService {
 
     @Override
     public List<WaiterDTO> getAllWaiters() {
-        return waiterRepository.findAll().stream().filter(Objects::isNull).
+        return waiterRepository.findAll().stream().
                 map(waiter -> WaiterMapper.INSTANCE.
                         toWaiterDto(waiter, new NotificatorMappingContext())).collect(Collectors.toList());
     }

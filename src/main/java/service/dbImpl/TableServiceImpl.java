@@ -20,7 +20,7 @@ public class TableServiceImpl implements TableService {
 
     @Override
     public List<TableDTO> getAllTable() {
-        return tableRepository.findAll().stream().filter(Objects::isNull).
+        return tableRepository.findAll().stream().
                 map(table -> TableMapper.INSTANCE.toTableDto(table, new NotificatorMappingContext())).
                 collect(Collectors.toList());
     }
