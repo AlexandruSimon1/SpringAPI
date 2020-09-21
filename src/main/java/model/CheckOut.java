@@ -8,7 +8,6 @@ import javax.persistence.Table;
 
 @Data
 @RequiredArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "check_out")
 
