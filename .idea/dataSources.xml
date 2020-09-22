@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="hibernate.config.xml/Hibernate" uuid="90f961f2-9d6a-47af-befc-0f0e8b58ab77">
+      <imported>true</imported>
+      <configured-by-url>true</configured-by-url>
+      <remarks>Hibernate
+
+C:/Users/simon/IdeaProjects/SpringAPI/src/main/resources/hibernate.config.xml</remarks>
+      <jdbc-driver>oracle.jdbc.driver.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@//localhost:3606/restaurant_db</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="restaurant_db" uuid="4daf2f26-04b0-4657-b452-bcc764de42b7">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/restaurant_db?serverTimezone=UTC</jdbc-url>
+    </data-source>
+  </component>
+</project>
