@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-@PropertySource("application-${spring.profile.activate}.properties")
+@PropertySource("application-${spring.profiles.active}.properties")
 public class DBConstants {
     @Value("${db_driver}")
     private String db_driver;
@@ -19,6 +19,6 @@ public class DBConstants {
     private String db_password;
     @Value("${db_name}")
     private String db_name;
-    @Value("@{server_port}")
+    @Value("${server_port}")
     private String server_port;
 }
