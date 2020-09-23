@@ -57,7 +57,7 @@ public class AdministratorServiceImpl implements AdministratorService {
                 orElseThrow(() -> new ApplicationException(ExceptionType.ADMINISTRATOR_NOT_FOUND));
         updateAdministrator.setFirstName(adminDTO.getFirstName());
         updateAdministrator.setLastName(adminDTO.getLastName());
-        updateAdministrator.setDateOfBirth(adminDTO.getDateOfBirth());
+//        updateAdministrator.setDateOfBirth(adminDTO.getDateOfBirth());
         updateAdministrator.setAddress(adminDTO.getAddress());
         updateAdministrator.setPhoneNumber(adminDTO.getPhoneNumber());
         updateAdministrator.setEmail(adminDTO.getEmail());

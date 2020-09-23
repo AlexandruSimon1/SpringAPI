@@ -7,7 +7,6 @@ import com.application.exceptions.ExceptionType;
 import com.application.mapper.MenuMapper;
 import com.application.mapper.NotificatorMappingContext;
 import com.application.mapper.OrderMapper;
-import com.application.mapper.TableMapper;
 import com.application.model.Menu;
 import com.application.model.Order;
 import com.application.repository.MenuRepository;
@@ -34,7 +33,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDTO> getAllOrders() {
+
         return orderRepository.findAll().stream().
+                filter(order -> order.getMenus() != null).
                 map(order -> OrderMapper.INSTANCE.toOrderDto(order, new NotificatorMappingContext())).
                 collect(Collectors.toList());
     }
@@ -66,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
         updateOrder.setQuantity(orderDTO.getQuantity());
         updateOrder.addMenu(MenuMapper.INSTANCE.fromMenuDto(orderDTO.getMenuDTO(), new NotificatorMappingContext()));
-        updateOrder.setTable(TableMapper.INSTANCE.fromTableDto(orderDTO.getTableDTO(), new NotificatorMappingContext()));
+        //updateOrder.setTable(TableMapper.INSTANCE.fromTableDto(orderDTO.getTableDTO(), new NotificatorMappingContext()));
         orderRepository.save(updateOrder);
         return OrderMapper.INSTANCE.toOrderDto(updateOrder, new NotificatorMappingContext());
     }

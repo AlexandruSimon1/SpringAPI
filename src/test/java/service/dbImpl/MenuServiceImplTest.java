@@ -105,14 +105,14 @@ class MenuServiceImplTest {
         createProductMenu.setDescription("Ice cream with couple of chocolate");
         createProductMenu.setCategoryType(CategoryType.DESSERT);
         createProductMenu.setPrice(85);
-        createProductMenu.setOrder(orderTest);
+//        createProductMenu.setOrder(orderTest);
         MenuDTO createdProduct = new MenuDTO();
         createdProduct.setProductId(ID_VALUE);
         createdProduct.setName("Mr Nico");
         createdProduct.setDescription("Ice cream with couple of chocolate");
         createdProduct.setCategoryType(CategoryType.DESSERT);
         createdProduct.setPrice(85);
-        createdProduct.setOrderDTO(orderDTOTest);
+//        createdProduct.setOrderDTO(orderDTOTest);
         when(menuRepository.save(createProductMenu)).thenReturn(createProductMenu);
 
         MenuDTO finalProduct = menuService.createProduct(createdProduct);

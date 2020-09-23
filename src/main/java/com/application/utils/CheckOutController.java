@@ -13,10 +13,11 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/main/v1/checkout")
+@RequestMapping("/api/v1/checkout")
 @Api(value = "checkout", description = "CRUD Operations for CheckOut", tags = "CHECKOUT")
 public class CheckOutController {
     private final CheckOutService checkOutService;
+
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

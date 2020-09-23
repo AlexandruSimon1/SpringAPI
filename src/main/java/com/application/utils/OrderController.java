@@ -14,7 +14,7 @@ import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/main/v1/orders")
+@RequestMapping("/api/v1/orders")
 @Api(value = "orders", description = "CRUD Operations for Orders", tags = "ORDERS")
 public class OrderController {
     private final OrderService orderService;

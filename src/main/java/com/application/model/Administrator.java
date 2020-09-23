@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Table;
 import javax.persistence.*;
+import java.time.LocalDate;
+
 
 @Data
 @RequiredArgsConstructor
@@ -14,7 +16,7 @@ public class Administrator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "administrator_id")
-    private int adminId;
+    private Integer adminId;
 
     @Column(name = "first_name")
     private String firstName;
@@ -23,7 +25,7 @@ public class Administrator {
     private String lastName;
 
     @Column(name = "date_of_birth")
-    private int dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "address")
     private String address;
@@ -33,4 +35,5 @@ public class Administrator {
 
     @Column(name = "email")
     private String email;
+
 }

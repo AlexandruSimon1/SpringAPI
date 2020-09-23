@@ -50,7 +50,7 @@ class AdministratorControllerTest {
         adminDTO.setAdminId(ID_VALUE);
         adminDTO.setFirstName("Marcus");
         adminDTO.setLastName("Polo");
-        adminDTO.setDateOfBirth(1964 - 05 - 06);
+        //adminDTO.setDateOfBirth("1964 - 05 - 06");
         adminDTO.setAddress("Istanbul");
         adminDTO.setPhoneNumber(65658965463L);
         adminDTO.setEmail("marcus@polo.com");

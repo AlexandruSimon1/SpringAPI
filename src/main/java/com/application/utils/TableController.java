@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/main/v1/tables")
+@RequestMapping("/api/v1/tables")
 @Api(value = "tables", description = "CRUD Operations for Tables", tags = "TABLES")
 public class TableController {
     private final TableService tableService;

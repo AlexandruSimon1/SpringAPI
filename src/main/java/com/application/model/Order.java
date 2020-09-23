@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+
 @Data
 @RequiredArgsConstructor
 @Entity
@@ -18,22 +19,22 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
-    private int orderId;
+    private Integer orderId;
     @Column(name = "order_number")
-    private int orderNumber;
+    private Integer orderNumber;
     @Column(name = "quantity")
-    private int quantity;
+    private Integer quantity;
 
-    @OneToOne(mappedBy = "order")
-    private CheckOut checkOut;
+//    @OneToOne(mappedBy = "order")
+//    @JoinColumn(name = "order_id")
+//    private CheckOut checkOut;
 
-    @ManyToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Menu> menus = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "table_id", referencedColumnName = "table_id")
-    private com.application.model.Table table;
+//    @OneToOne(mappedBy = "order")
+//    @JoinColumn(name = "table_id", referencedColumnName = "table_id")
+//    private com.application.model.Table table;
 
     public void addMenu(Menu menu) {
         if (menus == null) {
@@ -42,20 +43,4 @@ public class Order {
         menus.add(menu);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Order)) return false;
-        Order order = (Order) o;
-        return getOrderId() == order.getOrderId() &&
-                getQuantity() == order.getQuantity() &&
-                getCheckOut().equals(order.getCheckOut()) &&
-                getMenus().equals(order.getMenus()) &&
-                getTable().equals(order.getTable());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getOrderId(), getQuantity(), getCheckOut(), getMenus(), getTable());
-    }
 }

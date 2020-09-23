@@ -6,8 +6,8 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-22T11:29:18+0300",
-    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 14.0.1 (Oracle Corporation)"
+    date = "2020-09-23T12:44:52+0300",
+    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 11.0.7 (JetBrains s.r.o.)"
 )
 public class WaiterMapperImpl implements WaiterMapper {
 
@@ -26,9 +26,7 @@ public class WaiterMapperImpl implements WaiterMapper {
 
         context.storedMappedInstance( waiterDTO, waiter );
 
-        if ( waiterDTO.getWaiterId() != null ) {
-            waiter.setWaiterId( waiterDTO.getWaiterId() );
-        }
+        waiter.setWaiterId( waiterDTO.getWaiterId() );
         waiter.setFirstName( waiterDTO.getFirstName() );
         waiter.setLastName( waiterDTO.getLastName() );
         waiter.setDateOfBirth( waiterDTO.getDateOfBirth() );

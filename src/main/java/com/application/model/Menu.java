@@ -11,12 +11,12 @@ import javax.persistence.*;
 @Data
 @RequiredArgsConstructor
 @Entity
-@Table(name = "menu")
+@Table(name = "menus")
 public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "product_id")
-    private int productId;
+    private Integer productId;
 
     @Enumerated(EnumType.STRING)
     @Column (name = "category")
@@ -29,9 +29,10 @@ public class Menu {
     private String description;
 
     @Column(name = "price")
-    private int price;
+    private Integer price;
 
-    @ManyToMany
+    @ManyToOne
+    @JoinColumn(name = "order_id")
     private Order order;
 
 }

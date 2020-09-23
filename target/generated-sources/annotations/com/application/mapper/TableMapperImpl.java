@@ -6,8 +6,8 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-22T11:29:18+0300",
-    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 14.0.1 (Oracle Corporation)"
+    date = "2020-09-23T12:44:52+0300",
+    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 11.0.7 (JetBrains s.r.o.)"
 )
 public class TableMapperImpl implements TableMapper {
 
@@ -26,9 +26,7 @@ public class TableMapperImpl implements TableMapper {
 
         context.storedMappedInstance( tableDTO, table );
 
-        if ( tableDTO.getTableId() != null ) {
-            table.setTableId( tableDTO.getTableId() );
-        }
+        table.setTableId( tableDTO.getTableId() );
         table.setNumber( tableDTO.getNumber() );
 
         return table;

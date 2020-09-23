@@ -6,8 +6,8 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-22T11:29:18+0300",
-    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 14.0.1 (Oracle Corporation)"
+    date = "2020-09-23T12:44:52+0300",
+    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 11.0.7 (JetBrains s.r.o.)"
 )
 public class MenuMapperImpl implements MenuMapper {
 
@@ -26,9 +26,7 @@ public class MenuMapperImpl implements MenuMapper {
 
         context.storedMappedInstance( menuDTO, menu );
 
-        if ( menuDTO.getProductId() != null ) {
-            menu.setProductId( menuDTO.getProductId() );
-        }
+        menu.setProductId( menuDTO.getProductId() );
         menu.setCategoryType( menuDTO.getCategoryType() );
         menu.setName( menuDTO.getName() );
         menu.setDescription( menuDTO.getDescription() );

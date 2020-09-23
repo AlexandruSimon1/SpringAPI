@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/main/v1/waiters")
+@RequestMapping("/api/v1/waiters")
 @Api(value = "waiter", description = "CRUD Operations for Waiters", tags = "WAITER")
 public class WaiterController {
     private final WaiterService waiterService;

@@ -33,12 +33,12 @@ class WaiterServiceImplTest {
 
         defaultWaiter = new Waiter();
         defaultWaiter.setWaiterId(ID_VALUE);
-//        defaultWaiter.setFirstName("Peter");
-//        defaultWaiter.setLastName("Strawberry");
+        defaultWaiter.setFirstName("Peter");
+        defaultWaiter.setLastName("Strawberry");
 //        defaultWaiter.setDateOfBirth(1966 - 10 - 15);
-//        defaultWaiter.setAddress("Tokyo");
-//        defaultWaiter.setPhoneNumber(6589564632564L);
-//        defaultWaiter.setEmail("peter@strawberry.com");
+        defaultWaiter.setAddress("Tokyo");
+        defaultWaiter.setPhoneNumber(6589564632564L);
+        defaultWaiter.setEmail("peter@strawberry.com");
     }
 
     @Test
@@ -78,7 +78,7 @@ class WaiterServiceImplTest {
         WaiterDTO updateWaiter = new WaiterDTO();
         updateWaiter.setFirstName("Nick");
         updateWaiter.setLastName("Blackberry");
-        updateWaiter.setDateOfBirth(1955 - 05 - 05);
+//        updateWaiter.setDateOfBirth("1955 - 05 - 05");
         updateWaiter.setAddress("Amsterdam");
         updateWaiter.setPhoneNumber(25478965789L);
         updateWaiter.setEmail("nick@blackberry.com");
@@ -102,7 +102,7 @@ class WaiterServiceImplTest {
         newWaiter.setWaiterId(2);
         newWaiter.setFirstName("Mike");
         newWaiter.setLastName("Angus");
-        newWaiter.setDateOfBirth(1999-04-06);
+//        newWaiter.setDateOfBirth("1999-04-06");
         newWaiter.setAddress("Venice");
         newWaiter.setPhoneNumber(98564578563L);
         newWaiter.setEmail("mike@angus.com");
@@ -111,7 +111,7 @@ class WaiterServiceImplTest {
         createWaiter.setWaiterId(2);
         createWaiter.setFirstName("Mike");
         createWaiter.setLastName("Angus");
-        createWaiter.setDateOfBirth(1999 - 04 - 06);
+//        createWaiter.setDateOfBirth("1999 - 04 - 06");
         createWaiter.setAddress("Venice");
         createWaiter.setPhoneNumber(98564578563L);
         createWaiter.setEmail("mike@angus.com");

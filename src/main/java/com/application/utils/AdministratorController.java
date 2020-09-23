@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/main/v1/administrators")
+@RequestMapping("/api/v1/administrators")
 @Api(value = "administrator", description = "CRUD Operations for Administrators", tags = "ADMINISTRATOR")
 public class AdministratorController {
     private final AdministratorService administratorService;

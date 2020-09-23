@@ -9,6 +9,6 @@ public class MenuDTO {
     private CategoryType categoryType;
     private String name;
     private String description;
-    private int price;
+    private Integer price;
     private OrderDTO orderDTO;
 }

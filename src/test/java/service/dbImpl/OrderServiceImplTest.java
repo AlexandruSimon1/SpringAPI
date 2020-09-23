@@ -99,12 +99,12 @@ class OrderServiceImplTest {
         Table table = new Table();
         table.setTableId(ID_VALUE);
         table.setNumber(ID_VALUE);
-        order.setTable(table);
+        //order.setTable(table);
         when(tableRepository.findById(ID_VALUE)).thenReturn(Optional.of(table));
 
-        Set<Order> orderSet = new HashSet<>();
-        orderSet.add(order);
-        when(orderRepository.findAllByTableID(ID_VALUE)).thenReturn(orderSet);
+//        Set<Order> orderSet = new HashSet<>();
+//        orderSet.add(order);
+//        when(orderRepository.findAllByTableID(ID_VALUE)).thenReturn(orderSet);
 
         Menu menu = new Menu();
         menu.setProductId(ID_VALUE);

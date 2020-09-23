@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Table;
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @RequiredArgsConstructor
@@ -14,7 +15,7 @@ public class Waiter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "waiter_id")
-    private int waiterId;
+    private Integer waiterId;
 
     @Column(name = "first_name")
     private String firstName;
@@ -23,7 +24,7 @@ public class Waiter {
     private String lastName;
 
     @Column(name = "date_of_birth")
-    private int dateOfBirth;
+    private LocalDate dateOfBirth;
 
     @Column(name = "address")
     private String address;
@@ -33,5 +34,4 @@ public class Waiter {
 
     @Column(name = "email")
     private String email;
-
 }
