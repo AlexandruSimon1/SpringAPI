@@ -41,7 +41,6 @@ class AdministratorServiceImplTest {
         firstAdministrator.setAdminId(1);
         firstAdministrator.setFirstName("Max");
         firstAdministrator.setLastName("Cameron");
-        //firstAdministrator.setDateOfBirth(adminDate);
         firstAdministrator.setAddress("Douala");
         firstAdministrator.setPhoneNumber(3564789566L);
         firstAdministrator.setEmail("max@cameron.com");
@@ -50,7 +49,6 @@ class AdministratorServiceImplTest {
         secondAdministrator.setAdminId(2);
         secondAdministrator.setFirstName("Dean");
         secondAdministrator.setLastName("Fox");
-        //secondAdministrator.setDateOfBirth("1985 - 04 - 06");
         secondAdministrator.setAddress("Barcelona");
         secondAdministrator.setPhoneNumber(3569875486L);
         secondAdministrator.setEmail("dean@fox.com");
@@ -99,7 +97,6 @@ class AdministratorServiceImplTest {
         createAdmin.setAdminId(ID_VALUE);
         createAdmin.setFirstName("Greg");
         createAdmin.setLastName("Eagle");
-//        createAdmin.setDateOfBirth("1990 - 11 - 11");
         createAdmin.setAddress("Istanbul");
         createAdmin.setPhoneNumber(54789654785L);
         createAdmin.setEmail("greg@eagle.com");
@@ -108,7 +105,6 @@ class AdministratorServiceImplTest {
         dto.setAdminId(ID_VALUE);
         dto.setFirstName("Greg");
         dto.setLastName("Eagle");
-//        dto.setDateOfBirth("1990 - 11 - 11");
         dto.setAddress("Istanbul");
         dto.setPhoneNumber(54789654785L);
         dto.setEmail("greg@eagle.com");
@@ -132,7 +128,6 @@ class AdministratorServiceImplTest {
         updateAdministratorById.setAdminId(ID_VALUE);
         updateAdministratorById.setFirstName("Dave");
         updateAdministratorById.setLastName("Foster");
-//        updateAdministratorById.setDateOfBirth("1977 - 10 - 10");
         updateAdministratorById.setAddress("Copenhagen");
         updateAdministratorById.setPhoneNumber(68956465963L);
         updateAdministratorById.setEmail("dave@foster.com");

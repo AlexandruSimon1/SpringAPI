@@ -96,48 +96,48 @@ class OrderServiceImplTest {
 
     @Test
     void createOrder() {
-        Table table = new Table();
-        table.setTableId(ID_VALUE);
-        table.setNumber(ID_VALUE);
-        //order.setTable(table);
-        when(tableRepository.findById(ID_VALUE)).thenReturn(Optional.of(table));
-
+//        Table table = new Table();
+//        table.setTableId(ID_VALUE);
+//        table.setNumber(ID_VALUE);
+//        //order.setTable(table);
+//        when(tableRepository.findById(ID_VALUE)).thenReturn(Optional.of(table));
+//
 //        Set<Order> orderSet = new HashSet<>();
 //        orderSet.add(order);
-//        when(orderRepository.findAllByTableID(ID_VALUE)).thenReturn(orderSet);
-
-        Menu menu = new Menu();
-        menu.setProductId(ID_VALUE);
-        menu.setName("Pollo");
-        menu.setDescription("Pasta with chicken, mushrooms and Parmesan cheese");
-        menu.setCategoryType(CategoryType.SOUP);
-        menu.setPrice(74);
-        when(menuRepository.findById(ID_VALUE)).thenReturn(Optional.of(menu));
-
+//        //when(orderRepository.findAllByTableID(ID_VALUE)).thenReturn(orderSet);
+//
+//        Menu menu = new Menu();
+//        menu.setProductId(ID_VALUE);
+//        menu.setName("Pollo");
+//        menu.setDescription("Pasta with chicken, mushrooms and Parmesan cheese");
+//        menu.setCategoryType(CategoryType.SOUP);
+//        menu.setPrice(74);
+//        when(menuRepository.findById(ID_VALUE)).thenReturn(Optional.of(menu));
+//
         OrderDTO orderDTOList = new OrderDTO();
-        TableDTO tableDTO = new TableDTO();
-        tableDTO.setTableId(ID_VALUE);
-        tableDTO.setNumber(ID_VALUE);
-
-        MenuDTO menuDTO = new MenuDTO();
-        menuDTO.setProductId(ID_VALUE);
-        menuDTO.setName("Pollo");
-        menuDTO.setDescription("Pasta with chicken, mushrooms and Parmesan cheese");
-        menuDTO.setCategoryType(CategoryType.SOUP);
-        menuDTO.setPrice(74);
+//        TableDTO tableDTO = new TableDTO();
+//        tableDTO.setTableId(ID_VALUE);
+//        tableDTO.setNumber(ID_VALUE);
+//
+//        MenuDTO menuDTO = new MenuDTO();
+//        menuDTO.setProductId(ID_VALUE);
+//        menuDTO.setName("Pollo");
+//        menuDTO.setDescription("Pasta with chicken, mushrooms and Parmesan cheese");
+//        menuDTO.setCategoryType(CategoryType.SOUP);
+//        menuDTO.setPrice(74);
 
         Order createOrder = new Order();
-        createOrder.setOrderId(ID_VALUE);
-        createOrder.setOrderNumber(ID_VALUE);
-        createOrder.setQuantity(ID_VALUE);
+        createOrder.setOrderId(1);
+        createOrder.setOrderNumber(1);
+        createOrder.setQuantity(1);
 
-        orderDTOList.setOrderId(ID_VALUE);
-        orderDTOList.setQuantity(ID_VALUE);
-        orderDTOList.setOrderNumber(ID_VALUE);
-        orderDTOList.setMenuDTO(menuDTO);
-        orderDTOList.setTableDTO(tableDTO);
+        orderDTOList.setOrderId(1);
+        orderDTOList.setQuantity(1);
+        orderDTOList.setOrderNumber(1);
 
         OrderDTO existingOrder = orderService.createOrder(orderDTOList);
         assertEquals(createOrder.getOrderId(), existingOrder.getOrderId());
+        assertEquals(createOrder.getOrderNumber(),existingOrder.getOrderNumber());
+        assertEquals(createOrder.getQuantity(),existingOrder.getQuantity());
     }
 }

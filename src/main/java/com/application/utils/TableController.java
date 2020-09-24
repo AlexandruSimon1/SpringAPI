@@ -45,7 +45,7 @@ public class TableController {
         return tableService.createTable(tableDTO);
     }
 
-    @PutMapping
+    @PutMapping("{/tableId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @ApiOperation(value = "UPDATE TABLE", notes = "\n" + "This operation updates a table by id")
     public TableDTO updateTableById(@PathVariable int tableId, @RequestBody TableDTO tableDTO) {

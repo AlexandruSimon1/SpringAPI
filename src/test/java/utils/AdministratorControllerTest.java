@@ -1,5 +1,6 @@
 package utils;
 
+
 import com.application.utils.AdministratorController;
 import com.application.utils.ExceptionController;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +24,6 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = AdministratorController.class)
 class AdministratorControllerTest {
-    private static final int ID_VALUE = 1;
+    private static final Integer ID_VALUE = 1;
     private AdministratorController administratorController;
     @Autowired
     private MockMvc mockMvc;
@@ -50,7 +50,6 @@ class AdministratorControllerTest {
         adminDTO.setAdminId(ID_VALUE);
         adminDTO.setFirstName("Marcus");
         adminDTO.setLastName("Polo");
-        //adminDTO.setDateOfBirth("1964 - 05 - 06");
         adminDTO.setAddress("Istanbul");
         adminDTO.setPhoneNumber(65658965463L);
         adminDTO.setEmail("marcus@polo.com");
@@ -61,7 +60,7 @@ class AdministratorControllerTest {
         List<AdminDTO> adminDTOList = new ArrayList<>();
         adminDTOList.add(adminDTO);
         when(administratorService.getAllAdministrators()).thenReturn(adminDTOList);
-        mockMvc.perform(get("main/v1/administrators")).andDo(print()).
+        mockMvc.perform(get("/api/v1/administrators")).andDo(print()).
                 andExpect(status().isOk()).
                 andExpect(content().contentType(MediaType.APPLICATION_JSON)).
                 andExpect(jsonPath("$", hasSize(1)));
@@ -70,7 +69,7 @@ class AdministratorControllerTest {
     @Test
     void getAdministratorById() throws Exception {
         when(administratorService.getAdministratorById(anyInt())).thenReturn(adminDTO);
-        this.mockMvc.perform(get("main/v1/administrators/{administratorId}", ID_VALUE).contentType(MediaType.APPLICATION_JSON))
+        this.mockMvc.perform(get("/api/v1/administrators/{administratorId}", ID_VALUE).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("id", is(ID_VALUE)));
     }
@@ -78,7 +77,7 @@ class AdministratorControllerTest {
     @Test
     void deleteAdministratorById() throws Exception {
         when(administratorService.deleteAdministratorById(ID_VALUE)).thenReturn(adminDTO);
-        this.mockMvc.perform(delete("main/v1/administrators/{administratorId}", adminDTO.getAdminId()))
+        this.mockMvc.perform(delete("/api/v1/administrators/{administratorId}", adminDTO.getAdminId()))
                 .andExpect(status().is2xxSuccessful());
         verify(administratorService, times(1)).deleteAdministratorById(ID_VALUE);
     }
@@ -89,9 +88,19 @@ class AdministratorControllerTest {
         AdminDTO toUpdate = new AdminDTO();
         toUpdate.setFirstName("Alex");
         when(administratorService.update(toUpdate, anyInt())).thenReturn(toUpdate);
-        this.mockMvc.perform(put("main/v1/administrators/{administratorId}", adminDTO.getAdminId().
+        this.mockMvc.perform(put("/api/v1/administrators/{administratorId}", adminDTO.getAdminId().
                 toString()).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(toUpdate)))
                 .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("firstName", Matchers.is(toUpdate.getFirstName())));
+    }
+
+    @Test
+    void createAdministrator() throws Exception {
+        ObjectMapper objectMapper=new ObjectMapper();
+        AdminDTO create=new AdminDTO();
+        create.setFirstName("Alex");
+        create.setLastName("Rock");
+        when(administratorService.createAdministrator(create)).thenReturn(adminDTO);
+        this.mockMvc.perform(post("/api/v1/administrators",create)).andExpect(status().isCreated());
     }
 }

@@ -12,8 +12,8 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/menu")
-@Api(value = "menu", description = "CRUD Operations for Menu", tags = "MENU")
+@RequestMapping("/api/v1/menus")
+@Api(value = "menu", description = "CRUD Operations for Menu", tags = "MENUS")
 public class MenuController {
     private final MenuService menuService;
 

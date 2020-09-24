@@ -6,16 +6,15 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Table;
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.*;
 
 
 @Data
 @RequiredArgsConstructor
 @Entity
 @Table(name = "orders")
-public class Order {
+public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
@@ -25,20 +24,21 @@ public class Order {
     @Column(name = "quantity")
     private Integer quantity;
 
-//    @OneToOne(mappedBy = "order")
-//    @JoinColumn(name = "order_id")
-//    private CheckOut checkOut;
+    @OneToOne(mappedBy = "order")
+    private CheckOut checkOut;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Menu> menus = new HashSet<>();
+    @ManyToMany
+    @JoinTable(name = "order_products",joinColumns = {@JoinColumn(name = "order_id")},
+    inverseJoinColumns = {@JoinColumn(name = "product_id")})
+    private List<Menu> menus = new ArrayList<>();
 
-//    @OneToOne(mappedBy = "order")
-//    @JoinColumn(name = "table_id", referencedColumnName = "table_id")
-//    private com.application.model.Table table;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "table_id", referencedColumnName = "table_id")
+    private com.application.model.Table table;
 
     public void addMenu(Menu menu) {
         if (menus == null) {
-            menus = new HashSet<>();
+            menus = new ArrayList<>();
         }
         menus.add(menu);
     }

@@ -18,7 +18,6 @@ public class Table {
     @Column(name = "number")
     private Integer number;
 
-//    @OneToOne(mappedBy = "table",cascade = CascadeType.ALL)
-//    @JoinColumn(name = "order_id")
-//    private Order order;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Order order;
 }

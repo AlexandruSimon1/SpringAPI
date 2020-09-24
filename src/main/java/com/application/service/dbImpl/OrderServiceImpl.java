@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDTO> getAllOrders() {
 
         return orderRepository.findAll().stream().
-                filter(order -> order.getMenus() != null).
+//                filter(order -> order.getMenus() != null).
                 map(order -> OrderMapper.INSTANCE.toOrderDto(order, new NotificatorMappingContext())).
                 collect(Collectors.toList());
     }
@@ -76,7 +76,7 @@ public class OrderServiceImpl implements OrderService {
     public Set<MenuDTO> findAllProductByOrderId(int orderNumber) {
         Order order = orderRepository.findById(orderNumber).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
-        return order.getMenus().stream().
+        return order.getMenus().stream().filter(Objects::nonNull).
                 map(menu -> MenuMapper.INSTANCE.toMenuDto(menu, new NotificatorMappingContext())).collect(Collectors.toSet());
     }
 

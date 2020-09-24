@@ -15,13 +15,11 @@ import javax.persistence.*;
 public class CheckOut {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "check_out_id")
     private Integer checkOutId;
 
-    @Column(name = "payment_type")
     private String paymentType;
 
-//    @OneToOne(mappedBy = "checkOut",cascade = CascadeType.ALL)
-//    @JoinColumn(name = "order_id")
-//    private Order order;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "order_id",referencedColumnName = "order_id")
+    private Order order;
 }

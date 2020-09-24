@@ -17,6 +17,7 @@ import com.application.repository.MenuRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -38,10 +39,10 @@ class MenuServiceImplTest {
 
         defaultMenu = new Menu();
         defaultMenu.setProductId(ID_VALUE);
-//        menu.setCategoryType(CategoryType.PIZZA);
-//        menu.setName("Carbonara");
-//        menu.setDescription("Pasta with bacon and parmesan");
-//        menu.setPrice(85);
+        defaultMenu.setCategoryType(CategoryType.PIZZA);
+        defaultMenu.setName("Carbonara");
+        defaultMenu.setDescription("Pasta with bacon and parmesan");
+        defaultMenu.setPrice(85);
     }
 
     @Test
@@ -95,24 +96,18 @@ class MenuServiceImplTest {
 
     @Test
     void createProduct() {
-        Order orderTest=new Order();
-        orderTest.setOrderId(ID_VALUE);
-        OrderDTO orderDTOTest=new OrderDTO();
-        orderDTOTest.setOrderId(ID_VALUE);
         Menu createProductMenu = new Menu();
         createProductMenu.setProductId(ID_VALUE);
         createProductMenu.setName("Mr Nico");
         createProductMenu.setDescription("Ice cream with couple of chocolate");
         createProductMenu.setCategoryType(CategoryType.DESSERT);
         createProductMenu.setPrice(85);
-//        createProductMenu.setOrder(orderTest);
         MenuDTO createdProduct = new MenuDTO();
         createdProduct.setProductId(ID_VALUE);
         createdProduct.setName("Mr Nico");
         createdProduct.setDescription("Ice cream with couple of chocolate");
         createdProduct.setCategoryType(CategoryType.DESSERT);
         createdProduct.setPrice(85);
-//        createdProduct.setOrderDTO(orderDTOTest);
         when(menuRepository.save(createProductMenu)).thenReturn(createProductMenu);
 
         MenuDTO finalProduct = menuService.createProduct(createdProduct);
