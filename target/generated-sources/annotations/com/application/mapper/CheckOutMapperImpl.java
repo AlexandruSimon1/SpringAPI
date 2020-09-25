@@ -6,7 +6,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-23T12:44:52+0300",
+    date = "2020-09-25T09:16:21+0300",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 11.0.7 (JetBrains s.r.o.)"
 )
 public class CheckOutMapperImpl implements CheckOutMapper {
@@ -26,7 +26,7 @@ public class CheckOutMapperImpl implements CheckOutMapper {
 
         context.storedMappedInstance( checkOutDTO, checkOut );
 
-        checkOut.setCheckOutId( checkOutDTO.getCheckOutId() );
+        checkOut.setId( checkOutDTO.getId() );
         checkOut.setPaymentType( checkOutDTO.getPaymentType() );
 
         return checkOut;
@@ -47,7 +47,7 @@ public class CheckOutMapperImpl implements CheckOutMapper {
 
         context.storedMappedInstance( checkOut, checkOutDTO );
 
-        checkOutDTO.setCheckOutId( checkOut.getCheckOutId() );
+        checkOutDTO.setId( checkOut.getId() );
         checkOutDTO.setPaymentType( checkOut.getPaymentType() );
 
         return checkOutDTO;

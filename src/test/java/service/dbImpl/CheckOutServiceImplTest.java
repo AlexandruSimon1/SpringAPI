@@ -34,7 +34,7 @@ class CheckOutServiceImplTest {
         MockitoAnnotations.initMocks(this);
         checkOutService = new CheckOutServiceImpl(checkOutRepository);
         checkOut = new CheckOut();
-        checkOut.setCheckOutId(ID_VALUE);
+        checkOut.setId(ID_VALUE);
         checkOut.setPaymentType("Visa");
     }
 
@@ -53,7 +53,7 @@ class CheckOutServiceImplTest {
     void getCheckOutById() {
         when(checkOutRepository.findById(ID_VALUE)).thenReturn(Optional.of(checkOut));
         CheckOutDTO checkOutDTO = checkOutService.getCheckOutById(ID_VALUE);
-        assertEquals(checkOut.getCheckOutId(), checkOutDTO.getCheckOutId());
+        assertEquals(checkOut.getId(), checkOutDTO.getId());
         assertEquals(checkOut.getPaymentType(), checkOutDTO.getPaymentType());
         verify(checkOutRepository, times(1)).findById(ID_VALUE);
     }
@@ -64,37 +64,37 @@ class CheckOutServiceImplTest {
         checkOutRepository.deleteById(ID_VALUE);
         verify(checkOutRepository, times(1)).deleteById(ID_VALUE);
         CheckOutDTO checkOutDTO = checkOutService.deleteCheckOutById(ID_VALUE);
-        assertEquals(ID_VALUE, checkOutDTO.getCheckOutId());
+        assertEquals(ID_VALUE, checkOutDTO.getId());
     }
 
     @Test
     void updateCheckOutById() {
         CheckOutDTO checkOutDTO = new CheckOutDTO();
-        checkOutDTO.setCheckOutId(ID_VALUE);
+        checkOutDTO.setId(ID_VALUE);
         checkOutDTO.setPaymentType("Visa");
 
         when(checkOutRepository.findById(ID_VALUE)).thenReturn(Optional.of(checkOut));
         when(checkOutRepository.save(checkOut)).thenReturn(checkOut);
 
         CheckOutDTO updatedCheckOut = checkOutService.update(checkOutDTO, ID_VALUE);
-        assertEquals(updatedCheckOut.getCheckOutId(), checkOut.getCheckOutId());
+        assertEquals(updatedCheckOut.getId(), checkOut.getId());
         assertEquals(updatedCheckOut.getPaymentType(), checkOut.getPaymentType());
     }
 
     @Test
     void createCheckOut() {
         CheckOut checkOutCreate = new CheckOut();
-        checkOutCreate.setCheckOutId(ID_VALUE);
+        checkOutCreate.setId(ID_VALUE);
         checkOutCreate.setPaymentType("MasterCard");
 
         CheckOutDTO checkOutDTO = new CheckOutDTO();
-        checkOutDTO.setCheckOutId(ID_VALUE);
+        checkOutDTO.setId(ID_VALUE);
         checkOutDTO.setPaymentType("MasterCard");
         when(checkOutRepository.save(checkOutCreate)).thenReturn(checkOutCreate);
 
         CheckOutDTO createCheckOut = checkOutService.createCheckOut(checkOutDTO);
         assertNotNull(createCheckOut);
-        assertEquals(createCheckOut.getCheckOutId(), checkOutCreate.getCheckOutId());
+        assertEquals(createCheckOut.getId(), checkOutCreate.getId());
         assertEquals(createCheckOut.getPaymentType(), checkOutCreate.getPaymentType());
     }
 }

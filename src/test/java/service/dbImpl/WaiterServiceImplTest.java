@@ -32,7 +32,7 @@ class WaiterServiceImplTest {
         waiterServiceImpl = new WaiterServiceImpl(waiterRepository);
 
         defaultWaiter = new Waiter();
-        defaultWaiter.setWaiterId(ID_VALUE);
+        defaultWaiter.setId(ID_VALUE);
         defaultWaiter.setFirstName("Peter");
         defaultWaiter.setLastName("Strawberry");
         defaultWaiter.setAddress("Tokyo");
@@ -58,7 +58,7 @@ class WaiterServiceImplTest {
         when(waiterRepository.findById(ID_VALUE)).thenReturn(Optional.of(defaultWaiter));
         WaiterDTO waiterDTO = waiterServiceImpl.getWaiterById(ID_VALUE);
 
-        assertEquals(defaultWaiter.getWaiterId(), waiterDTO.getWaiterId());
+        assertEquals(defaultWaiter.getId(), waiterDTO.getId());
         verify(waiterRepository, times(1)).findById(ID_VALUE);
     }
 
@@ -69,7 +69,7 @@ class WaiterServiceImplTest {
         verify(waiterRepository, times(1)).deleteById(ID_VALUE);
 
         WaiterDTO waiterDTO = waiterServiceImpl.deleteWaiterById(ID_VALUE);
-        assertEquals(ID_VALUE, waiterDTO.getWaiterId());
+        assertEquals(ID_VALUE, waiterDTO.getId());
     }
 
     @Test
@@ -85,7 +85,7 @@ class WaiterServiceImplTest {
         when(waiterRepository.save(defaultWaiter)).thenReturn(defaultWaiter);
 
         WaiterDTO updatedWaiter = waiterServiceImpl.update(updateWaiter, ID_VALUE);
-        assertEquals(updatedWaiter.getWaiterId(), defaultWaiter.getWaiterId());
+        assertEquals(updatedWaiter.getId(), defaultWaiter.getId());
         assertEquals(updatedWaiter.getFirstName(), updateWaiter.getFirstName());
         assertEquals(updatedWaiter.getLastName(), updateWaiter.getLastName());
         assertEquals(updatedWaiter.getAddress(), updateWaiter.getAddress());
@@ -96,7 +96,7 @@ class WaiterServiceImplTest {
     @Test
     void createWaiter() {
         Waiter newWaiter=new Waiter();
-        newWaiter.setWaiterId(2);
+        newWaiter.setId(2);
         newWaiter.setFirstName("Mike");
         newWaiter.setLastName("Angus");
         newWaiter.setAddress("Venice");
@@ -104,7 +104,7 @@ class WaiterServiceImplTest {
         newWaiter.setEmail("mike@angus.com");
 
         WaiterDTO createWaiter = new WaiterDTO();
-        createWaiter.setWaiterId(2);
+        createWaiter.setId(2);
         createWaiter.setFirstName("Mike");
         createWaiter.setLastName("Angus");
         createWaiter.setAddress("Venice");
@@ -115,7 +115,7 @@ class WaiterServiceImplTest {
 
         WaiterDTO createdWaiter = waiterServiceImpl.createWaiter(createWaiter);
         assertNotNull(createdWaiter);
-        assertEquals(createdWaiter.getWaiterId(), newWaiter.getWaiterId());
+        assertEquals(createdWaiter.getId(), newWaiter.getId());
         assertEquals(createdWaiter.getFirstName(),newWaiter.getFirstName());
         assertEquals(createdWaiter.getLastName(), newWaiter.getLastName());
         assertEquals(createdWaiter.getAddress(), newWaiter.getAddress());

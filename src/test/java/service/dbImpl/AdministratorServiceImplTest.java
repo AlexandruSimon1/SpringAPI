@@ -38,7 +38,7 @@ class AdministratorServiceImplTest {
         administratorService = new AdministratorServiceImpl(administratorRepository);
 
         firstAdministrator = new Administrator();
-        firstAdministrator.setAdminId(1);
+        firstAdministrator.setId(1);
         firstAdministrator.setFirstName("Max");
         firstAdministrator.setLastName("Cameron");
         firstAdministrator.setAddress("Douala");
@@ -46,7 +46,7 @@ class AdministratorServiceImplTest {
         firstAdministrator.setEmail("max@cameron.com");
 
         secondAdministrator = new Administrator();
-        secondAdministrator.setAdminId(2);
+        secondAdministrator.setId(2);
         secondAdministrator.setFirstName("Dean");
         secondAdministrator.setLastName("Fox");
         secondAdministrator.setAddress("Barcelona");
@@ -70,31 +70,31 @@ class AdministratorServiceImplTest {
     @Test
     void getAdministratorById() {
         Administrator getAdmin = new Administrator();
-        getAdmin.setAdminId(ID_VALUE);
+        getAdmin.setId(ID_VALUE);
 
         when(administratorRepository.findById(ID_VALUE)).thenReturn(Optional.of(getAdmin));
         AdminDTO adminDTO = administratorService.getAdministratorById(ID_VALUE);
-        assertEquals(getAdmin.getAdminId(), adminDTO.getAdminId());
+        assertEquals(getAdmin.getId(), adminDTO.getId());
         verify(administratorRepository, times(1)).findById(ID_VALUE);
     }
 
     @Test
     void deleteAdministratorById() {
         Administrator deleteAdmin = new Administrator();
-        deleteAdmin.setAdminId(ID_VALUE);
+        deleteAdmin.setId(ID_VALUE);
 
         when(administratorRepository.findById(ID_VALUE)).thenReturn(Optional.of(deleteAdmin));
         administratorRepository.deleteById(ID_VALUE);
         verify(administratorRepository, times(1)).deleteById(ID_VALUE);
 
         AdminDTO adminDTO = administratorService.deleteAdministratorById(ID_VALUE);
-        assertEquals(deleteAdmin.getAdminId(), adminDTO.getAdminId());
+        assertEquals(deleteAdmin.getId(), adminDTO.getId());
     }
 
     @Test
     void createAdministrator() {
         Administrator createAdmin = new Administrator();
-        createAdmin.setAdminId(ID_VALUE);
+        createAdmin.setId(ID_VALUE);
         createAdmin.setFirstName("Greg");
         createAdmin.setLastName("Eagle");
         createAdmin.setAddress("Istanbul");
@@ -102,7 +102,7 @@ class AdministratorServiceImplTest {
         createAdmin.setEmail("greg@eagle.com");
 
         AdminDTO dto = new AdminDTO();
-        dto.setAdminId(ID_VALUE);
+        dto.setId(ID_VALUE);
         dto.setFirstName("Greg");
         dto.setLastName("Eagle");
         dto.setAddress("Istanbul");
@@ -113,7 +113,7 @@ class AdministratorServiceImplTest {
         AdminDTO adminDTO = administratorService.createAdministrator(dto);
 
         assertNotNull(adminDTO);
-        assertEquals(createAdmin.getAdminId(), adminDTO.getAdminId());
+        assertEquals(createAdmin.getId(), adminDTO.getId());
         assertEquals(createAdmin.getFirstName(), adminDTO.getFirstName());
         assertEquals(createAdmin.getLastName(), adminDTO.getLastName());
         //assertEquals(createAdmin.getDateOfBirth(), adminDTO.getDateOfBirth());
@@ -125,7 +125,7 @@ class AdministratorServiceImplTest {
     @Test
     void updateAdministratorById() {
         Administrator updateAdministratorById = new Administrator();
-        updateAdministratorById.setAdminId(ID_VALUE);
+        updateAdministratorById.setId(ID_VALUE);
         updateAdministratorById.setFirstName("Dave");
         updateAdministratorById.setLastName("Foster");
         updateAdministratorById.setAddress("Copenhagen");
@@ -133,7 +133,7 @@ class AdministratorServiceImplTest {
         updateAdministratorById.setEmail("dave@foster.com");
 
         AdminDTO dto = new AdminDTO();
-        dto.setAdminId(2);
+        dto.setId(2);
         dto.setFirstName("Alex");
         dto.setLastName("Stone");
 //        dto.setDateOfBirth(1967,05,06);
@@ -146,7 +146,7 @@ class AdministratorServiceImplTest {
         AdminDTO updatedAdmin = administratorService.update(dto, ID_VALUE);
 
         assertNotNull(updatedAdmin);
-        assertEquals(updateAdministratorById.getAdminId(), updatedAdmin.getAdminId());
+        assertEquals(updateAdministratorById.getId(), updatedAdmin.getId());
         assertEquals(updateAdministratorById.getFirstName(), updatedAdmin.getFirstName());
         assertEquals(updateAdministratorById.getLastName(), updatedAdmin.getLastName());
 //        assertEquals(updateAdministratorById.getDateOfBirth(), updatedAdmin.getDateOfBirth());

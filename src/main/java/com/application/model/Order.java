@@ -17,30 +17,41 @@ import java.util.*;
 public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
-    private Integer orderId;
+    @Column(name = "id")
+    private Integer id;
     @Column(name = "order_number")
     private Integer orderNumber;
     @Column(name = "quantity")
     private Integer quantity;
-
-    @OneToOne(mappedBy = "order")
-    private CheckOut checkOut;
-
-    @ManyToMany
-    @JoinTable(name = "order_products",joinColumns = {@JoinColumn(name = "order_id")},
-    inverseJoinColumns = {@JoinColumn(name = "product_id")})
-    private List<Menu> menus = new ArrayList<>();
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "table_id", referencedColumnName = "table_id")
-    private com.application.model.Table table;
+    @ManyToMany(mappedBy = "order")
+    private Set<CheckOut> checkOut;
+    @ManyToMany(mappedBy = "order")
+    private Set<Menu> menus = new HashSet<>();
+    @ManyToMany(mappedBy = "order")
+    private Set<com.application.model.Table> table;
 
     public void addMenu(Menu menu) {
         if (menus == null) {
-            menus = new ArrayList<>();
+            menus = new HashSet<>();
         }
         menus.add(menu);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Order order = (Order) o;
+        return Objects.equals(id, order.id) &&
+                Objects.equals(orderNumber, order.orderNumber) &&
+                Objects.equals(quantity, order.quantity) &&
+                Objects.equals(checkOut, order.checkOut) &&
+                Objects.equals(menus, order.menus) &&
+                Objects.equals(table, order.table);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, orderNumber, quantity, checkOut, menus, table);
+    }
 }

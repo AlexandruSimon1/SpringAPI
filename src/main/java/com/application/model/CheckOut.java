@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Table;
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @RequiredArgsConstructor
@@ -15,11 +16,12 @@ import javax.persistence.*;
 public class CheckOut {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer checkOutId;
+    private Integer id;
 
     private String paymentType;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "order_id",referencedColumnName = "order_id")
-    private Order order;
+    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @JoinTable(name = "checkout_orders", joinColumns = @JoinColumn(name = "checkout_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id"))
+    private Set<Order> order;
 }

@@ -6,7 +6,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-23T12:44:52+0300",
+    date = "2020-09-25T09:16:21+0300",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 11.0.7 (JetBrains s.r.o.)"
 )
 public class OrderMapperImpl implements OrderMapper {
@@ -26,7 +26,7 @@ public class OrderMapperImpl implements OrderMapper {
 
         context.storedMappedInstance( orderDTO, order );
 
-        order.setOrderId( orderDTO.getOrderId() );
+        order.setId( orderDTO.getId() );
         order.setOrderNumber( orderDTO.getOrderNumber() );
         order.setQuantity( orderDTO.getQuantity() );
 
@@ -48,7 +48,7 @@ public class OrderMapperImpl implements OrderMapper {
 
         context.storedMappedInstance( order, orderDTO );
 
-        orderDTO.setOrderId( order.getOrderId() );
+        orderDTO.setId( order.getId() );
         orderDTO.setOrderNumber( order.getOrderNumber() );
         orderDTO.setQuantity( order.getQuantity() );
 

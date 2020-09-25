@@ -24,17 +24,17 @@ public class AdministratorController {
         return administratorService.getAllAdministrators();
     }
 
-    @GetMapping("/{administratorId}")
+    @GetMapping("/{administratorID}")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET ADMINISTRATOR BY ID", notes = "\n" + "This operation get an administrator by id")
-    public AdminDTO getAdministratorById(@PathVariable int adminId) {
+    public AdminDTO getAdministratorById(@PathVariable Integer adminId) {
         return administratorService.getAdministratorById(adminId);
     }
 
     @DeleteMapping("/{administratorID}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "DELETE ADMINISTRATOR BY ID", notes = "\n" + "This operation deletes an administrator by id")
-    public AdminDTO deleteAdministratorById(@PathVariable int adminId) {
+    public AdminDTO deleteAdministratorById(@PathVariable Integer adminId) {
         return administratorService.deleteAdministratorById(adminId);
     }
 
@@ -48,7 +48,7 @@ public class AdministratorController {
     @PutMapping("/{administratorId}")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "UPDATE ADMINISTRATOR BY ID", notes = "\n" + "This operation update an administrator by id")
-    public AdminDTO updateAdministratorById(@PathVariable int adminId, @RequestBody AdminDTO adminDTO) {
+    public AdminDTO updateAdministratorById(@PathVariable Integer adminId, @RequestBody AdminDTO adminDTO) {
         return administratorService.update(adminDTO, adminId);
     }
 

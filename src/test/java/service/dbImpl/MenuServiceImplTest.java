@@ -38,7 +38,7 @@ class MenuServiceImplTest {
         menuService = new MenuServiceImpl(menuRepository);
 
         defaultMenu = new Menu();
-        defaultMenu.setProductId(ID_VALUE);
+        defaultMenu.setId(ID_VALUE);
         defaultMenu.setCategoryType(CategoryType.PIZZA);
         defaultMenu.setName("Carbonara");
         defaultMenu.setDescription("Pasta with bacon and parmesan");
@@ -58,11 +58,11 @@ class MenuServiceImplTest {
     @Test
     void getProductById() {
         Menu menuTest=new Menu();
-        menuTest.setProductId(ID_VALUE);
+        menuTest.setId(ID_VALUE);
         when(menuRepository.findById(ID_VALUE)).thenReturn(Optional.of(menuTest));
         MenuDTO menuDTO = menuService.getProductById(ID_VALUE);
 
-        assertEquals(menuDTO.getProductId(),menuTest.getProductId());
+        assertEquals(menuDTO.getId(),menuTest.getId());
         verify(menuRepository, times(1)).findById(ID_VALUE);
     }
 
@@ -72,7 +72,7 @@ class MenuServiceImplTest {
         menuRepository.deleteById(ID_VALUE);
         verify(menuRepository, times(1)).deleteById(ID_VALUE);
         MenuDTO menuDTO = menuService.deleteProductById(ID_VALUE);
-        assertEquals(menuDTO.getProductId(), defaultMenu.getProductId());
+        assertEquals(menuDTO.getId(), defaultMenu.getId());
     }
 
     @Test
@@ -87,7 +87,7 @@ class MenuServiceImplTest {
         when(menuRepository.save(defaultMenu)).thenReturn(defaultMenu);
 
         MenuDTO updatedMenu = menuService.update(updateProduct, ID_VALUE);
-        assertEquals(updatedMenu.getProductId(), defaultMenu.getProductId());
+        assertEquals(updatedMenu.getId(), defaultMenu.getId());
         assertEquals(updatedMenu.getName(), updateProduct.getName());
         assertEquals(updatedMenu.getDescription(), updateProduct.getDescription());
         assertEquals(updatedMenu.getPrice(), updateProduct.getPrice());
@@ -97,13 +97,13 @@ class MenuServiceImplTest {
     @Test
     void createProduct() {
         Menu createProductMenu = new Menu();
-        createProductMenu.setProductId(ID_VALUE);
+        createProductMenu.setId(ID_VALUE);
         createProductMenu.setName("Mr Nico");
         createProductMenu.setDescription("Ice cream with couple of chocolate");
         createProductMenu.setCategoryType(CategoryType.DESSERT);
         createProductMenu.setPrice(85);
         MenuDTO createdProduct = new MenuDTO();
-        createdProduct.setProductId(ID_VALUE);
+        createdProduct.setId(ID_VALUE);
         createdProduct.setName("Mr Nico");
         createdProduct.setDescription("Ice cream with couple of chocolate");
         createdProduct.setCategoryType(CategoryType.DESSERT);
@@ -111,7 +111,7 @@ class MenuServiceImplTest {
         when(menuRepository.save(createProductMenu)).thenReturn(createProductMenu);
 
         MenuDTO finalProduct = menuService.createProduct(createdProduct);
-        assertEquals(finalProduct.getProductId(), createProductMenu.getProductId());
+        assertEquals(finalProduct.getId(), createProductMenu.getId());
         assertEquals(finalProduct.getName(), createProductMenu.getName());
         assertEquals(finalProduct.getDescription(), createProductMenu.getDescription());
         assertEquals(finalProduct.getCategoryType(), createProductMenu.getCategoryType());

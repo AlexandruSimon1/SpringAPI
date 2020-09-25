@@ -42,12 +42,12 @@ class OrderServiceImplTest {
         orderService = new OrderServiceImpl(orderRepository, menuRepository, tableRepository);
 
         order = new Order();
-        order.setOrderId(ID_VALUE);
+        order.setId(ID_VALUE);
         order.setOrderNumber(ID_VALUE);
         order.setQuantity(ID_VALUE);
 
         dto = new OrderDTO();
-        dto.setOrderId(ID_VALUE);
+        dto.setId(ID_VALUE);
         dto.setOrderNumber(ID_VALUE);
         dto.setQuantity(ID_VALUE);
     }
@@ -68,7 +68,7 @@ class OrderServiceImplTest {
         when(orderRepository.findById(ID_VALUE)).thenReturn(Optional.of(order));
         OrderDTO orderDTO = orderService.getOrderById(ID_VALUE);
 
-        assertEquals(order.getOrderId(), orderDTO.getOrderId());
+        assertEquals(order.getId(), orderDTO.getId());
         verify(orderRepository, times(1)).findById(ID_VALUE);
     }
 
@@ -79,7 +79,7 @@ class OrderServiceImplTest {
 
         verify(orderRepository, times(1)).deleteById(ID_VALUE);
         OrderDTO orderDTO = orderService.deleteOrderById(ID_VALUE);
-        assertEquals(order.getOrderId(), orderDTO.getOrderId());
+        assertEquals(order.getId(), orderDTO.getId());
     }
 
     @Test
@@ -90,7 +90,7 @@ class OrderServiceImplTest {
         OrderDTO updatedOrder = orderService.update(dto, ID_VALUE);
 
         assertNotNull(updatedOrder);
-        assertEquals(ID_VALUE, updatedOrder.getOrderId());
+        assertEquals(ID_VALUE, updatedOrder.getId());
         assertEquals(dto.getOrderNumber(), updatedOrder.getOrderNumber());
     }
 
@@ -127,16 +127,16 @@ class OrderServiceImplTest {
 //        menuDTO.setPrice(74);
 
         Order createOrder = new Order();
-        createOrder.setOrderId(1);
+        createOrder.setId(1);
         createOrder.setOrderNumber(1);
         createOrder.setQuantity(1);
 
-        orderDTOList.setOrderId(1);
+        orderDTOList.setId(1);
         orderDTOList.setQuantity(1);
         orderDTOList.setOrderNumber(1);
 
         OrderDTO existingOrder = orderService.createOrder(orderDTOList);
-        assertEquals(createOrder.getOrderId(), existingOrder.getOrderId());
+        assertEquals(createOrder.getId(), existingOrder.getId());
         assertEquals(createOrder.getOrderNumber(),existingOrder.getOrderNumber());
         assertEquals(createOrder.getQuantity(),existingOrder.getQuantity());
     }

@@ -47,7 +47,7 @@ class AdministratorControllerTest {
                 .setControllerAdvice(new ExceptionController()).alwaysExpect(MockMvcResultMatchers.content().
                         contentType(MediaType.APPLICATION_JSON)).build();
         adminDTO = new AdminDTO();
-        adminDTO.setAdminId(ID_VALUE);
+        adminDTO.setId(ID_VALUE);
         adminDTO.setFirstName("Marcus");
         adminDTO.setLastName("Polo");
         adminDTO.setAddress("Istanbul");
@@ -77,7 +77,7 @@ class AdministratorControllerTest {
     @Test
     void deleteAdministratorById() throws Exception {
         when(administratorService.deleteAdministratorById(ID_VALUE)).thenReturn(adminDTO);
-        this.mockMvc.perform(delete("/api/v1/administrators/{administratorId}", adminDTO.getAdminId()))
+        this.mockMvc.perform(delete("/api/v1/administrators/{administratorId}", adminDTO.getId()))
                 .andExpect(status().is2xxSuccessful());
         verify(administratorService, times(1)).deleteAdministratorById(ID_VALUE);
     }
@@ -88,7 +88,7 @@ class AdministratorControllerTest {
         AdminDTO toUpdate = new AdminDTO();
         toUpdate.setFirstName("Alex");
         when(administratorService.update(toUpdate, anyInt())).thenReturn(toUpdate);
-        this.mockMvc.perform(put("/api/v1/administrators/{administratorId}", adminDTO.getAdminId().
+        this.mockMvc.perform(put("/api/v1/administrators/{administratorId}", adminDTO.getId().
                 toString()).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(toUpdate)))
                 .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("firstName", Matchers.is(toUpdate.getFirstName())));

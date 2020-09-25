@@ -32,7 +32,7 @@ class TableServiceImplTest {
         MockitoAnnotations.initMocks(this);
         tableService = new TableServiceImpl(tableRepository);
         table = new Table();
-        table.setTableId(ID_VALUE);
+        table.setId(ID_VALUE);
         table.setNumber(1);
     }
 
@@ -52,7 +52,7 @@ class TableServiceImplTest {
         when(tableRepository.findById(ID_VALUE)).thenReturn(Optional.of(table));
         TableDTO tableDTO = tableService.getTableById(ID_VALUE);
 
-        assertEquals(table.getTableId(), tableDTO.getTableId());
+        assertEquals(table.getId(), tableDTO.getId());
         verify(tableRepository, times(1)).findById(ID_VALUE);
     }
 
@@ -63,38 +63,38 @@ class TableServiceImplTest {
 
         verify(tableRepository, times(1)).deleteById(ID_VALUE);
         TableDTO tableDTO = tableService.deleteTableById(ID_VALUE);
-        assertEquals(ID_VALUE, tableDTO.getTableId());
+        assertEquals(ID_VALUE, tableDTO.getId());
     }
 
     @Test
     void updateTableById() {
         TableDTO tableDTO = new TableDTO();
-        tableDTO.setTableId(ID_VALUE);
+        tableDTO.setId(ID_VALUE);
         tableDTO.setNumber(1);
 
         when(tableRepository.findById(ID_VALUE)).thenReturn(Optional.of(table));
         when(tableRepository.save(table)).thenReturn(table);
 
         TableDTO updatedTable = tableService.update(tableDTO, ID_VALUE);
-        assertEquals(updatedTable.getTableId(), table.getTableId());
+        assertEquals(updatedTable.getId(), table.getId());
         assertEquals(updatedTable.getNumber(), tableDTO.getNumber());
     }
 
     @Test
     void createTable() {
         Table createTable = new Table();
-        createTable.setTableId(ID_VALUE);
+        createTable.setId(ID_VALUE);
         createTable.setNumber(ID_VALUE);
 
         TableDTO confirmTable = new TableDTO();
-        confirmTable.setTableId(ID_VALUE);
+        confirmTable.setId(ID_VALUE);
         confirmTable.setNumber(ID_VALUE);
 
         when(tableRepository.save(createTable)).thenReturn(createTable);
 
         TableDTO createdTable = tableService.createTable(confirmTable);
         assertNotNull(createdTable);
-        assertEquals(createdTable.getTableId(), createTable.getTableId());
+        assertEquals(createdTable.getId(), createTable.getId());
         assertEquals(createdTable.getNumber(), createTable.getNumber());
     }
 }

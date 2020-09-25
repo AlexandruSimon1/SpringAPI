@@ -6,7 +6,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-23T12:44:52+0300",
+    date = "2020-09-25T09:16:21+0300",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 11.0.7 (JetBrains s.r.o.)"
 )
 public class AdministratorMapperImpl implements AdministratorMapper {
@@ -26,7 +26,7 @@ public class AdministratorMapperImpl implements AdministratorMapper {
 
         context.storedMappedInstance( adminDTO, administrator );
 
-        administrator.setAdminId( adminDTO.getAdminId() );
+        administrator.setId( adminDTO.getId() );
         administrator.setFirstName( adminDTO.getFirstName() );
         administrator.setLastName( adminDTO.getLastName() );
         administrator.setDateOfBirth( adminDTO.getDateOfBirth() );
@@ -52,7 +52,7 @@ public class AdministratorMapperImpl implements AdministratorMapper {
 
         context.storedMappedInstance( administrator, adminDTO );
 
-        adminDTO.setAdminId( administrator.getAdminId() );
+        adminDTO.setId( administrator.getId() );
         adminDTO.setFirstName( administrator.getFirstName() );
         adminDTO.setLastName( administrator.getLastName() );
         adminDTO.setDateOfBirth( administrator.getDateOfBirth() );

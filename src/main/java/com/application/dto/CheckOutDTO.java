@@ -2,9 +2,11 @@ package com.application.dto;
 
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 public class CheckOutDTO {
-    private Integer checkOutId;
+    private Integer id;
     private String paymentType;
-    private OrderDTO orderDTO;
+    transient private Set<OrderDTO> orderDTO;
 }

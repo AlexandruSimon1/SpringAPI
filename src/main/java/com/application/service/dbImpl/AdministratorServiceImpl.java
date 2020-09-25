@@ -10,6 +10,7 @@ import com.application.model.Administrator;
 import com.application.repository.AdministratorRepository;
 import com.application.service.AdministratorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +21,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Transactional
 public class AdministratorServiceImpl implements AdministratorService {
+    @Autowired
     private final AdministratorRepository administratorRepository;
-
 
     @Override
     public List<AdminDTO> getAllAdministrators() {
@@ -31,14 +32,14 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     @Override
-    public AdminDTO getAdministratorById(int adminId) {
+    public AdminDTO getAdministratorById(Integer adminId) {
         final Administrator getAdministrator = administratorRepository.findById(adminId).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ADMINISTRATOR_NOT_FOUND));
         return AdministratorMapper.INSTANCE.toAdministratorDto(getAdministrator, new NotificatorMappingContext());
     }
 
     @Override
-    public AdminDTO deleteAdministratorById(int adminId) {
+    public AdminDTO deleteAdministratorById(Integer adminId) {
         final Administrator deleteAdministrator = administratorRepository.findById(adminId).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ADMINISTRATOR_NOT_FOUND));
         return AdministratorMapper.INSTANCE.toAdministratorDto(deleteAdministrator, new NotificatorMappingContext());
@@ -47,12 +48,13 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public AdminDTO createAdministrator(AdminDTO adminDTO) {
         final Administrator createAdministrator = AdministratorMapper.INSTANCE.fromAdministratorDto(adminDTO, new NotificatorMappingContext());
+        //createAdministrator.setPassword(bCryptPasswordEncoder.encode(adminDTO.getPassword()));
         final Administrator saveAdministrator = administratorRepository.save(createAdministrator);
         return AdministratorMapper.INSTANCE.toAdministratorDto(saveAdministrator, new NotificatorMappingContext());
     }
 
     @Override
-    public AdminDTO update(AdminDTO adminDTO, int adminId) {
+    public AdminDTO update(AdminDTO adminDTO, Integer adminId) {
         final Administrator updateAdministrator = administratorRepository.findById(adminId).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ADMINISTRATOR_NOT_FOUND));
         updateAdministrator.setFirstName(adminDTO.getFirstName());
