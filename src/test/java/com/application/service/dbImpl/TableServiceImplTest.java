@@ -1,8 +1,7 @@
-package service.dbImpl;
+package com.application.service.dbImpl;
 
 import com.application.dto.TableDTO;
 import com.application.model.Table;
-import com.application.service.dbImpl.TableServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

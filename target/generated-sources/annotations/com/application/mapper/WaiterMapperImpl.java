@@ -6,36 +6,10 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-25T09:16:21+0300",
-    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 11.0.7 (JetBrains s.r.o.)"
+    date = "2020-09-26T09:25:21+0300",
+    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_261 (Oracle Corporation)"
 )
 public class WaiterMapperImpl implements WaiterMapper {
-
-    @Override
-    public Waiter fromWaiterDto(WaiterDTO waiterDTO, NotificatorMappingContext context) {
-        Waiter target = context.getMappedInstance( waiterDTO, Waiter.class );
-        if ( target != null ) {
-            return target;
-        }
-
-        if ( waiterDTO == null ) {
-            return null;
-        }
-
-        Waiter waiter = new Waiter();
-
-        context.storedMappedInstance( waiterDTO, waiter );
-
-        waiter.setId( waiterDTO.getId() );
-        waiter.setFirstName( waiterDTO.getFirstName() );
-        waiter.setLastName( waiterDTO.getLastName() );
-        waiter.setDateOfBirth( waiterDTO.getDateOfBirth() );
-        waiter.setAddress( waiterDTO.getAddress() );
-        waiter.setPhoneNumber( waiterDTO.getPhoneNumber() );
-        waiter.setEmail( waiterDTO.getEmail() );
-
-        return waiter;
-    }
 
     @Override
     public WaiterDTO toWaiterDto(Waiter waiter, NotificatorMappingContext context) {
@@ -61,5 +35,31 @@ public class WaiterMapperImpl implements WaiterMapper {
         waiterDTO.setEmail( waiter.getEmail() );
 
         return waiterDTO;
+    }
+
+    @Override
+    public Waiter fromWaiterDto(WaiterDTO waiterDTO, NotificatorMappingContext context) {
+        Waiter target = context.getMappedInstance( waiterDTO, Waiter.class );
+        if ( target != null ) {
+            return target;
+        }
+
+        if ( waiterDTO == null ) {
+            return null;
+        }
+
+        Waiter waiter = new Waiter();
+
+        context.storedMappedInstance( waiterDTO, waiter );
+
+        waiter.setId( waiterDTO.getId() );
+        waiter.setFirstName( waiterDTO.getFirstName() );
+        waiter.setLastName( waiterDTO.getLastName() );
+        waiter.setDateOfBirth( waiterDTO.getDateOfBirth() );
+        waiter.setAddress( waiterDTO.getAddress() );
+        waiter.setPhoneNumber( waiterDTO.getPhoneNumber() );
+        waiter.setEmail( waiterDTO.getEmail() );
+
+        return waiter;
     }
 }

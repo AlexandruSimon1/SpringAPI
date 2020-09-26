@@ -32,14 +32,14 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     @Override
-    public AdminDTO getAdministratorById(Integer adminId) {
+    public AdminDTO getAdministratorById(int adminId) {
         final Administrator getAdministrator = administratorRepository.findById(adminId).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ADMINISTRATOR_NOT_FOUND));
         return AdministratorMapper.INSTANCE.toAdministratorDto(getAdministrator, new NotificatorMappingContext());
     }
 
     @Override
-    public AdminDTO deleteAdministratorById(Integer adminId) {
+    public AdminDTO deleteAdministratorById(int adminId) {
         final Administrator deleteAdministrator = administratorRepository.findById(adminId).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ADMINISTRATOR_NOT_FOUND));
         return AdministratorMapper.INSTANCE.toAdministratorDto(deleteAdministrator, new NotificatorMappingContext());
@@ -48,18 +48,16 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public AdminDTO createAdministrator(AdminDTO adminDTO) {
         final Administrator createAdministrator = AdministratorMapper.INSTANCE.fromAdministratorDto(adminDTO, new NotificatorMappingContext());
-        //createAdministrator.setPassword(bCryptPasswordEncoder.encode(adminDTO.getPassword()));
         final Administrator saveAdministrator = administratorRepository.save(createAdministrator);
         return AdministratorMapper.INSTANCE.toAdministratorDto(saveAdministrator, new NotificatorMappingContext());
     }
 
     @Override
-    public AdminDTO update(AdminDTO adminDTO, Integer adminId) {
+    public AdminDTO update(AdminDTO adminDTO, int adminId) {
         final Administrator updateAdministrator = administratorRepository.findById(adminId).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ADMINISTRATOR_NOT_FOUND));
         updateAdministrator.setFirstName(adminDTO.getFirstName());
         updateAdministrator.setLastName(adminDTO.getLastName());
-//        updateAdministrator.setDateOfBirth(adminDTO.getDateOfBirth());
         updateAdministrator.setAddress(adminDTO.getAddress());
         updateAdministrator.setPhoneNumber(adminDTO.getPhoneNumber());
         updateAdministrator.setEmail(adminDTO.getEmail());

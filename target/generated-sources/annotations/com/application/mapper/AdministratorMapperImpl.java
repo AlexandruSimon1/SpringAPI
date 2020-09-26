@@ -6,36 +6,10 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-25T09:16:21+0300",
-    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 11.0.7 (JetBrains s.r.o.)"
+    date = "2020-09-26T09:25:21+0300",
+    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_261 (Oracle Corporation)"
 )
 public class AdministratorMapperImpl implements AdministratorMapper {
-
-    @Override
-    public Administrator fromAdministratorDto(AdminDTO adminDTO, NotificatorMappingContext context) {
-        Administrator target = context.getMappedInstance( adminDTO, Administrator.class );
-        if ( target != null ) {
-            return target;
-        }
-
-        if ( adminDTO == null ) {
-            return null;
-        }
-
-        Administrator administrator = new Administrator();
-
-        context.storedMappedInstance( adminDTO, administrator );
-
-        administrator.setId( adminDTO.getId() );
-        administrator.setFirstName( adminDTO.getFirstName() );
-        administrator.setLastName( adminDTO.getLastName() );
-        administrator.setDateOfBirth( adminDTO.getDateOfBirth() );
-        administrator.setAddress( adminDTO.getAddress() );
-        administrator.setPhoneNumber( adminDTO.getPhoneNumber() );
-        administrator.setEmail( adminDTO.getEmail() );
-
-        return administrator;
-    }
 
     @Override
     public AdminDTO toAdministratorDto(Administrator administrator, NotificatorMappingContext context) {
@@ -61,5 +35,31 @@ public class AdministratorMapperImpl implements AdministratorMapper {
         adminDTO.setEmail( administrator.getEmail() );
 
         return adminDTO;
+    }
+
+    @Override
+    public Administrator fromAdministratorDto(AdminDTO adminDTO, NotificatorMappingContext context) {
+        Administrator target = context.getMappedInstance( adminDTO, Administrator.class );
+        if ( target != null ) {
+            return target;
+        }
+
+        if ( adminDTO == null ) {
+            return null;
+        }
+
+        Administrator administrator = new Administrator();
+
+        context.storedMappedInstance( adminDTO, administrator );
+
+        administrator.setId( adminDTO.getId() );
+        administrator.setFirstName( adminDTO.getFirstName() );
+        administrator.setLastName( adminDTO.getLastName() );
+        administrator.setDateOfBirth( adminDTO.getDateOfBirth() );
+        administrator.setAddress( adminDTO.getAddress() );
+        administrator.setPhoneNumber( adminDTO.getPhoneNumber() );
+        administrator.setEmail( adminDTO.getEmail() );
+
+        return administrator;
     }
 }

@@ -20,8 +20,8 @@ public class MenuController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET ALL PRODUCTS", notes = "\n" + "This operation gets all products")
-    public List<MenuDTO> getAllProduct() {
-        return menuService.getAllMenu();
+    public List<MenuDTO> getAllProducts() {
+        return menuService.getAllProducts();
     }
 
     @GetMapping("/{productId}")

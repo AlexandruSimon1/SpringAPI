@@ -8,5 +8,5 @@ import java.util.Set;
 public class TableDTO {
     private Integer id;
     private Integer number;
-    transient private Set<OrderDTO> orderDTO;
+    private Set<OrderDTO> orders;
 }

@@ -1,13 +1,7 @@
-package service.dbImpl;
+package com.application.service.dbImpl;
 
-import com.application.dto.MenuDTO;
 import com.application.dto.OrderDTO;
-import com.application.dto.TableDTO;
-import com.application.model.Menu;
 import com.application.model.Order;
-import com.application.model.Table;
-import com.application.model.enums.CategoryType;
-import com.application.service.dbImpl.OrderServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,6 +12,7 @@ import com.application.repository.MenuRepository;
 import com.application.repository.OrderRepository;
 import com.application.repository.TableRepository;
 
+import java.sql.ResultSet;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,12 +39,10 @@ class OrderServiceImplTest {
         order = new Order();
         order.setId(ID_VALUE);
         order.setOrderNumber(ID_VALUE);
-        order.setQuantity(ID_VALUE);
 
         dto = new OrderDTO();
         dto.setId(ID_VALUE);
         dto.setOrderNumber(ID_VALUE);
-        dto.setQuantity(ID_VALUE);
     }
 
     @Test
@@ -96,48 +89,18 @@ class OrderServiceImplTest {
 
     @Test
     void createOrder() {
-//        Table table = new Table();
-//        table.setTableId(ID_VALUE);
-//        table.setNumber(ID_VALUE);
-//        //order.setTable(table);
-//        when(tableRepository.findById(ID_VALUE)).thenReturn(Optional.of(table));
-//
-//        Set<Order> orderSet = new HashSet<>();
-//        orderSet.add(order);
-//        //when(orderRepository.findAllByTableID(ID_VALUE)).thenReturn(orderSet);
-//
-//        Menu menu = new Menu();
-//        menu.setProductId(ID_VALUE);
-//        menu.setName("Pollo");
-//        menu.setDescription("Pasta with chicken, mushrooms and Parmesan cheese");
-//        menu.setCategoryType(CategoryType.SOUP);
-//        menu.setPrice(74);
-//        when(menuRepository.findById(ID_VALUE)).thenReturn(Optional.of(menu));
-//
         OrderDTO orderDTOList = new OrderDTO();
-//        TableDTO tableDTO = new TableDTO();
-//        tableDTO.setTableId(ID_VALUE);
-//        tableDTO.setNumber(ID_VALUE);
-//
-//        MenuDTO menuDTO = new MenuDTO();
-//        menuDTO.setProductId(ID_VALUE);
-//        menuDTO.setName("Pollo");
-//        menuDTO.setDescription("Pasta with chicken, mushrooms and Parmesan cheese");
-//        menuDTO.setCategoryType(CategoryType.SOUP);
-//        menuDTO.setPrice(74);
+        orderDTOList.setId(1);
+        orderDTOList.setOrderNumber(1);
 
         Order createOrder = new Order();
         createOrder.setId(1);
         createOrder.setOrderNumber(1);
-        createOrder.setQuantity(1);
-
-        orderDTOList.setId(1);
-        orderDTOList.setQuantity(1);
-        orderDTOList.setOrderNumber(1);
-
+        when(orderRepository.save(createOrder)).thenReturn(createOrder);
         OrderDTO existingOrder = orderService.createOrder(orderDTOList);
         assertEquals(createOrder.getId(), existingOrder.getId());
-        assertEquals(createOrder.getOrderNumber(),existingOrder.getOrderNumber());
-        assertEquals(createOrder.getQuantity(),existingOrder.getQuantity());
+        assertEquals(createOrder.getOrderNumber(), existingOrder.getOrderNumber());
+
+
     }
 }

@@ -1,9 +1,8 @@
-package service.dbImpl;
+package com.application.service.dbImpl;
 
 import com.application.dto.CheckOutDTO;
 import com.application.model.CheckOut;
 import com.application.model.Order;
-import com.application.service.dbImpl.CheckOutServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

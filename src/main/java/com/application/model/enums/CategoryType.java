@@ -7,7 +7,6 @@ import lombok.ToString;
 
 @Getter
 @RequiredArgsConstructor
-@ToString
 @JsonFormat
 public enum CategoryType {
     PIZZA,

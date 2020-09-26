@@ -6,31 +6,10 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-25T09:16:21+0300",
-    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 11.0.7 (JetBrains s.r.o.)"
+    date = "2020-09-26T09:25:21+0300",
+    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 1.8.0_261 (Oracle Corporation)"
 )
 public class TableMapperImpl implements TableMapper {
-
-    @Override
-    public Table fromTableDto(TableDTO tableDTO, NotificatorMappingContext context) {
-        Table target = context.getMappedInstance( tableDTO, Table.class );
-        if ( target != null ) {
-            return target;
-        }
-
-        if ( tableDTO == null ) {
-            return null;
-        }
-
-        Table table = new Table();
-
-        context.storedMappedInstance( tableDTO, table );
-
-        table.setId( tableDTO.getId() );
-        table.setNumber( tableDTO.getNumber() );
-
-        return table;
-    }
 
     @Override
     public TableDTO toTableDto(Table table, NotificatorMappingContext context) {
@@ -51,5 +30,26 @@ public class TableMapperImpl implements TableMapper {
         tableDTO.setNumber( table.getNumber() );
 
         return tableDTO;
+    }
+
+    @Override
+    public Table fromTableDto(TableDTO tableDTO, NotificatorMappingContext context) {
+        Table target = context.getMappedInstance( tableDTO, Table.class );
+        if ( target != null ) {
+            return target;
+        }
+
+        if ( tableDTO == null ) {
+            return null;
+        }
+
+        Table table = new Table();
+
+        context.storedMappedInstance( tableDTO, table );
+
+        table.setId( tableDTO.getId() );
+        table.setNumber( tableDTO.getNumber() );
+
+        return table;
     }
 }

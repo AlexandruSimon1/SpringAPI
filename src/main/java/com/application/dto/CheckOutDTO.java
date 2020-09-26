@@ -8,5 +8,5 @@ import java.util.Set;
 public class CheckOutDTO {
     private Integer id;
     private String paymentType;
-    transient private Set<OrderDTO> orderDTO;
+    private Set<OrderDTO> orders;
 }

@@ -1,11 +1,8 @@
-package service.dbImpl;
+package com.application.service.dbImpl;
 
 import com.application.dto.MenuDTO;
-import com.application.dto.OrderDTO;
 import com.application.model.Menu;
-import com.application.model.Order;
 import com.application.model.enums.CategoryType;
-import com.application.service.dbImpl.MenuServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +14,6 @@ import com.application.repository.MenuRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -50,7 +46,7 @@ class MenuServiceImplTest {
         List<Menu> getAllProducts = new ArrayList<>();
         getAllProducts.add(defaultMenu);
         when(menuRepository.findAll()).thenReturn(getAllProducts);
-        List<MenuDTO> menuDTOS = menuService.getAllMenu();
+        List<MenuDTO> menuDTOS = menuService.getAllProducts();
         assertEquals(menuDTOS.size(), getAllProducts.size());
         verify(menuRepository, times(1)).findAll();
     }

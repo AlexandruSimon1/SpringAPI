@@ -1,8 +1,7 @@
-package service.dbImpl;
+package com.application.service.dbImpl;
 
 import com.application.dto.WaiterDTO;
 import com.application.model.Waiter;
-import com.application.service.dbImpl.WaiterServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

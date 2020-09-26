@@ -1,7 +1,6 @@
-package service.dbImpl;
+package com.application.service.dbImpl;
 
 import com.application.model.Administrator;
-import com.application.service.dbImpl.AdministratorServiceImpl;
 import com.application.dto.AdminDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,9 +11,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.application.repository.AdministratorRepository;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 

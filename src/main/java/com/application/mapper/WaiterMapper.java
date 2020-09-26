@@ -12,8 +12,8 @@ import org.mapstruct.factory.Mappers;
 public interface WaiterMapper {
     WaiterMapper INSTANCE = Mappers.getMapper(WaiterMapper.class);
 
-    Waiter fromWaiterDto(WaiterDTO waiterDTO, @Context NotificatorMappingContext context);
+    WaiterDTO toWaiterDto(Waiter waiter, @Context NotificatorMappingContext context);
 
     @InheritInverseConfiguration
-    WaiterDTO toWaiterDto(Waiter waiter, @Context NotificatorMappingContext context);
+    Waiter fromWaiterDto(WaiterDTO waiterDTO, @Context NotificatorMappingContext context);
 }

@@ -31,7 +31,7 @@ public class WaiterController {
         return waiterService.getWaiterById(waiterId);
     }
 
-    @DeleteMapping("/waiterId")
+    @DeleteMapping("/{waiterId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "DELETE WAITER BY ID", notes = "\n" + "This operation delete an existing waiter by id")
     public WaiterDTO deleteWaiterById(@PathVariable int waiterId) {

@@ -1,4 +1,4 @@
-package utils;
+package com.application.utils;
 
 
 import com.application.utils.AdministratorController;
@@ -9,12 +9,15 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.application.service.dbImpl.AdministratorServiceImpl;
@@ -24,6 +27,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -33,13 +37,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = AdministratorController.class)
 class AdministratorControllerTest {
-    private static final Integer ID_VALUE = 1;
+    private static final int ID_VALUE = 1;
+    @Autowired
     private AdministratorController administratorController;
     @Autowired
     private MockMvc mockMvc;
     @MockBean
     private AdministratorServiceImpl administratorService;
     private AdminDTO adminDTO;
+    private ObjectMapper mapper = new ObjectMapper();
 
     @BeforeEach
     void setUp() {
@@ -84,23 +90,31 @@ class AdministratorControllerTest {
 
     @Test
     void updateAdministratorByID() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
         AdminDTO toUpdate = new AdminDTO();
-        toUpdate.setFirstName("Alex");
-        when(administratorService.update(toUpdate, anyInt())).thenReturn(toUpdate);
-        this.mockMvc.perform(put("/api/v1/administrators/{administratorId}", adminDTO.getId().
-                toString()).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(toUpdate)))
-                .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("firstName", Matchers.is(toUpdate.getFirstName())));
+        toUpdate.setPhoneNumber(9564632639l);
+
+        when(administratorService.update(any(), anyInt())).thenReturn(toUpdate);
+
+        this.mockMvc.perform(put("/api/v1/administrators/{administratorId}", adminDTO.getId().toString())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(mapper.writeValueAsString(toUpdate)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("phoneNumber", Matchers.is(toUpdate.getPhoneNumber())));
     }
 
     @Test
     void createAdministrator() throws Exception {
-        ObjectMapper objectMapper=new ObjectMapper();
-        AdminDTO create=new AdminDTO();
-        create.setFirstName("Alex");
-        create.setLastName("Rock");
-        when(administratorService.createAdministrator(create)).thenReturn(adminDTO);
-        this.mockMvc.perform(post("/api/v1/administrators",create)).andExpect(status().isCreated());
+        AdminDTO toCreate=new AdminDTO();
+        toCreate.setFirstName("Alex");
+        toCreate.setLastName("Rock");
+        toCreate.setAddress("Moscow");
+        when(administratorService.createAdministrator(Mockito.any(AdminDTO.class))).thenReturn(toCreate);
+        MockHttpServletRequestBuilder builder= MockMvcRequestBuilders.post("/api/v1/administrators").
+                contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON).characterEncoding("UTF-8")
+                .content(this.mapper.writeValueAsBytes(toCreate));
+        mockMvc.perform(builder).andExpect(status().isCreated()).andExpect(jsonPath("$.firstName",is("Alex"))).
+                andExpect(MockMvcResultMatchers.content().string(this.mapper.writeValueAsString(toCreate)));
     }
 }

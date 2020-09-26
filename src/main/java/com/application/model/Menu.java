@@ -18,19 +18,13 @@ import java.util.Set;
 public class Menu implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
     @Enumerated(EnumType.STRING)
-    @Column(name = "category")
     private CategoryType categoryType;
-    @Column(name = "name")
     private String name;
-    @Column(name = "description")
     private String description;
-    @Column(name = "price")
     private Integer price;
-    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
-    @JoinTable(name = "orders_menus",joinColumns = {@JoinColumn(name = "orders_id")},
-            inverseJoinColumns = {@JoinColumn(name = "menus_id")})
-    private Set<Order> order = new HashSet<>();
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    @JoinColumn(name = "menu_id",referencedColumnName = "id")
+    private Order order;
 }

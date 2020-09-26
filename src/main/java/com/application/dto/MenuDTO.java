@@ -12,5 +12,4 @@ public class MenuDTO {
     private String name;
     private String description;
     private Integer price;
-    transient private Set<OrderDTO> orderDTO;
 }
