@@ -38,7 +38,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDTO> getAllOrders() {
         return orderRepository.findAll().stream().
-        map(order -> OrderMapper.INSTANCE.toDTO(order, new NotificatorMappingContext())).
+        map(order -> OrderMapper.INSTANCE.toOrderDto(order, new NotificatorMappingContext())).
                         collect(Collectors.toList());
     }
 
@@ -46,30 +46,30 @@ public class OrderServiceImpl implements OrderService {
     public OrderDTO getOrderById(int orderNumber) {
         final Order getOrder = orderRepository.findById(orderNumber).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
-        return OrderMapper.INSTANCE.toDTO(getOrder, new NotificatorMappingContext());
+        return OrderMapper.INSTANCE.toOrderDto(getOrder, new NotificatorMappingContext());
     }
 
     @Override
     public OrderDTO deleteOrderById(int orderNumber) {
         final Order deleteOrder = orderRepository.findById(orderNumber).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
-        return OrderMapper.INSTANCE.toDTO(deleteOrder, new NotificatorMappingContext());
+        return OrderMapper.INSTANCE.toOrderDto(deleteOrder, new NotificatorMappingContext());
     }
 
     @Override
     public OrderDTO createOrder(OrderDTO orderDTO) {
-        final Order createOrder = OrderMapper.INSTANCE.fromDTO(orderDTO, new NotificatorMappingContext());
+        final Order createOrder = OrderMapper.INSTANCE.fromOrderDto(orderDTO, new NotificatorMappingContext());
         final Order saveOrder = orderRepository.save(createOrder);
-        return OrderMapper.INSTANCE.toDTO(saveOrder, new NotificatorMappingContext());
+        return OrderMapper.INSTANCE.toOrderDto(saveOrder, new NotificatorMappingContext());
     }
 
     @Override
     public OrderDTO update(OrderDTO orderDTO, int orderNumber) {
         final Order updateOrder = orderRepository.findById(orderNumber).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
-        updateOrder.setMenus((List<Menu>) MenuMapper.INSTANCE.fromMenuDto((MenuDTO) orderDTO.getMenus(),new NotificatorMappingContext()));
+        //updateOrder.addMenu(MenuMapper.INSTANCE.fromMenuDto(orderDTO.getMenus(),new NotificatorMappingContext()));
         orderRepository.save(updateOrder);
-        return OrderMapper.INSTANCE.toDTO(updateOrder, new NotificatorMappingContext());
+        return OrderMapper.INSTANCE.toOrderDto(updateOrder, new NotificatorMappingContext());
     }
 
     @Override

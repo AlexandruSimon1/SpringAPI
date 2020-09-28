@@ -1,8 +1,7 @@
 package com.application.utils;
 
 
-import com.application.utils.AdministratorController;
-import com.application.utils.ExceptionController;
+import com.application.controller.AdministratorController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.application.dto.AdminDTO;
 import org.hamcrest.Matchers;
@@ -27,7 +26,6 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

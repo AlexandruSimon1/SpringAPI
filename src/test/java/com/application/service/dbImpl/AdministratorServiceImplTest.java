@@ -113,7 +113,6 @@ class AdministratorServiceImplTest {
         assertEquals(createAdmin.getId(), adminDTO.getId());
         assertEquals(createAdmin.getFirstName(), adminDTO.getFirstName());
         assertEquals(createAdmin.getLastName(), adminDTO.getLastName());
-        //assertEquals(createAdmin.getDateOfBirth(), adminDTO.getDateOfBirth());
         assertEquals(createAdmin.getAddress(), adminDTO.getAddress());
         assertEquals(createAdmin.getPhoneNumber(), adminDTO.getPhoneNumber());
         assertEquals(createAdmin.getEmail(), adminDTO.getEmail());
@@ -133,7 +132,6 @@ class AdministratorServiceImplTest {
         dto.setId(2);
         dto.setFirstName("Alex");
         dto.setLastName("Stone");
-//        dto.setDateOfBirth(1967,05,06);
         dto.setAddress("Larnaca");
         dto.setPhoneNumber(26548965475L);
         dto.setEmail("alex@stone.com");
@@ -146,7 +144,6 @@ class AdministratorServiceImplTest {
         assertEquals(updateAdministratorById.getId(), updatedAdmin.getId());
         assertEquals(updateAdministratorById.getFirstName(), updatedAdmin.getFirstName());
         assertEquals(updateAdministratorById.getLastName(), updatedAdmin.getLastName());
-//        assertEquals(updateAdministratorById.getDateOfBirth(), updatedAdmin.getDateOfBirth());
         assertEquals(updateAdministratorById.getAddress(), updatedAdmin.getAddress());
         assertEquals(updateAdministratorById.getPhoneNumber(), updatedAdmin.getPhoneNumber());
         assertEquals(updateAdministratorById.getEmail(), updatedAdmin.getEmail());

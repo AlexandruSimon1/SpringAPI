@@ -1,5 +1,6 @@
 package com.application.utils;
 
+import com.application.controller.WaiterController;
 import com.application.dto.WaiterDTO;
 import com.application.service.dbImpl.WaiterServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;

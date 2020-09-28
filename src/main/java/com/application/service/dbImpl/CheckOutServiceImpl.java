@@ -1,7 +1,6 @@
 package com.application.service.dbImpl;
 
 import com.application.dto.CheckOutDTO;
-import com.application.dto.OrderDTO;
 import com.application.exceptions.ApplicationException;
 import com.application.exceptions.ExceptionType;
 import com.application.mapper.CheckOutMapper;
@@ -59,7 +58,7 @@ public class CheckOutServiceImpl implements CheckOutService {
                 orElseThrow(() -> new ApplicationException(ExceptionType.CHECKOUT_NOT_FOUND));
         updateCheckOut.setPaymentType(checkOutDTO.getPaymentType());
         updateCheckOut.setOrder(OrderMapper.INSTANCE.
-                fromDTO((OrderDTO) checkOutDTO.getOrders(), new NotificatorMappingContext()));
+                fromOrderDto(checkOutDTO.getOrder(), new NotificatorMappingContext()));
         checkOutRepository.save(updateCheckOut);
         return CheckOutMapper.INSTANCE.toCheckOutDto(updateCheckOut, new NotificatorMappingContext());
     }

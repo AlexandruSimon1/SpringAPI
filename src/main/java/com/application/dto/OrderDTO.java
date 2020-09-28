@@ -9,5 +9,5 @@ import java.util.Set;
 public class OrderDTO {
     private Integer id;
     private Integer orderNumber;
-    private Set<MenuDTO> menus;
+    private List<MenuDTO> menus;
 }

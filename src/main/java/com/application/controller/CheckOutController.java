@@ -1,4 +1,4 @@
-package com.application.utils;
+package com.application.controller;
 
 import com.application.dto.CheckOutDTO;
 import com.application.service.CheckOutService;

@@ -20,11 +20,13 @@ public class Menu implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Enumerated(EnumType.STRING)
+    @Column(name = "category")
     private CategoryType categoryType;
     private String name;
     private String description;
     private Integer price;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    @JoinColumn(name = "menu_id",referencedColumnName = "id")
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(insertable = false, updatable = false, name = "id", referencedColumnName = "id")
     private Order order;
 }

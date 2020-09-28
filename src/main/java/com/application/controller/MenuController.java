@@ -1,4 +1,4 @@
-package com.application.utils;
+package com.application.controller;
 
 import com.application.dto.MenuDTO;
 import com.application.service.MenuService;
