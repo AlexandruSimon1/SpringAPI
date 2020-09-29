@@ -9,6 +9,7 @@ import com.application.model.Table;
 import com.application.repository.TableRepository;
 import com.application.service.TableService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Transactional
 public class TableServiceImpl implements TableService {
+    @Autowired
     private final TableRepository tableRepository;
 
     @Override

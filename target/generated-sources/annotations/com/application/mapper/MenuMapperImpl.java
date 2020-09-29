@@ -6,34 +6,10 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-23T12:44:52+0300",
-    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 11.0.7 (JetBrains s.r.o.)"
+    date = "2020-09-29T11:33:45+0300",
+    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 14.0.1 (Oracle Corporation)"
 )
 public class MenuMapperImpl implements MenuMapper {
-
-    @Override
-    public Menu fromMenuDto(MenuDTO menuDTO, NotificatorMappingContext context) {
-        Menu target = context.getMappedInstance( menuDTO, Menu.class );
-        if ( target != null ) {
-            return target;
-        }
-
-        if ( menuDTO == null ) {
-            return null;
-        }
-
-        Menu menu = new Menu();
-
-        context.storedMappedInstance( menuDTO, menu );
-
-        menu.setProductId( menuDTO.getProductId() );
-        menu.setCategoryType( menuDTO.getCategoryType() );
-        menu.setName( menuDTO.getName() );
-        menu.setDescription( menuDTO.getDescription() );
-        menu.setPrice( menuDTO.getPrice() );
-
-        return menu;
-    }
 
     @Override
     public MenuDTO toMenuDto(Menu menu, NotificatorMappingContext context) {
@@ -50,12 +26,36 @@ public class MenuMapperImpl implements MenuMapper {
 
         context.storedMappedInstance( menu, menuDTO );
 
-        menuDTO.setProductId( menu.getProductId() );
+        menuDTO.setId( menu.getId() );
         menuDTO.setCategoryType( menu.getCategoryType() );
         menuDTO.setName( menu.getName() );
         menuDTO.setDescription( menu.getDescription() );
         menuDTO.setPrice( menu.getPrice() );
 
         return menuDTO;
+    }
+
+    @Override
+    public Menu fromMenuDto(MenuDTO menuDTO, NotificatorMappingContext context) {
+        Menu target = context.getMappedInstance( menuDTO, Menu.class );
+        if ( target != null ) {
+            return target;
+        }
+
+        if ( menuDTO == null ) {
+            return null;
+        }
+
+        Menu menu = new Menu();
+
+        context.storedMappedInstance( menuDTO, menu );
+
+        menu.setId( menuDTO.getId() );
+        menu.setCategoryType( menuDTO.getCategoryType() );
+        menu.setName( menuDTO.getName() );
+        menu.setDescription( menuDTO.getDescription() );
+        menu.setPrice( menuDTO.getPrice() );
+
+        return menu;
     }
 }

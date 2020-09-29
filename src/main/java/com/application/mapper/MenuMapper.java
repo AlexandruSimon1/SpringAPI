@@ -12,8 +12,8 @@ import org.mapstruct.factory.Mappers;
 public interface MenuMapper {
     MenuMapper INSTANCE = Mappers.getMapper(MenuMapper.class);
 
-    Menu fromMenuDto(MenuDTO menuDTO, @Context NotificatorMappingContext context);
+    MenuDTO toMenuDto(Menu menu, @Context NotificatorMappingContext context);
 
     @InheritInverseConfiguration
-    MenuDTO toMenuDto(Menu menu, @Context NotificatorMappingContext context);
+    Menu fromMenuDto(MenuDTO menuDTO, @Context NotificatorMappingContext context);
 }

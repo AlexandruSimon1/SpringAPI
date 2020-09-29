@@ -14,5 +14,4 @@ public interface AdministratorService {
     AdminDTO createAdministrator(AdminDTO adminDTO);
 
     AdminDTO update(AdminDTO adminDTO, int adminId);
-
 }

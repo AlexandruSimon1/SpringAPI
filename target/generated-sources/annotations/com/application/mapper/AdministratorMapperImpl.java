@@ -6,36 +6,10 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-23T12:44:52+0300",
-    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 11.0.7 (JetBrains s.r.o.)"
+    date = "2020-09-29T11:33:46+0300",
+    comments = "version: 1.2.0.Final, compiler: javac, environment: Java 14.0.1 (Oracle Corporation)"
 )
 public class AdministratorMapperImpl implements AdministratorMapper {
-
-    @Override
-    public Administrator fromAdministratorDto(AdminDTO adminDTO, NotificatorMappingContext context) {
-        Administrator target = context.getMappedInstance( adminDTO, Administrator.class );
-        if ( target != null ) {
-            return target;
-        }
-
-        if ( adminDTO == null ) {
-            return null;
-        }
-
-        Administrator administrator = new Administrator();
-
-        context.storedMappedInstance( adminDTO, administrator );
-
-        administrator.setAdminId( adminDTO.getAdminId() );
-        administrator.setFirstName( adminDTO.getFirstName() );
-        administrator.setLastName( adminDTO.getLastName() );
-        administrator.setDateOfBirth( adminDTO.getDateOfBirth() );
-        administrator.setAddress( adminDTO.getAddress() );
-        administrator.setPhoneNumber( adminDTO.getPhoneNumber() );
-        administrator.setEmail( adminDTO.getEmail() );
-
-        return administrator;
-    }
 
     @Override
     public AdminDTO toAdministratorDto(Administrator administrator, NotificatorMappingContext context) {
@@ -52,7 +26,7 @@ public class AdministratorMapperImpl implements AdministratorMapper {
 
         context.storedMappedInstance( administrator, adminDTO );
 
-        adminDTO.setAdminId( administrator.getAdminId() );
+        adminDTO.setId( administrator.getId() );
         adminDTO.setFirstName( administrator.getFirstName() );
         adminDTO.setLastName( administrator.getLastName() );
         adminDTO.setDateOfBirth( administrator.getDateOfBirth() );
@@ -61,5 +35,31 @@ public class AdministratorMapperImpl implements AdministratorMapper {
         adminDTO.setEmail( administrator.getEmail() );
 
         return adminDTO;
+    }
+
+    @Override
+    public Administrator fromAdministratorDto(AdminDTO adminDTO, NotificatorMappingContext context) {
+        Administrator target = context.getMappedInstance( adminDTO, Administrator.class );
+        if ( target != null ) {
+            return target;
+        }
+
+        if ( adminDTO == null ) {
+            return null;
+        }
+
+        Administrator administrator = new Administrator();
+
+        context.storedMappedInstance( adminDTO, administrator );
+
+        administrator.setId( adminDTO.getId() );
+        administrator.setFirstName( adminDTO.getFirstName() );
+        administrator.setLastName( adminDTO.getLastName() );
+        administrator.setDateOfBirth( adminDTO.getDateOfBirth() );
+        administrator.setAddress( adminDTO.getAddress() );
+        administrator.setPhoneNumber( adminDTO.getPhoneNumber() );
+        administrator.setEmail( adminDTO.getEmail() );
+
+        return administrator;
     }
 }

@@ -2,11 +2,12 @@ package com.application.dto;
 
 import lombok.Data;
 
+import java.util.List;
+import java.util.Set;
+
 @Data
 public class OrderDTO {
-    private Integer orderId;
+    private Integer id;
     private Integer orderNumber;
-    private Integer quantity;
-    private MenuDTO menuDTO;
-    private TableDTO tableDTO;
+    private List<MenuDTO> menus;
 }

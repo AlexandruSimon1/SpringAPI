@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.Table;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Data
 @RequiredArgsConstructor
@@ -14,8 +15,8 @@ import java.time.LocalDate;
 public class Waiter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "waiter_id")
-    private Integer waiterId;
+    @Column(name = "id")
+    private Integer id;
 
     @Column(name = "first_name")
     private String firstName;

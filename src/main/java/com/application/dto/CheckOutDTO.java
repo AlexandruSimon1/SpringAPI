@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CheckOutDTO {
-    private Integer checkOutId;
-    private OrderDTO orderDTO;
+    private Integer id;
     private String paymentType;
+    private OrderDTO order;
 }

@@ -12,8 +12,8 @@ import org.mapstruct.factory.Mappers;
 public interface OrderMapper {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
-    Order fromOrderDto(OrderDTO orderDTO, @Context NotificatorMappingContext context);
+    OrderDTO toOrderDto(Order order, @Context NotificatorMappingContext context);
 
     @InheritInverseConfiguration
-    OrderDTO toOrderDto(Order order, @Context NotificatorMappingContext context);
+    Order fromOrderDto(OrderDTO orderDTO, @Context NotificatorMappingContext context);
 }

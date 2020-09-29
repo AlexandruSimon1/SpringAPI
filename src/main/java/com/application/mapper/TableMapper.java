@@ -12,8 +12,8 @@ import org.mapstruct.factory.Mappers;
 public interface TableMapper {
     TableMapper INSTANCE = Mappers.getMapper(TableMapper.class);
 
-    Table fromTableDto(TableDTO tableDTO, @Context NotificatorMappingContext context);
+    TableDTO toTableDto(Table table, @Context NotificatorMappingContext context);
 
     @InheritInverseConfiguration
-    TableDTO toTableDto(Table table, @Context NotificatorMappingContext context);
+    Table fromTableDto(TableDTO tableDTO, @Context NotificatorMappingContext context);
 }

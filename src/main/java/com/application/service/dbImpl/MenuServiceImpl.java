@@ -9,6 +9,7 @@ import com.application.model.Menu;
 import com.application.repository.MenuRepository;
 import com.application.service.MenuService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,10 +20,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Transactional
 public class MenuServiceImpl implements MenuService {
+    @Autowired
     private final MenuRepository menuRepository;
 
     @Override
-    public List<MenuDTO> getAllMenu() {
+    public List<MenuDTO> getAllProducts() {
         return menuRepository.findAll().stream().
                 map(menu -> MenuMapper.INSTANCE.toMenuDto(menu, new NotificatorMappingContext())).collect(Collectors.toList());
     }

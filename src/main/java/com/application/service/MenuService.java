@@ -5,7 +5,7 @@ import com.application.dto.MenuDTO;
 import java.util.List;
 
 public interface MenuService {
-    List<MenuDTO> getAllMenu();
+    List<MenuDTO> getAllProducts();
 
     MenuDTO getProductById(int productId);
 

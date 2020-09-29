@@ -4,35 +4,32 @@ package com.application.model;
 import com.application.model.enums.CategoryType;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.Table;
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @RequiredArgsConstructor
 @Entity
 @Table(name = "menus")
-public class Menu {
+public class Menu implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "product_id")
-    private Integer productId;
-
+    private Integer id;
     @Enumerated(EnumType.STRING)
-    @Column (name = "category")
+    @Column(name = "category")
     private CategoryType categoryType;
-
-    @Column(name = "name")
     private String name;
-
-    @Column(name = "description")
     private String description;
-
-    @Column(name = "price")
     private Integer price;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @NotFound(action = NotFoundAction.IGNORE)
+    @JoinColumn(insertable = false, updatable = false, name = "id", referencedColumnName = "id")
     private Order order;
-
 }

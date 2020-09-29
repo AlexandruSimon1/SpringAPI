@@ -10,6 +10,7 @@ import com.application.model.Administrator;
 import com.application.repository.AdministratorRepository;
 import com.application.service.AdministratorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +21,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Transactional
 public class AdministratorServiceImpl implements AdministratorService {
+    @Autowired
     private final AdministratorRepository administratorRepository;
-
 
     @Override
     public List<AdminDTO> getAllAdministrators() {
@@ -57,7 +58,6 @@ public class AdministratorServiceImpl implements AdministratorService {
                 orElseThrow(() -> new ApplicationException(ExceptionType.ADMINISTRATOR_NOT_FOUND));
         updateAdministrator.setFirstName(adminDTO.getFirstName());
         updateAdministrator.setLastName(adminDTO.getLastName());
-//        updateAdministrator.setDateOfBirth(adminDTO.getDateOfBirth());
         updateAdministrator.setAddress(adminDTO.getAddress());
         updateAdministrator.setPhoneNumber(adminDTO.getPhoneNumber());
         updateAdministrator.setEmail(adminDTO.getEmail());

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.Table;
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 
 @Data
@@ -15,8 +16,8 @@ import java.time.LocalDate;
 public class Administrator {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "administrator_id")
-    private Integer adminId;
+    @Column(name = "id")
+    private Integer id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -35,5 +36,4 @@ public class Administrator {
 
     @Column(name = "email")
     private String email;
-
 }

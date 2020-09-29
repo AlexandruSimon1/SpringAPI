@@ -1,46 +1,53 @@
 package com.application.model;
 
 
+import com.google.common.base.Objects;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Table;
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.io.Serializable;
+import java.util.*;
 
 
 @Data
 @RequiredArgsConstructor
 @Entity
 @Table(name = "orders")
-public class Order {
+public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
-    private Integer orderId;
-    @Column(name = "order_number")
+    private Integer id;
     private Integer orderNumber;
-    @Column(name = "quantity")
-    private Integer quantity;
 
-//    @OneToOne(mappedBy = "order")
-//    @JoinColumn(name = "order_id")
-//    private CheckOut checkOut;
+    @OneToOne(mappedBy = "order")
+    private CheckOut checkOut;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Menu> menus = new HashSet<>();
+    @OneToMany(mappedBy ="order" ,cascade = CascadeType.ALL)
+    private List<Menu> menus;
 
-//    @OneToOne(mappedBy = "order")
-//    @JoinColumn(name = "table_id", referencedColumnName = "table_id")
-//    private com.application.model.Table table;
+    @OneToOne(mappedBy = "order")
+    private com.application.model.Table table;
 
     public void addMenu(Menu menu) {
         if (menus == null) {
-            menus = new HashSet<>();
+            menus = new ArrayList<>();
         }
         menus.add(menu);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Order)) return false;
+        Order order = (Order) o;
+        return Objects.equal(getId(), order.getId()) &&
+                Objects.equal(getMenus(), order.getMenus());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId(), getMenus());
+    }
 }

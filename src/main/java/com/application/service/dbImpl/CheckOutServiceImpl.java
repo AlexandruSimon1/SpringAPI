@@ -5,18 +5,23 @@ import com.application.exceptions.ApplicationException;
 import com.application.exceptions.ExceptionType;
 import com.application.mapper.CheckOutMapper;
 import com.application.mapper.NotificatorMappingContext;
+import com.application.mapper.OrderMapper;
 import com.application.model.CheckOut;
 import com.application.repository.CheckOutRepository;
 import com.application.service.CheckOutService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
+@Transactional
 @Service
 public class CheckOutServiceImpl implements CheckOutService {
+    @Autowired
     private final CheckOutRepository checkOutRepository;
 
     @Override
@@ -52,8 +57,8 @@ public class CheckOutServiceImpl implements CheckOutService {
         final CheckOut updateCheckOut = checkOutRepository.findById(checkOutId).
                 orElseThrow(() -> new ApplicationException(ExceptionType.CHECKOUT_NOT_FOUND));
         updateCheckOut.setPaymentType(checkOutDTO.getPaymentType());
-        //updateCheckOut.setOrder(OrderMapper.INSTANCE.
-       //         fromOrderDto(checkOutDTO.getOrderDTO(), new NotificatorMappingContext()));
+        updateCheckOut.setOrder(OrderMapper.INSTANCE.
+                fromOrderDto(checkOutDTO.getOrder(), new NotificatorMappingContext()));
         checkOutRepository.save(updateCheckOut);
         return CheckOutMapper.INSTANCE.toCheckOutDto(updateCheckOut, new NotificatorMappingContext());
     }

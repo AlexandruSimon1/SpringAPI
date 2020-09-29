@@ -12,8 +12,8 @@ import org.mapstruct.factory.Mappers;
 public interface CheckOutMapper {
     CheckOutMapper INSTANCE = Mappers.getMapper(CheckOutMapper.class);
 
-    CheckOut fromCheckOutDto(CheckOutDTO checkOutDTO, @Context NotificatorMappingContext context);
+    CheckOutDTO toCheckOutDto(CheckOut checkOut, @Context NotificatorMappingContext context);
 
     @InheritInverseConfiguration
-    CheckOutDTO toCheckOutDto(CheckOut checkOut, @Context NotificatorMappingContext context);
+    CheckOut fromCheckOutDto(CheckOutDTO checkOutDTO, @Context NotificatorMappingContext context);
 }

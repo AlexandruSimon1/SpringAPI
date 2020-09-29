@@ -7,13 +7,12 @@ import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
-
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface AdministratorMapper {
     AdministratorMapper INSTANCE = Mappers.getMapper(AdministratorMapper.class);
 
-    Administrator fromAdministratorDto(AdminDTO adminDTO, @Context NotificatorMappingContext context);
+    AdminDTO toAdministratorDto(Administrator administrator, @Context NotificatorMappingContext context);
 
     @InheritInverseConfiguration
-    AdminDTO toAdministratorDto(Administrator administrator, @Context NotificatorMappingContext context);
+    Administrator fromAdministratorDto(AdminDTO adminDTO, @Context NotificatorMappingContext context);
 }

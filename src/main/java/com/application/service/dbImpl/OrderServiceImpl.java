@@ -14,6 +14,7 @@ import com.application.repository.OrderRepository;
 import com.application.repository.TableRepository;
 import com.application.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,17 +28,18 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Transactional
 public class OrderServiceImpl implements OrderService {
+    @Autowired
     private final OrderRepository orderRepository;
+    @Autowired
     private final MenuRepository menuRepository;
+    @Autowired
     private final TableRepository tableRepository;
 
     @Override
     public List<OrderDTO> getAllOrders() {
-
         return orderRepository.findAll().stream().
-                filter(order -> order.getMenus() != null).
-                map(order -> OrderMapper.INSTANCE.toOrderDto(order, new NotificatorMappingContext())).
-                collect(Collectors.toList());
+        map(order -> OrderMapper.INSTANCE.toOrderDto(order, new NotificatorMappingContext())).
+                        collect(Collectors.toList());
     }
 
     @Override
@@ -65,9 +67,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDTO update(OrderDTO orderDTO, int orderNumber) {
         final Order updateOrder = orderRepository.findById(orderNumber).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
-        updateOrder.setQuantity(orderDTO.getQuantity());
-        updateOrder.addMenu(MenuMapper.INSTANCE.fromMenuDto(orderDTO.getMenuDTO(), new NotificatorMappingContext()));
-        //updateOrder.setTable(TableMapper.INSTANCE.fromTableDto(orderDTO.getTableDTO(), new NotificatorMappingContext()));
+        updateOrder.addMenu(MenuMapper.INSTANCE.fromMenuDto((MenuDTO) orderDTO.getMenus(),new NotificatorMappingContext()));
         orderRepository.save(updateOrder);
         return OrderMapper.INSTANCE.toOrderDto(updateOrder, new NotificatorMappingContext());
     }
@@ -85,7 +85,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.findById(orderNumber).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
         Optional<Menu> deleteProduct = order.getMenus().stream().
-                filter(menu -> Objects.equals(menu.getProductId(), removed_productId)).findFirst();
+                filter(menu -> Objects.equals(menu.getId(), removed_productId)).findFirst();
         if (!deleteProduct.isPresent()) {
             throw new ApplicationException(ExceptionType.PRODUCT_NOT_FOUND);
         }

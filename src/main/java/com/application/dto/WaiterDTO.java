@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Data
 public class WaiterDTO {
-    private Integer waiterId;
+    private Integer id;
     private String firstName;
     private String lastName;
     private LocalDate dateOfBirth;
