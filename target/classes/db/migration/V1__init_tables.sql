@@ -46,3 +46,22 @@ PAYMENT_TYPE VARCHAR(30),
 ORDERS_ID INT ,
 CONSTRAINT CHECKOUT_ORDERS_FK FOREIGN KEY (ORDERS_ID)REFERENCES orders(ID)
 );
+
+create table users
+(
+	id int auto_increment,
+	email varchar(255) not null,
+	first_name varchar(55) null,
+	last_name varchar(55) null,
+	password varchar(255) null,
+	role varchar(55) default 'USER' null,
+	status varchar(55) default 'ACTIVE' null,
+	constraint users_pk
+		primary key (id)
+);
+
+create unique index users_email_uindex
+	on users (email);
+
+Insert INTO users values (1,'admin@mail.com','Alex','Rock','$2y$12$3hDlVfh2j6W/OqHUWSkyTeu1NRLn/E.q/3J8HeM6NTAAOuNdNHdQ6','ADMIN','ACTIVE');
+Insert INTO users values (2,'user@mail.com','Arthur','Rock','$2y$12$eusZxiNmmXAkT.xozsJituoNTjvEo989OAAqci7vgFDhn7m5n4WG6','USER','ACTIVE');
