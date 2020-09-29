@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class MenuController {
     private final MenuService menuService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('developers:read')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET ALL PRODUCTS", notes = "\n" + "This operation gets all products")
     public List<MenuDTO> getAllProducts() {
@@ -25,6 +27,7 @@ public class MenuController {
     }
 
     @GetMapping("/{productId}")
+    @PreAuthorize("hasAuthority('developers:read')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET PRODUCT BY ID", notes = "\n" + "This operation get product by id")
     public MenuDTO getProductById(@PathVariable int productId) {
@@ -32,6 +35,7 @@ public class MenuController {
     }
 
     @DeleteMapping("/{productId}")
+    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "DELETE PRODUCT BY ID", notes = "\n" + "This operation delete product by id")
     public MenuDTO deleteProductById(@PathVariable int productId) {
@@ -39,6 +43,7 @@ public class MenuController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "CREATE PRODUCT", notes = "\n" + "This operation creates a product")
     public MenuDTO createProduct(@RequestBody MenuDTO menuDTO) {
@@ -46,6 +51,7 @@ public class MenuController {
     }
 
     @PutMapping("/{productId}")
+    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "UPDATE PRODUCT", notes = "\n" + "This operation updates a existing product")
     public MenuDTO updateProduct(@PathVariable int productId, @RequestBody MenuDTO menuDTO) {

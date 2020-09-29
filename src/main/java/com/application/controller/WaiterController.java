@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class WaiterController {
     private final WaiterService waiterService;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('developers:read')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET ALL WAITERS", notes = "\n" + "This operation gets all waiters")
     public List<WaiterDTO> getAllWaiters() {
@@ -25,6 +27,7 @@ public class WaiterController {
     }
 
     @GetMapping("/{waiterId}")
+    @PreAuthorize("hasAuthority('developers:read')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET WAITER BY ID", notes = "\n" + "This operation get an waiter by id")
     public WaiterDTO getWaiterById(@PathVariable int waiterId) {
@@ -32,6 +35,7 @@ public class WaiterController {
     }
 
     @DeleteMapping("/{waiterId}")
+    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "DELETE WAITER BY ID", notes = "\n" + "This operation delete an existing waiter by id")
     public WaiterDTO deleteWaiterById(@PathVariable int waiterId) {
@@ -39,6 +43,7 @@ public class WaiterController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "CREATE A WAITER", notes = "\n" + "This operation create a new waiter")
     public WaiterDTO createWaiter(@RequestBody WaiterDTO waiterDTO) {
@@ -46,6 +51,7 @@ public class WaiterController {
     }
 
     @PutMapping("/{waiterId}")
+    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "UPDATE WAITER BY ID", notes = "\n" + "This operation update an existing waiter by id")
     public WaiterDTO updateWaiterById(@PathVariable int waiterId, @RequestBody WaiterDTO waiterDTO) {

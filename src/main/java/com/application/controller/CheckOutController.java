@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,7 @@ public class CheckOutController {
 
 
     @GetMapping
+    @PreAuthorize("hasAuthority('developers:read')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET ALL CHECKOUT", notes = "\n" + "This operation gets all checkout")
     public List<CheckOutDTO> getAllCheckOut() {
@@ -27,6 +29,7 @@ public class CheckOutController {
     }
 
     @GetMapping("/{checkoutId}")
+    @PreAuthorize("hasAuthority('developers:read')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET CHECKOUT BY ID", notes = "\n" + "This operation get a checkout by id")
     public CheckOutDTO getCheckOutById(@PathVariable int checkoutId) {
@@ -34,6 +37,7 @@ public class CheckOutController {
     }
 
     @DeleteMapping("/{checkoutId}")
+    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "DELETE CHECKOUT BY ID", notes = "\n" + "This operation delete a checkout by id")
     public CheckOutDTO deleteCheckOutById(@PathVariable int checkoutId) {
@@ -41,6 +45,7 @@ public class CheckOutController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "CREATE CHECKOUT", notes = "\n" + "This operation creates a checkout")
     public CheckOutDTO createCheckOut(@RequestBody CheckOutDTO checkOutDTO) {
@@ -48,6 +53,7 @@ public class CheckOutController {
     }
 
     @PutMapping("/{checkoutId}")
+    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @ApiOperation(value = "UPDATE CHECKOUT BY ID", notes = "\n" + "This operation updates a checkout by id")
     public CheckOutDTO updateCheckOutById(@PathVariable int checkoutId, @RequestBody CheckOutDTO checkOutDTO) {
