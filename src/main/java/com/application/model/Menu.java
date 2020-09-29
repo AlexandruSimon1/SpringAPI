@@ -4,6 +4,8 @@ package com.application.model;
 import com.application.model.enums.CategoryType;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import javax.persistence.Table;
 import javax.persistence.*;
@@ -27,6 +29,7 @@ public class Menu implements Serializable {
     private Integer price;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @NotFound(action = NotFoundAction.IGNORE)
     @JoinColumn(insertable = false, updatable = false, name = "id", referencedColumnName = "id")
     private Order order;
 }

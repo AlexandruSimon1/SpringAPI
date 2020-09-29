@@ -67,7 +67,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDTO update(OrderDTO orderDTO, int orderNumber) {
         final Order updateOrder = orderRepository.findById(orderNumber).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
-        //updateOrder.addMenu(MenuMapper.INSTANCE.fromMenuDto(orderDTO.getMenus(),new NotificatorMappingContext()));
+        updateOrder.addMenu(MenuMapper.INSTANCE.fromMenuDto((MenuDTO) orderDTO.getMenus(),new NotificatorMappingContext()));
         orderRepository.save(updateOrder);
         return OrderMapper.INSTANCE.toOrderDto(updateOrder, new NotificatorMappingContext());
     }
