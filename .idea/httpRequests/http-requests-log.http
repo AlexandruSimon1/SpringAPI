@@ -1,0 +1,8 @@
+GET https://localhost:8181/api/v1/administrators
+
+###
+
+GET https://localhost:8080/api/v1/administrators
+
+###
+
