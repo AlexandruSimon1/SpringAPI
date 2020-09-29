@@ -6,7 +6,7 @@ import javax.annotation.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2020-09-29T12:24:50+0300",
+    date = "2020-09-29T21:58:23+0300",
     comments = "version: 1.2.0.Final, compiler: javac, environment: Java 14.0.1 (Oracle Corporation)"
 )
 public class AdministratorMapperImpl implements AdministratorMapper {
