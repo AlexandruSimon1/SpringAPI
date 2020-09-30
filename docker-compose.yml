@@ -15,7 +15,7 @@ services:
       - 5432:3306
 
   service:
-    image: arthur2104/restaurant_api
+    image: arthur2104/restaurant
     container_name: service
     depends_on:
       - db
