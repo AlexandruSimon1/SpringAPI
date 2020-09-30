@@ -1,0 +1,29 @@
+version: '3.7'
+services:
+  db:
+    image: mysql
+    container_name: mysqldb
+    restart: always
+    volumes:
+      - "/src/main/resources/init.sql:/docker-entrypoint-initdb.d/"
+    environment:
+      - MYSQL_ROOT_PASSWORD=Sanea@21041990
+      - MYSQL_DATABASE=restaurant_db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=Sanea@21041990
+    ports:
+      - 5432:3306
+
+  service:
+    image: arthur2104/restaurant_api
+    container_name: service
+    depends_on:
+      - db
+    ports:
+      - 8282:8282
+    environment:
+      - DATABASE_HOST=mysqldb
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=Sanea@21041990
+      - DATABASE_NAME=restaurant_db
+      - DATABASE_PORT=3306
