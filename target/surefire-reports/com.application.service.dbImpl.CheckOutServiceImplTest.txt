@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.application.service.dbImpl.CheckOutServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s - in com.application.service.dbImpl.CheckOutServiceImplTest

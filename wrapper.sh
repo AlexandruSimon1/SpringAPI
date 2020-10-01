@@ -5,4 +5,4 @@ while ! exec 6<>/dev/tcp/${DATABASE_HOST}/${DATABASE_PORT}; do
 
 done
 echo ">> connected to MySQL database! <<"
-java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /out/artifacts/springapi/springapi.jar
+java -Djava.security.egd=file:/dev/./urandom -Dspring.profiles.active=container -jar /opt/docker-spring-boot.jar
