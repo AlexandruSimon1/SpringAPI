@@ -6,7 +6,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +18,6 @@ public class TableController {
     private final TableService tableService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('developers:read')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET ALL TABLES", notes = "\n" + "This operation gets all tables")
     public List<TableDTO> getAllTables() {
@@ -27,7 +25,6 @@ public class TableController {
     }
 
     @GetMapping("/{tableId}")
-    @PreAuthorize("hasAuthority('developers:read')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET TABLE BY ID", notes = "\n" + "This operation get a table by id")
     public TableDTO getTableById(@PathVariable int tableId) {
@@ -35,7 +32,6 @@ public class TableController {
     }
 
     @DeleteMapping("/{tableId}")
-    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "DELETE TABLE BY ID", notes = "\n" + "This operation deletes a table by id")
     public TableDTO deleteTableById(@PathVariable int tableId) {
@@ -43,7 +39,6 @@ public class TableController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "CREATE TABLE", notes = "\n" + "This operation creates a table")
     public TableDTO createTable(@RequestBody TableDTO tableDTO) {
@@ -51,7 +46,6 @@ public class TableController {
     }
 
     @PutMapping("/{tableId}")
-    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @ApiOperation(value = "UPDATE TABLE", notes = "\n" + "This operation updates a table by id")
     public TableDTO updateTableById(@PathVariable int tableId, @RequestBody TableDTO tableDTO) {

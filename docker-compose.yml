@@ -27,3 +27,4 @@ services:
       - DATABASE_PASSWORD=Sanea@21041990
       - DATABASE_NAME=restaurant_db
       - DATABASE_PORT=3306
+

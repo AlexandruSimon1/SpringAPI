@@ -15,7 +15,7 @@
     <description>Demo project for Spring Boot</description>
     <packaging>jar</packaging>
     <properties>
-        <java.version>14</java.version>
+        <java.version>11</java.version>
         <springfox-swagger.version>2.9.2</springfox-swagger.version>
         <flyway-maven-plugin.version>6.0.3</flyway-maven-plugin.version>
         <flyway-maven-plugin.user>root</flyway-maven-plugin.user>
@@ -25,6 +25,17 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-spring-boot-starter</artifactId>
+            <version>11.0.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-admin-client</artifactId>
+            <version>11.0.2</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-autoconfigure -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

@@ -7,7 +7,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +20,6 @@ public class OrderController {
     private final OrderService orderService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('developers:read')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET ALL ORDERS", notes = "\n" + "This operation gets all orders")
     public List<OrderDTO> getAllOrders() {
@@ -29,7 +27,6 @@ public class OrderController {
     }
 
     @GetMapping("/{orderId}")
-    @PreAuthorize("hasAuthority('developers:read')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET ORDER BY ID", notes = "\n" + "This operation get order by id")
     public OrderDTO getOrderById(@PathVariable int orderId) {
@@ -37,7 +34,6 @@ public class OrderController {
     }
 
     @DeleteMapping("/{orderId}")
-    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "DELETE ORDER BY ID", notes = "\n" + "This operation deletes order by id")
     public OrderDTO deleteOrderById(@PathVariable int orderId) {
@@ -45,7 +41,6 @@ public class OrderController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "CREATE ORDER", notes = "\n" + "This operation creates order")
     public OrderDTO createOrder(@RequestBody OrderDTO orderDTO) {
@@ -53,7 +48,6 @@ public class OrderController {
     }
 
     @PutMapping("/{orderId}")
-    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @ApiOperation(value = "UPDATE ORDER BY ID", notes = "\n" + "This operation updates an existing order")
     public OrderDTO updateOrderById(@PathVariable int orderId, @RequestBody OrderDTO orderDTO) {
@@ -61,7 +55,6 @@ public class OrderController {
     }
 
     @GetMapping("/{orderId}/menus")
-    @PreAuthorize("hasAuthority('developers:read')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET ALL PRODUCT BY ORDER NUMBER", notes = "\n" + "This operation gets all products from order number")
     public Set<MenuDTO> getAllProductByOrderId(@PathVariable int orderId) {
@@ -69,7 +62,6 @@ public class OrderController {
     }
 
     @PutMapping("/{orderId}/menus/{removed_productId}")
-    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @ApiOperation(value = "UPDATE PRODUCT BY ORDER NUMBER", notes = "\n" + "This operation updates products from existing order by order number")
     public MenuDTO updateProductByOrderId(@PathVariable int orderId, @PathVariable int removed_productId, @RequestBody MenuDTO menuDTO) {
@@ -77,7 +69,6 @@ public class OrderController {
     }
 
     @DeleteMapping("/{orderNumber}/menus/{removedOrderId}")
-    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "DELETE PRODUCT BY ORDER NUMBER", notes = "\n" + "This operation deletes products from existing order by order number")
     public MenuDTO deleteProductByOrderId(@PathVariable int orderNumber, @PathVariable int removedOrderId) {
