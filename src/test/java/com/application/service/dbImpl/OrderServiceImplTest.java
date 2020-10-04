@@ -1,7 +1,10 @@
 package com.application.service.dbImpl;
 
+import com.application.dto.MenuDTO;
 import com.application.dto.OrderDTO;
+import com.application.model.Menu;
 import com.application.model.Order;
+import com.application.model.enums.CategoryType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,9 +13,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.application.repository.MenuRepository;
 import com.application.repository.OrderRepository;
-import com.application.repository.TableRepository;
 
-import java.sql.ResultSet;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,25 +25,43 @@ class OrderServiceImplTest {
     private OrderServiceImpl orderService;
     private OrderDTO dto;
     private Order order;
+    private List<Menu> menuList;
+    private List<MenuDTO> menuDTOList;
     @Mock
     private OrderRepository orderRepository;
     @Mock
     private MenuRepository menuRepository;
-    @Mock
-    private TableRepository tableRepository;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        orderService = new OrderServiceImpl(orderRepository, menuRepository, tableRepository);
+        orderService = new OrderServiceImpl(orderRepository, menuRepository);
 
         order = new Order();
         order.setId(ID_VALUE);
         order.setOrderNumber(ID_VALUE);
+        order.setMenus(menuList);
 
         dto = new OrderDTO();
         dto.setId(ID_VALUE);
         dto.setOrderNumber(ID_VALUE);
+
+        menuList = new ArrayList<>();
+        Menu menu = new Menu();
+        menu.setId(ID_VALUE);
+        menu.setName("Pizza");
+        menu.setCategoryType(CategoryType.PIZZA);
+        menu.setPrice(95);
+        menuList.add(menu);
+
+
+        menuDTOList = new ArrayList<>();
+        MenuDTO menuDTO = new MenuDTO();
+        menuDTO.setId(ID_VALUE);
+        menuDTO.setName("Pizza");
+        menuDTO.setCategoryType(CategoryType.PIZZA);
+        menuDTO.setPrice(95);
+        menuDTOList.add(menuDTO);
     }
 
     @Test
@@ -100,7 +119,52 @@ class OrderServiceImplTest {
         OrderDTO existingOrder = orderService.createOrder(orderDTOList);
         assertEquals(createOrder.getId(), existingOrder.getId());
         assertEquals(createOrder.getOrderNumber(), existingOrder.getOrderNumber());
+    }
 
+    @Test
+    void findAllProductByOrderId() {
+        order.setMenus(menuList);
 
+        when(orderRepository.findById(ID_VALUE)).thenReturn(Optional.of(order));
+        menuDTOList = orderService.findAllProductByOrderId(ID_VALUE);
+
+        assertFalse(menuDTOList.isEmpty());
+        assertEquals(menuDTOList.size(), menuList.size());
+    }
+
+    @Test
+    void updateProductByOrderId() {
+        order.setMenus(menuList);
+
+        when(orderRepository.findById(ID_VALUE)).thenReturn(Optional.of(order));
+        Menu menu = new Menu();
+        menu.setId(ID_VALUE);
+        menu.setPrice(95);
+
+        MenuDTO menuDTO = new MenuDTO();
+        menuDTO.setId(ID_VALUE);
+        menuDTO.setPrice(95);
+
+        when(menuRepository.save(menu)).thenReturn(menu);
+        MenuDTO updated = orderService.updateProductByOrderId(ID_VALUE, ID_VALUE, menuDTO);
+
+        assertNotNull(updated);
+        assertEquals(95, updated.getPrice());
+    }
+    @Test
+    void deleteProductByOrderId(){
+        List<Menu>menuListDelete=new ArrayList<>();
+        Menu menu=new Menu();
+        menu.setId(ID_VALUE);
+        menu.setPrice(95);
+        menuListDelete.add(menu);
+        order.setMenus(menuListDelete);
+        when(orderRepository.findById(ID_VALUE)).thenReturn(Optional.of(order));
+
+        when(menuRepository.findById(ID_VALUE)).thenReturn(Optional.of(menu));
+
+        MenuDTO deleted=orderService.deleteProductByOrderId(ID_VALUE,ID_VALUE);
+        assertNotNull(deleted);
+        assertEquals(ID_VALUE, deleted.getId());
     }
 }

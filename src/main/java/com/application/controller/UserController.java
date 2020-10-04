@@ -22,7 +22,6 @@ import org.keycloak.representations.idm.RoleRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,7 +39,7 @@ public class UserController {
     private String realm = "springapi";
     private String clientId = "springapi";
     private String role = "admin";
-    private String clientSecret = "59657666-a339-4e3e-ab4f-085b5ab9d02d";
+    private String clientSecret = "a0517d75-b5ea-4ed4-8285-3ed356aeb801";
 
     @PostMapping(path = "/create")
     public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) {

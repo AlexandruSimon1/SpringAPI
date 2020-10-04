@@ -3,6 +3,7 @@ package com.application.utils;
 import com.application.controller.OrderController;
 import com.application.dto.MenuDTO;
 import com.application.dto.OrderDTO;
+import com.application.model.enums.CategoryType;
 import com.application.service.dbImpl.OrderServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,9 +23,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -47,7 +46,7 @@ class OrderControllerTest {
     @MockBean
     private OrderServiceImpl orderService;
     private OrderDTO orderDTO;
-    private Set<MenuDTO> menuDTO;
+    private List<MenuDTO> menuDTO;
     private MenuDTO testMenuDTO;
     ObjectMapper mapper = new ObjectMapper();
 
@@ -59,10 +58,13 @@ class OrderControllerTest {
         orderDTO = new OrderDTO();
         orderDTO.setId(ID_VALUE);
         orderDTO.setOrderNumber(1);
+        orderDTO.setMenus(menuDTO);
 
-        menuDTO=new HashSet<>();
-        testMenuDTO=new MenuDTO();
+        menuDTO = new ArrayList<>();
+        testMenuDTO = new MenuDTO();
+        testMenuDTO.setId(ID_VALUE);
         testMenuDTO.setName("Pizza");
+        testMenuDTO.setCategoryType(CategoryType.PIZZA);
         testMenuDTO.setPrice(85);
         menuDTO.add(testMenuDTO);
     }
@@ -121,13 +123,35 @@ class OrderControllerTest {
         mockMvc.perform(builder).andExpect(status().isCreated()).andExpect(jsonPath("$.id", is(ID_VALUE))).
                 andExpect(MockMvcResultMatchers.content().string(this.mapper.writeValueAsString(toCreate)));
     }
+
     @Test
     void getAllProductByOrderId() throws Exception {
-        when(orderService.findAllProductByOrderId(anyInt())).thenReturn(menuDTO);
-        this.mockMvc.perform(get("/api/v1/orders/{orderId}/menus", ID_VALUE).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.number", is(ID_VALUE)));
-
-
+        when(orderService.findAllProductByOrderId(ID_VALUE)).thenReturn(menuDTO);
+        this.mockMvc.perform(get("/api/v1/orders/{orderId}/menus", ID_VALUE)).andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(1)));
     }
+
+    @Test
+    void updateProductByOrderId() throws Exception {
+        Mockito.when(orderService.updateProductByOrderId(ID_VALUE, ID_VALUE, testMenuDTO)).thenReturn(testMenuDTO);
+        MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.put("/api/v1/orders/1/menus/1")
+                .contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON).characterEncoding("UTF-8")
+                .content(this.mapper.writeValueAsBytes(testMenuDTO));
+        mockMvc.perform(builder).andExpect(status().isAccepted()).andExpect(jsonPath("$.id", is(ID_VALUE)))
+                .andExpect(MockMvcResultMatchers.content().string(this.mapper.writeValueAsString(testMenuDTO)));
+    }
+//    @Test
+//    void deleteProductByOrderId()throws Exception{
+//        Mockito.when(orderService.deleteProductByOrderId(ID_VALUE,ID_VALUE)).thenReturn(testMenuDTO);
+//        MockHttpServletRequestBuilder builder=MockMvcRequestBuilders.delete("/api/v1/orders/{orderId}",orderDTO.getId())
+//                .contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON).characterEncoding("UTF-8")
+//                .content(this.mapper.writeValueAsBytes(testMenuDTO));
+//        mockMvc.perform(builder).andExpect(status().is2xxSuccessful()).andExpect(jsonPath(".id",is(ID_VALUE)))
+//                .andExpect(MockMvcResultMatchers.content().string(this.mapper.writeValueAsString(testMenuDTO)));
+////        this.mockMvc.perform(delete("/api/v1/orders/{orderId}",orderDTO.getId(),"/menus/{productId}",testMenuDTO.getId()))
+////                .andExpect(status().is2xxSuccessful());
+////        verify(orderService,times(1)).deleteProductByOrderId(ID_VALUE,ID_VALUE);
+//    }
 }

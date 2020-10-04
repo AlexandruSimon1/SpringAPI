@@ -54,6 +54,4 @@ public class AdministratorController {
     public AdminDTO updateAdministratorById(@PathVariable Integer administratorId, @RequestBody AdminDTO adminDTO) {
         return administratorService.update(adminDTO, administratorId);
     }
-
-
 }
