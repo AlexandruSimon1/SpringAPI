@@ -68,10 +68,10 @@ public class OrderController {
         return orderService.updateProductByOrderId(orderId, removed_productId, menuDTO);
     }
 
-    @DeleteMapping("/{orderNumber}/menus/{removedOrderId}")
+    @DeleteMapping("/{orderNumber}/menus/{removedProductId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "DELETE PRODUCT BY ORDER NUMBER", notes = "\n" + "This operation deletes products from existing order by order number")
-    public MenuDTO deleteProductByOrderId(@PathVariable int orderNumber, @PathVariable int removedOrderId) {
-        return orderService.deleteProductByOrderId(orderNumber, removedOrderId);
+    public MenuDTO deleteProductByOrderId(@PathVariable int orderNumber, @PathVariable int removedProductId) {
+        return orderService.deleteProductByOrderId(orderNumber, removedProductId);
     }
 }
