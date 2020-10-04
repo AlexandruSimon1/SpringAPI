@@ -3,7 +3,6 @@
   <component name="dataSourceStorageLocal">
     <data-source name="hibernate.config.xml/Hibernate" uuid="90f961f2-9d6a-47af-befc-0f0e8b58ab77">
       <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="ORACLE" exact-version="0" />
-      <user-name>root</user-name>
       <schema-mapping />
     </data-source>
     <data-source name="restaurant_db" uuid="4daf2f26-04b0-4657-b452-bcc764de42b7">
