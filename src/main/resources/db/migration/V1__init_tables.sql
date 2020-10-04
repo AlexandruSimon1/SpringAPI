@@ -59,9 +59,3 @@ create table users
 	constraint users_pk
 		primary key (id)
 );
-
-create unique index users_email_uindex
-	on users (email);
-
-Insert INTO users values (1,'admin@mail.com','Alex','Rock','$2y$12$3hDlVfh2j6W/OqHUWSkyTeu1NRLn/E.q/3J8HeM6NTAAOuNdNHdQ6','ADMIN','ACTIVE');
-Insert INTO users values (2,'user@mail.com','Arthur','Rock','$2y$12$eusZxiNmmXAkT.xozsJituoNTjvEo989OAAqci7vgFDhn7m5n4WG6','USER','ACTIVE');
