@@ -46,16 +46,3 @@ PAYMENT_TYPE VARCHAR(30),
 ORDERS_ID INT ,
 CONSTRAINT CHECKOUT_ORDERS_FK FOREIGN KEY (ORDERS_ID)REFERENCES orders(ID)
 );
-
-create table users
-(
-	id int auto_increment,
-	email varchar(255) not null,
-	first_name varchar(55) null,
-	last_name varchar(55) null,
-	password varchar(255) null,
-	role varchar(55) default 'USER' null,
-	status varchar(55) default 'ACTIVE' null,
-	constraint users_pk
-		primary key (id)
-);
