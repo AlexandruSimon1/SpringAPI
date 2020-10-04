@@ -11,7 +11,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -64,7 +63,7 @@ public class OrderController {
     @PreAuthorize("hasAuthority('developers:read')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET ALL PRODUCT BY ORDER NUMBER", notes = "\n" + "This operation gets all products from order number")
-    public Set<MenuDTO> getAllProductByOrderId(@PathVariable int orderId) {
+    public List<MenuDTO> getAllProductByOrderId(@PathVariable int orderId) {
         return orderService.findAllProductByOrderId(orderId);
     }
 
