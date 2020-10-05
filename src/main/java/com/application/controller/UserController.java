@@ -55,7 +55,6 @@ public class UserController {
         user.setLastName(userDTO.getLastname());
         user.setEmail(userDTO.getEmail());
 
-        // Get realm
         RealmResource realmResource = keycloak.realm(realm);
         UsersResource usersResource = realmResource.users();
 
@@ -70,8 +69,6 @@ public class UserController {
 
             log.info("Created userId {}", userId);
 
-
-            // create password credential
             CredentialRepresentation passwordCred = new CredentialRepresentation();
             passwordCred.setTemporary(false);
             passwordCred.setType(CredentialRepresentation.PASSWORD);
@@ -79,13 +76,10 @@ public class UserController {
 
             UserResource userResource = usersResource.get(userId);
 
-            // Set password credential
             userResource.resetPassword(passwordCred);
 
-            // Get realm role student
             RoleRepresentation realmRoleUser = realmResource.roles().get(role).toRepresentation();
 
-            // Assign realm role student to user
             userResource.roles().realmLevel().add(Arrays.asList(realmRoleUser));
         }
         return ResponseEntity.ok(userDTO);
@@ -107,18 +101,5 @@ public class UserController {
 
         return ResponseEntity.ok(response);
     }
-
-
-    @GetMapping(value = "/unprotected-data")
-    public String getName() {
-        return "Hello, this api is not protected.";
-    }
-
-
-    @GetMapping(value = "/protected-data")
-    public String getEmail() {
-        return "Hello, this api is protected.";
-    }
-
 }
 
