@@ -23,10 +23,7 @@ import org.keycloak.representations.idm.UserRepresentation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RequestMapping(value = "/api/v1/users")
@@ -39,7 +36,7 @@ public class UserController {
     private String realm = "springapi";
     private String clientId = "springapi";
     private String role = "admin";
-    private String clientSecret = "a0517d75-b5ea-4ed4-8285-3ed356aeb801";
+    private String clientSecret = "e937d3fd-86fc-4497-ab02-6439a14e70da";
 
     @PostMapping(path = "/create")
     public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) {
@@ -58,6 +55,7 @@ public class UserController {
         user.setLastName(userDTO.getLastname());
         user.setEmail(userDTO.getEmail());
 
+        // Get realm
         RealmResource realmResource = keycloak.realm(realm);
         UsersResource usersResource = realmResource.users();
 
@@ -72,20 +70,29 @@ public class UserController {
 
             log.info("Created userId {}", userId);
 
+
+            // create password credential
             CredentialRepresentation passwordCred = new CredentialRepresentation();
             passwordCred.setTemporary(false);
             passwordCred.setType(CredentialRepresentation.PASSWORD);
             passwordCred.setValue(userDTO.getPassword());
+
             UserResource userResource = usersResource.get(userId);
+
+            // Set password credential
             userResource.resetPassword(passwordCred);
+
+            // Get realm role student
             RoleRepresentation realmRoleUser = realmResource.roles().get(role).toRepresentation();
+
+            // Assign realm role student to user
             userResource.roles().realmLevel().add(Arrays.asList(realmRoleUser));
         }
         return ResponseEntity.ok(userDTO);
     }
 
-    @PostMapping(path = "/signin")
-    public ResponseEntity<?> signin(@RequestBody UserDTO userDTO) {
+    @PostMapping(path = "/login")
+    public ResponseEntity<?> login(@RequestBody UserDTO userDTO) {
 
         Map<String, Object> clientCredentials = new HashMap<>();
         clientCredentials.put("secret", clientSecret);
@@ -100,4 +107,18 @@ public class UserController {
 
         return ResponseEntity.ok(response);
     }
+
+
+    @GetMapping(value = "/unprotected-data")
+    public String getName() {
+        return "Hello, this api is not protected.";
+    }
+
+
+    @GetMapping(value = "/protected-data")
+    public String getEmail() {
+        return "Hello, this api is protected.";
+    }
+
 }
+

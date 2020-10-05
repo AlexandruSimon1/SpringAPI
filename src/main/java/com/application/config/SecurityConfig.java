@@ -32,15 +32,22 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         super.configure(http);
 
-        http.cors().and().csrf().disable().sessionManagement().
-                sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+        http.cors().and().csrf().disable().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+                .antMatchers("/api/v1/users/unprotected-data").permitAll()
                 .antMatchers("/api/v1/users/create").permitAll()
-                .antMatchers("/api/v1/users/signin").permitAll()
+                .antMatchers("/api/v1/users/login").permitAll()
                 .anyRequest().authenticated();
+
     }
 
     @Override
     protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
+
+        /**
+         * Returning NullAuthenticatedSessionStrategy means app will not remember session
+         */
+
         return new NullAuthenticatedSessionStrategy();
     }
 
@@ -86,8 +93,11 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
     @Bean
     public FilterRegistrationBean<?> keycloakSecurityContextRequestFilterBean(
             KeycloakSecurityContextRequestFilter filter) {
+
         FilterRegistrationBean<?> registrationBean = new FilterRegistrationBean<>(filter);
+
         registrationBean.setEnabled(false);
+
         return registrationBean;
     }
 
@@ -98,4 +108,3 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
         return new HttpSessionManager();
     }
 }
-
