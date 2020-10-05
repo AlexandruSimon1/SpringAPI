@@ -36,7 +36,7 @@ public class UserController {
     private String realm = "springapi";
     private String clientId = "springapi";
     private String role = "admin";
-    private String clientSecret = "e937d3fd-86fc-4497-ab02-6439a14e70da";
+    private String clientSecret = "75538822-3191-42b5-91e7-6a9fcc0e016f";
 
     @PostMapping(path = "/create")
     public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) {

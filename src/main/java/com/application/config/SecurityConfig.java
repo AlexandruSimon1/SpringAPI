@@ -34,20 +34,15 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
 
         http.cors().and().csrf().disable().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
-                .antMatchers("/api/v1/users/unprotected-data").permitAll()
                 .antMatchers("/api/v1/users/create").permitAll()
                 .antMatchers("/api/v1/users/login").permitAll()
+                .antMatchers("/api/v1/menus").hasRole("admin")
                 .anyRequest().authenticated();
 
     }
 
     @Override
     protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
-
-        /**
-         * Returning NullAuthenticatedSessionStrategy means app will not remember session
-         */
-
         return new NullAuthenticatedSessionStrategy();
     }
 
