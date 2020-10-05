@@ -144,16 +144,14 @@ class OrderControllerTest {
         mockMvc.perform(builder).andExpect(status().isAccepted()).andExpect(jsonPath("$.id", is(ID_VALUE)))
                 .andExpect(MockMvcResultMatchers.content().string(this.mapper.writeValueAsString(testMenuDTO)));
     }
-//    @Test
-//    void deleteProductByOrderId()throws Exception{
-//        Mockito.when(orderService.deleteProductByOrderId(ID_VALUE,ID_VALUE)).thenReturn(testMenuDTO);
-//        MockHttpServletRequestBuilder builder=MockMvcRequestBuilders.delete("/api/v1/orders/{orderId}",orderDTO.getId())
-//                .contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON).characterEncoding("UTF-8")
-//                .content(this.mapper.writeValueAsBytes(testMenuDTO));
-//        mockMvc.perform(builder).andExpect(status().is2xxSuccessful()).andExpect(jsonPath(".id",is(ID_VALUE)))
-//                .andExpect(MockMvcResultMatchers.content().string(this.mapper.writeValueAsString(testMenuDTO)));
-////        this.mockMvc.perform(delete("/api/v1/orders/{orderId}",orderDTO.getId(),"/menus/{productId}",testMenuDTO.getId()))
-////                .andExpect(status().is2xxSuccessful());
-////        verify(orderService,times(1)).deleteProductByOrderId(ID_VALUE,ID_VALUE);
-//    }
+    @Test
+    void deleteProductByOrderId()throws Exception{
+        Mockito.when(orderService.deleteProductByOrderId(ID_VALUE,ID_VALUE)).thenReturn(testMenuDTO);
+        MockHttpServletRequestBuilder builder=MockMvcRequestBuilders.delete("/api/v1/orders/1/menus/1")
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON).characterEncoding("UTF-8")
+                .content(this.mapper.writeValueAsBytes(testMenuDTO));
+        mockMvc.perform(builder).andExpect(status().is2xxSuccessful())
+                .andExpect(MockMvcResultMatchers.content().string(this.mapper.writeValueAsString(testMenuDTO)));
+    }
 }
