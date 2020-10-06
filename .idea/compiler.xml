@@ -10,8 +10,8 @@
         <module name="SpringAPI" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="11">
-      <module name="SpringAPI" target="9" />
+    <bytecodeTargetLevel target="14">
+      <module name="SpringAPI" target="14" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

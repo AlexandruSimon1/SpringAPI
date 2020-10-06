@@ -1,7 +1,9 @@
 pipeline {
     agent any
 
-
+ tools {
+        maven "3.6.2"
+    }
 
     stages {
         stage("Read from Maven POM"){
@@ -27,7 +29,7 @@ pipeline {
         stage("Build image"){
             steps {
                 echo "Building service image and pushing it to DockerHub"
-                    withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: "dockerLogin",
+                    withCredentials([usernamePassword(credentialsId: 'Docker', usernameVariable: "dockerLogin",
                         passwordVariable: "dockerPassword")]) {
 
                             bat "docker login -u ${dockerLogin} -p ${dockerPassword}"
