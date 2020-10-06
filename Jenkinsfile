@@ -43,8 +43,7 @@ pipeline {
         }
         stage("Newman Test"){
             steps{
-                bat "newman run newman_test.json -e newman_test.json -r junit"
-                bat "publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'var/reports/newman/html', reportFiles: 'index.html', reportName: 'Newman API Test', reportTitles: ''])"
+                bat "newman run https://www.getpostman.com/collections/345d1665e5bdd9ca448e"
             }
         }
     }
