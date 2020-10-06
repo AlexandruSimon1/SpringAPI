@@ -38,7 +38,7 @@ pipeline {
             steps{
                 bat "docker-compose --file docker-compose.yml up --detach"
                 echo "Server is fully up and running"
-                sleep (time:200,unit:"SECONDS")
+                sleep (time:90,unit:"SECONDS")
             }
         }
         stage("Newman Test"){
