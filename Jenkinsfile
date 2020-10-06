@@ -1,10 +1,6 @@
 pipeline {
     agent any
 
- tools {
-        maven "3.6.2"
-    }
-
     stages {
         stage("Read from Maven POM"){
             steps{
