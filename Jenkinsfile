@@ -43,7 +43,9 @@ pipeline {
         }
         stage("Newman Test"){
             steps{
-                bat "docker run -t postman/newman_ubuntu1404 run https://www.getpostman.com/collections/345d1665e5bdd9ca448e"
+                bat "npm install"
+                bat "npm run newman-tests"
+                junit "newman.xml"
             }
         }
     }
