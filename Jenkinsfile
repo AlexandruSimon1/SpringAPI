@@ -43,7 +43,7 @@ pipeline {
         }
         stage("Newman Test"){
             steps{
-                bat "newman run https://www.getpostman.com/collections/345d1665e5bdd9ca448e"
+                bat "C:\Users\simon\AppData\Roaming\npm\newman -c "C:\Users\simon\IdeaProjects\SpringAPI\newman_test.json""
             }
         }
     }
