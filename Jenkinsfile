@@ -38,13 +38,12 @@ pipeline {
             steps{
                 bat "docker-compose --file docker-compose.yml up --detach"
                 echo "Server is fully up and running"
-
+                sleep (time:30,unit:"SECONDS")
             }
         }
         stage("Newman Test"){
             steps{
                 bat "newman run https://www.getpostman.com/collections/345d1665e5bdd9ca448e"
-                bat "--reports cli.junit"
             }
         }
     }
