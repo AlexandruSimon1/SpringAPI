@@ -36,13 +36,13 @@ public class UserController {
     private String realm = "springapi";
     private String clientId = "springapi";
     private String role = "admin";
-    private String clientSecret = "75538822-3191-42b5-91e7-6a9fcc0e016f";
+    private String clientSecret = "a8625bc7-131c-4b96-94f1-be9a921f98c2";
 
     @PostMapping(path = "/create")
     public ResponseEntity<?> createUser(@RequestBody UserDTO userDTO) {
 
         Keycloak keycloak = KeycloakBuilder.builder().serverUrl(authServerUrl)
-                .grantType(OAuth2Constants.PASSWORD).realm("master").clientId("admin-cli")
+                .grantType(OAuth2Constants.PASSWORD).realm("master").clientId("springapi-realm")
                 .username("admin").password("Sanea@21041990")
                 .resteasyClient(new ResteasyClientBuilder().connectionPoolSize(10).build()).build();
 
