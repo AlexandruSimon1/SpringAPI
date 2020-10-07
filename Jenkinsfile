@@ -51,7 +51,8 @@ pipeline {
             steps{
             echo "Starting the JMeter Loading Test"
             bat "jmeter -jjmeter.save.saveservice.output_format.xml -n -t D:/RestaurantAPI.jmx -l D:/report.jtl"
-            }        }
+            }
+        }
     }
     post {
         always {
