@@ -43,7 +43,14 @@ pipeline {
         }
         stage("Newman Test"){
             steps{
+                echo "Starting Newman Test"
                 bat "newman run --disable-unicode https://www.getpostman.com/collections/345d1665e5bdd9ca448e"
+            }
+        }
+        stage("JMeter Loading Test"){
+            steps{
+            echo "Starting the JMeter Loading Test"
+            bat "C:\Program Files\JMeter\bin>jmeter.bat -jjmeter.save.saveservice.output_format=xml -n -t D:\RestaurantAPI.jmx -l D:\report.jtl"
             }
         }
     }
