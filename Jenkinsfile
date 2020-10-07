@@ -46,6 +46,11 @@ pipeline {
                 bat "newman run --disable-unicode https://www.getpostman.com/collections/345d1665e5bdd9ca448e"
             }
         }
+        stage("Jmeter Load Testing"){
+            steps{
+                bat "C:\Program Files\JMeter\bin\jmeter.bat -n -t C:\Users\simon\IdeaProjects\SpringAPI/RestaurantAPI.jmx -l test.jtl"
+            }
+        }
     }
     post {
         always {
