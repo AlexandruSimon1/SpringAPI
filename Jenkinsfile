@@ -50,7 +50,8 @@ pipeline {
         stage("JMeter Loading Test"){
             steps{
             echo "Starting the JMeter Loading Test"
-            bat "C:/ProgramFiles/JMeter/bin>jmeter.bat -jjmeter.save.saveservice.output_format=xml -n -t D:/RestaurantAPI.jmx -l D:/report.jtl"
+            bat "cd C:/ProgramFiles/JMeter/bin"
+            bat "jmeter.bat -jjmeter.save.saveservice.output_format=xml -n -t D:/RestaurantAPI.jmx -l D:/report.jtl"
             }
         }
     }
