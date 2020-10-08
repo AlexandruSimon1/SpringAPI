@@ -1,10 +1,11 @@
-package com.application.utils;
+package com.application.controller;
 
 import com.application.controller.OrderController;
 import com.application.dto.MenuDTO;
 import com.application.dto.OrderDTO;
 import com.application.model.enums.CategoryType;
 import com.application.service.dbImpl.OrderServiceImpl;
+import com.application.utils.ExceptionController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

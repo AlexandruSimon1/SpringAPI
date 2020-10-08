@@ -1,8 +1,9 @@
-package com.application.utils;
+package com.application.controller;
 
 import com.application.controller.CheckOutController;
 import com.application.dto.CheckOutDTO;
 import com.application.service.dbImpl.CheckOutServiceImpl;
+import com.application.utils.ExceptionController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
