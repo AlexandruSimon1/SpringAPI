@@ -1,7 +1,6 @@
 package com.application.controller;
 
 
-import com.application.controller.AdministratorController;
 import com.application.utils.ExceptionController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.application.dto.AdminDTO;
