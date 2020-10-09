@@ -36,8 +36,18 @@ pipeline {
         stage("Deploy"){
             steps{
                 bat "docker-compose --file docker-compose.yml up --detach"
-                echo "Server is fully up and running"
-                sleep (time:180,unit:"SECONDS")
+                            timeout(time: 60, unit: 'SECONDS') {
+                                    waitUntil(initialRecurrencePeriod: 2000) {
+                                        script {
+                                            def result =
+                                                sh script: "curl --silent --output /dev/null http://localhost:8282/waiters",
+                                                returnStatus: true
+                                            return (result == 0)
+                                        }
+                                    }
+                                }
+                                echo "Server is up"
+                            }
             }
         }
         stage("Newman Test"){
