@@ -73,11 +73,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Set<MenuDTO> findAllProductByOrderId(int orderNumber) {
+    public List<MenuDTO> findAllProductByOrderId(int orderNumber) {
         Order order = orderRepository.findById(orderNumber).
                 orElseThrow(() -> new ApplicationException(ExceptionType.ORDER_NOT_FOUND));
         return order.getMenus().stream().
-                map(menu -> MenuMapper.INSTANCE.toMenuDto(menu, new NotificatorMappingContext())).collect(Collectors.toSet());
+                map(menu -> MenuMapper.INSTANCE.toMenuDto(menu, new NotificatorMappingContext())).collect(Collectors.toList());
     }
 
     @Override

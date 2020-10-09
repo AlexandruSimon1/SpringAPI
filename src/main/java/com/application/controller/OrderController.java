@@ -57,7 +57,7 @@ public class OrderController {
     @GetMapping("/{orderId}/menus")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET ALL PRODUCT BY ORDER NUMBER", notes = "\n" + "This operation gets all products from order number")
-    public Set<MenuDTO> getAllProductByOrderId(@PathVariable int orderId) {
+    public List<MenuDTO> getAllProductByOrderId(@PathVariable int orderId) {
         return orderService.findAllProductByOrderId(orderId);
     }
 
