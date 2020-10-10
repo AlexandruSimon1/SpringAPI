@@ -1,8 +1,9 @@
-package com.application.utils;
+package com.application.controller;
 
 import com.application.controller.WaiterController;
 import com.application.dto.WaiterDTO;
 import com.application.service.dbImpl.WaiterServiceImpl;
+import com.application.utils.ExceptionController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;

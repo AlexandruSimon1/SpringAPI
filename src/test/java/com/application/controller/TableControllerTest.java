@@ -1,8 +1,10 @@
-package com.application.utils;
+package com.application.controller;
 
-import com.application.controller.CheckOutController;
-import com.application.dto.CheckOutDTO;
-import com.application.service.dbImpl.CheckOutServiceImpl;
+
+import com.application.controller.TableController;
+import com.application.dto.TableDTO;
+import com.application.service.dbImpl.TableServiceImpl;
+import com.application.utils.ExceptionController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -33,16 +35,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = CheckOutController.class)
-class CheckOutControllerTest {
+@WebMvcTest(controllers = TableController.class)
+class TableControllerTest {
     private static final int ID_VALUE = 1;
     @Autowired
-    private CheckOutController controller;
+    private TableController controller;
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private CheckOutServiceImpl checkOutService;
-    private CheckOutDTO checkOutDTO;
+    private TableServiceImpl tableService;
+    private TableDTO tableDTO;
     ObjectMapper mapper = new ObjectMapper();
 
     @BeforeEach
@@ -50,45 +52,46 @@ class CheckOutControllerTest {
         this.mockMvc = MockMvcBuilders.standaloneSetup(controller)
                 .setControllerAdvice(new ExceptionController()).alwaysExpect(MockMvcResultMatchers.content().
                         contentType(MediaType.APPLICATION_JSON)).build();
-        checkOutDTO = new CheckOutDTO();
-        checkOutDTO.setId(ID_VALUE);
-        checkOutDTO.setPaymentType("Visa");
+        tableDTO = new TableDTO();
+        tableDTO.setId(ID_VALUE);
+        tableDTO.setNumber(1);
     }
 
     @Test
-    void getAllCheckOut() throws Exception {
-        List<CheckOutDTO> checkOutDTOList = new ArrayList<>();
-        checkOutDTOList.add(checkOutDTO);
-        when(checkOutService.getAllCheckOut()).thenReturn(checkOutDTOList);
-        mockMvc.perform(get("/api/v1/checkout")).andDo(print()).
+    void getAllTables() throws Exception {
+        List<TableDTO> tableDTOList = new ArrayList<>();
+        tableDTOList.add(tableDTO);
+        when(tableService.getAllTable()).thenReturn(tableDTOList);
+        mockMvc.perform(get("/api/v1/tables")).andDo(print()).
                 andExpect(status().isOk()).
                 andExpect(content().contentType(MediaType.APPLICATION_JSON)).
                 andExpect(jsonPath("$", hasSize(1)));
     }
 
     @Test
-    void getCheckOutById() throws Exception {
-        when(checkOutService.getCheckOutById(anyInt())).thenReturn(checkOutDTO);
-        this.mockMvc.perform(get("/api/v1/checkout/{checkoutId}", ID_VALUE).contentType(MediaType.APPLICATION_JSON))
+    void getTableById() throws Exception {
+        when(tableService.getTableById(anyInt())).thenReturn(tableDTO);
+        this.mockMvc.perform(get("/api/v1/tables/{tableId}", ID_VALUE).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("id", is(ID_VALUE)));
     }
 
     @Test
-    void deleteCheckOutById() throws Exception {
-        when(checkOutService.deleteCheckOutById(ID_VALUE)).thenReturn(checkOutDTO);
-        this.mockMvc.perform(delete("/api/v1/checkout/{checkoutId}", checkOutDTO.getId()))
+    void deleteTableById() throws Exception {
+        when(tableService.deleteTableById(ID_VALUE)).thenReturn(tableDTO);
+        this.mockMvc.perform(delete("/api/v1/tables/{tableId}", tableDTO.getId()))
                 .andExpect(status().is2xxSuccessful());
-        verify(checkOutService, times(1)).deleteCheckOutById(ID_VALUE);
+        verify(tableService, times(1)).deleteTableById(ID_VALUE);
     }
 
     @Test
-    void updateCheckOutById() throws Exception {
-        CheckOutDTO toUpdate = new CheckOutDTO();
+    void updateTableById() throws Exception {
+        TableDTO toUpdate = new TableDTO();
         toUpdate.setId(ID_VALUE);
+        toUpdate.setNumber(ID_VALUE);
 
-        Mockito.when(checkOutService.update(toUpdate,ID_VALUE)).thenReturn(toUpdate);
-        MockHttpServletRequestBuilder builder= MockMvcRequestBuilders.put("/api/v1/checkout/1",toUpdate)
+        Mockito.when(tableService.update(toUpdate,ID_VALUE)).thenReturn(toUpdate);
+        MockHttpServletRequestBuilder builder= MockMvcRequestBuilders.put("/api/v1/tables/1",toUpdate)
                 .contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON).characterEncoding("UTF-8")
                 .content(this.mapper.writeValueAsBytes(toUpdate));
 
@@ -96,15 +99,15 @@ class CheckOutControllerTest {
                 .andExpect(MockMvcResultMatchers.content().string(this.mapper.writeValueAsString(toUpdate)));
     }
     @Test
-    void createCheckOut() throws Exception {
-        CheckOutDTO toCreate=new CheckOutDTO();
-        toCreate.setPaymentType("Visa");
+    void createTable() throws Exception {
+        TableDTO toCreate=new TableDTO();
+        toCreate.setNumber(ID_VALUE);
         toCreate.setId(ID_VALUE);
-        when(checkOutService.createCheckOut(Mockito.any(CheckOutDTO.class))).thenReturn(toCreate);
-        MockHttpServletRequestBuilder builder= MockMvcRequestBuilders.post("/api/v1/checkout").
+        when(tableService.createTable(Mockito.any(TableDTO.class))).thenReturn(toCreate);
+        MockHttpServletRequestBuilder builder= MockMvcRequestBuilders.post("/api/v1/tables").
                 contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON).characterEncoding("UTF-8")
                 .content(this.mapper.writeValueAsBytes(toCreate));
-        mockMvc.perform(builder).andExpect(status().isCreated()).andExpect(jsonPath("$.paymentType",is("Visa"))).
+        mockMvc.perform(builder).andExpect(status().isCreated()).andExpect(jsonPath("$.number",is(ID_VALUE))).
                 andExpect(MockMvcResultMatchers.content().string(this.mapper.writeValueAsString(toCreate)));
     }
 }
