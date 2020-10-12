@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
+//With this class we get the information regarding the errors that can happen and more details information
 @ControllerAdvice
 public class ExceptionController extends ResponseEntityExceptionHandler {
 

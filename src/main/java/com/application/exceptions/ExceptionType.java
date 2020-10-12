@@ -3,7 +3,7 @@ package com.application.exceptions;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-
+//Creating our personal Exception
 @Getter
 @RequiredArgsConstructor
 public enum ExceptionType {
