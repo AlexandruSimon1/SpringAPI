@@ -41,12 +41,13 @@ class WaiterServiceImplTest {
 
     @Test
     void getAllWaiters() {
+        //given
         List<Waiter> getAllWaiters = new ArrayList<>();
         getAllWaiters.add(defaultWaiter);
-
+        //when
         when(waiterRepository.findAll()).thenReturn(getAllWaiters);
-
         List<WaiterDTO> waiterDTOS = waiterServiceImpl.getAllWaiters();
+        //then
         assertNotNull(waiterDTOS);
         assertEquals(getAllWaiters.size(), waiterDTOS.size());
         verify(waiterRepository, times(1)).findAll();
@@ -65,10 +66,10 @@ class WaiterServiceImplTest {
     void deleteWaiterById() {
         when(waiterRepository.findById(ID_VALUE)).thenReturn(Optional.of(defaultWaiter));
         waiterRepository.deleteById(ID_VALUE);
-        verify(waiterRepository, times(1)).deleteById(ID_VALUE);
-
         WaiterDTO waiterDTO = waiterServiceImpl.deleteWaiterById(ID_VALUE);
+
         assertEquals(ID_VALUE, waiterDTO.getId());
+        verify(waiterRepository, times(1)).deleteById(ID_VALUE);
     }
 
     @Test
@@ -82,8 +83,8 @@ class WaiterServiceImplTest {
 
         when(waiterRepository.findById(ID_VALUE)).thenReturn(Optional.of(defaultWaiter));
         when(waiterRepository.save(defaultWaiter)).thenReturn(defaultWaiter);
-
         WaiterDTO updatedWaiter = waiterServiceImpl.update(updateWaiter, ID_VALUE);
+
         assertEquals(updatedWaiter.getId(), defaultWaiter.getId());
         assertEquals(updatedWaiter.getFirstName(), updateWaiter.getFirstName());
         assertEquals(updatedWaiter.getLastName(), updateWaiter.getLastName());
@@ -111,8 +112,8 @@ class WaiterServiceImplTest {
         createWaiter.setEmail("mike@angus.com");
 
         when(waiterRepository.save(newWaiter)).thenReturn(newWaiter);
-
         WaiterDTO createdWaiter = waiterServiceImpl.createWaiter(createWaiter);
+
         assertNotNull(createdWaiter);
         assertEquals(createdWaiter.getId(), newWaiter.getId());
         assertEquals(createdWaiter.getFirstName(),newWaiter.getFirstName());

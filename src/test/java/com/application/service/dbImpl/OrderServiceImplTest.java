@@ -69,41 +69,45 @@ class OrderServiceImplTest {
 
     @Test
     void getAllOrders() {
+        //given
         List<Order> orderList = new ArrayList<>();
         orderList.add(order);
-
+        //when
         when(orderRepository.findAll()).thenReturn(orderList);
         List<OrderDTO> orderDTOList = orderService.getAllOrders();
+        //then
         assertEquals(orderDTOList.size(), orderList.size());
         verify(orderRepository, times(1)).findAll();
     }
 
     @Test
     void getOrderById() {
+        //when
         when(orderRepository.findById(ID_VALUE)).thenReturn(Optional.of(order));
         OrderDTO orderDTO = orderService.getOrderById(ID_VALUE);
-
+        //then
         assertEquals(order.getId(), orderDTO.getId());
         verify(orderRepository, times(1)).findById(ID_VALUE);
     }
 
     @Test
     void deleteOrderById() {
+        //when
         when(orderRepository.findById(ID_VALUE)).thenReturn(Optional.of(order));
         orderRepository.deleteById(ID_VALUE);
-
-        verify(orderRepository, times(1)).deleteById(ID_VALUE);
         OrderDTO orderDTO = orderService.deleteOrderById(ID_VALUE);
+        //then
+        verify(orderRepository, times(1)).deleteById(ID_VALUE);
         assertEquals(order.getId(), orderDTO.getId());
     }
 
     @Test
     void updateOrder() {
+        //when
         when(orderRepository.findById(ID_VALUE)).thenReturn(Optional.of(order));
         when(orderRepository.save(order)).thenReturn(order);
-
         OrderDTO updatedOrder = orderService.update(dto, ID_VALUE);
-
+        //then
         assertNotNull(updatedOrder);
         assertEquals(ID_VALUE, updatedOrder.getId());
         assertEquals(dto.getOrderNumber(), updatedOrder.getOrderNumber());
@@ -111,6 +115,7 @@ class OrderServiceImplTest {
 
     @Test
     void createOrder() {
+        //given
         OrderDTO orderDTOList = new OrderDTO();
         orderDTOList.setId(1);
         orderDTOList.setOrderNumber(1);
@@ -118,8 +123,10 @@ class OrderServiceImplTest {
         Order createOrder = new Order();
         createOrder.setId(1);
         createOrder.setOrderNumber(1);
+        //when
         when(orderRepository.save(createOrder)).thenReturn(createOrder);
         OrderDTO existingOrder = orderService.createOrder(orderDTOList);
+        //then
         assertEquals(createOrder.getId(), existingOrder.getId());
         assertEquals(createOrder.getOrderNumber(), existingOrder.getOrderNumber());
 
@@ -128,20 +135,21 @@ class OrderServiceImplTest {
 
     @Test
     void findAllProductByOrderId() {
+        //given
         order.setMenus(menuList);
-
+        //when
         when(orderRepository.findById(ID_VALUE)).thenReturn(Optional.of(order));
         menuDTOList = orderService.findAllProductByOrderId(ID_VALUE);
-
+        //then
         assertFalse(menuDTOList.isEmpty());
         assertEquals(menuDTOList.size(), menuList.size());
     }
 
     @Test
     void updateProductByOrderId() {
+        //given
         order.setMenus(menuList);
 
-        when(orderRepository.findById(ID_VALUE)).thenReturn(Optional.of(order));
         Menu menu = new Menu();
         menu.setId(ID_VALUE);
         menu.setPrice(95);
@@ -149,27 +157,29 @@ class OrderServiceImplTest {
         MenuDTO menuDTO = new MenuDTO();
         menuDTO.setId(ID_VALUE);
         menuDTO.setPrice(95);
-
+        //when
+        when(orderRepository.findById(ID_VALUE)).thenReturn(Optional.of(order));
         when(menuRepository.save(menu)).thenReturn(menu);
         MenuDTO updated = orderService.updateProductByOrderId(ID_VALUE, ID_VALUE, menuDTO);
-
+        //then
         assertNotNull(updated);
         assertEquals(95, updated.getPrice());
     }
 
     @Test
     void deleteProductByOrderId() {
+        //given
         List<Menu> menuListDelete = new ArrayList<>();
         Menu menu = new Menu();
         menu.setId(ID_VALUE);
         menu.setPrice(95);
         menuListDelete.add(menu);
         order.setMenus(menuListDelete);
+        //when
         when(orderRepository.findById(ID_VALUE)).thenReturn(Optional.of(order));
-
         when(menuRepository.findById(ID_VALUE)).thenReturn(Optional.of(menu));
-
         MenuDTO deleted = orderService.deleteProductByOrderId(ID_VALUE, ID_VALUE);
+        //then
         assertNotNull(deleted);
         assertEquals(ID_VALUE, deleted.getId());
     }
