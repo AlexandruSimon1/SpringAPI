@@ -39,10 +39,13 @@ class CheckOutServiceImplTest {
 
     @Test
     void getAllCheckOut() {
+        //given
         List<CheckOut> checkOuts = new ArrayList<>();
         checkOuts.add(checkOut);
+        //when
         when(checkOutRepository.findAll()).thenReturn(checkOuts);
         List<CheckOutDTO> checkOutDTOS = checkOutService.getAllCheckOut();
+        //then
         assertNotNull(checkOutDTOS);
         assertEquals(checkOuts.size(), checkOutDTOS.size());
         verify(checkOutRepository, times(1)).findAll();
@@ -50,8 +53,10 @@ class CheckOutServiceImplTest {
 
     @Test
     void getCheckOutById() {
+        //when
         when(checkOutRepository.findById(ID_VALUE)).thenReturn(Optional.of(checkOut));
         CheckOutDTO checkOutDTO = checkOutService.getCheckOutById(ID_VALUE);
+        //then
         assertEquals(checkOut.getId(), checkOutDTO.getId());
         assertEquals(checkOut.getPaymentType(), checkOutDTO.getPaymentType());
         verify(checkOutRepository, times(1)).findById(ID_VALUE);
@@ -61,6 +66,7 @@ class CheckOutServiceImplTest {
     void deleteCheckOutByID() {
         when(checkOutRepository.findById(ID_VALUE)).thenReturn(Optional.of(checkOut));
         checkOutRepository.deleteById(ID_VALUE);
+
         verify(checkOutRepository, times(1)).deleteById(ID_VALUE);
         CheckOutDTO checkOutDTO = checkOutService.deleteCheckOutById(ID_VALUE);
         assertEquals(ID_VALUE, checkOutDTO.getId());
@@ -89,9 +95,10 @@ class CheckOutServiceImplTest {
         CheckOutDTO checkOutDTO = new CheckOutDTO();
         checkOutDTO.setId(ID_VALUE);
         checkOutDTO.setPaymentType("MasterCard");
-        when(checkOutRepository.save(checkOutCreate)).thenReturn(checkOutCreate);
 
+        when(checkOutRepository.save(checkOutCreate)).thenReturn(checkOutCreate);
         CheckOutDTO createCheckOut = checkOutService.createCheckOut(checkOutDTO);
+
         assertNotNull(createCheckOut);
         assertEquals(createCheckOut.getId(), checkOutCreate.getId());
         assertEquals(createCheckOut.getPaymentType(), checkOutCreate.getPaymentType());

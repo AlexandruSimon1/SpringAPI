@@ -7,6 +7,7 @@ import org.mapstruct.TargetType;
 import java.util.IdentityHashMap;
 import java.util.Map;
 
+//Is used for mapping the data before every mapping request that is made and can be used only by abstract classes
 public class NotificatorMappingContext {
     private final Map<Object, Object> knownInstances = new IdentityHashMap<>();
 

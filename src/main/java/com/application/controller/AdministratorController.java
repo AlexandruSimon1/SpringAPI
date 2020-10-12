@@ -19,9 +19,11 @@ import java.util.List;
 public class AdministratorController {
     @Autowired
     private final AdministratorService administratorService;
-
+    //Mapping name
     @GetMapping
+    //Response status is used for providing the status of our request
     @ResponseStatus(HttpStatus.OK)
+    //This is a response information that we will get using our Swagger and Swagger documentation
     @ApiOperation(value = "GET ALL ADMINISTRATORS", notes = "\n" + "This operation gets all administrators")
     public List<AdminDTO> getAllAdministrators() {
         return administratorService.getAllAdministrators();

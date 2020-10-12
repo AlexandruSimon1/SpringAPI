@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
+//Connecting our REST API to data base
 @Data
 @Component
 @PropertySource("application-${spring.profiles.active}.properties")

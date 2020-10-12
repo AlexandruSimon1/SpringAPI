@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V1__init_tables.sql" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V2__insert_administrator_table.sql" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V3__insert_waiter_table.sql" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V4__insert_menu_table.sql" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V5__alter_table_menu.sql" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V6__insert_table_table.sql" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V7__insert_order_table.sql" dialect="GenericSQL" />
-    <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V8__insert_checkout_table.sql" dialect="GenericSQL" />
-    <file url="PROJECT" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/db/migration/V1__init_tables.sql" dialect="MySQL" />
   </component>
 </project>

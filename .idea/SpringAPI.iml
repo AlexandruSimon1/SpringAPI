@@ -9,7 +9,6 @@
           <factory-entry name="entityManagerFactory" value="4daf2f26-04b0-4657-b452-bcc764de42b7" />
         </datasource-mapping>
         <naming-strategy-map />
-        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/.idea/META-INF/persistence.xml" />
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
@@ -17,9 +16,6 @@
     </facet>
     <facet type="web" name="Web">
       <configuration>
-        <descriptors>
-          <deploymentDescriptor name="context.xml" url="file://$MODULE_DIR$/.idea/META-INF/context.xml" />
-        </descriptors>
         <webroots>
           <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
         </webroots>

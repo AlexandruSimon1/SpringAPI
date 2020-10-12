@@ -11,7 +11,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Collections;
-
+//Swagger is used for online documentation in order to have the endpoints online and test all of them
 @Configuration
 @EnableSwagger2
 public class SwaggerConfiguration {
@@ -26,7 +26,7 @@ public class SwaggerConfiguration {
     }
 
     private ApiInfo metaData(){
-        Contact contact = new Contact("Arthur Simon","", "asimon@ms3-inc.com");
+        Contact contact = new Contact("Alexandru Simon","", "asimon@ms3-inc.com");
 
         return new ApiInfo(
                 "",

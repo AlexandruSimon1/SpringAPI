@@ -1,6 +1,5 @@
 package com.application.controller;
 
-import com.application.controller.MenuController;
 import com.application.dto.MenuDTO;
 import com.application.model.enums.CategoryType;
 import com.application.service.dbImpl.MenuServiceImpl;
@@ -50,9 +49,13 @@ class MenuControllerTest {
 
     @BeforeEach
     void setUp() {
+        //Setup the controller to MockMvc in order to have access to the information from the REST API
         this.mockMvc = MockMvcBuilders.standaloneSetup(menuController)
-                .setControllerAdvice(new ExceptionController()).alwaysExpect(MockMvcResultMatchers.content().
-                        contentType(MediaType.APPLICATION_JSON)).build();
+                .setControllerAdvice(new ExceptionController())
+                .alwaysExpect(MockMvcResultMatchers.content()
+                        .contentType(MediaType.APPLICATION_JSON))
+                .build();
+        //Inserting the data in order to be able to do the test of the endpoints
         menuDTO = new MenuDTO();
         menuDTO.setId(ID_VALUE);
         menuDTO.setName("Mushroom");
@@ -63,26 +66,35 @@ class MenuControllerTest {
 
     @Test
     void getAllProducts() throws Exception {
+        //given
         List<MenuDTO> menuDTOList = new ArrayList<>();
         menuDTOList.add(menuDTO);
+        //when
         when(menuService.getAllProducts()).thenReturn(menuDTOList);
-        mockMvc.perform(get("/api/v1/menus")).andDo(print()).
-                andExpect(status().isOk()).
-                andExpect(content().contentType(MediaType.APPLICATION_JSON)).
-                andExpect(jsonPath("$", hasSize(1)));
+        //then
+        mockMvc.perform(get("/api/v1/menus")).andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$", hasSize(1)));
     }
 
     @Test
     void getProductById() throws Exception {
+        //when
         when(menuService.getProductById(anyInt())).thenReturn(menuDTO);
-        this.mockMvc.perform(get("/api/v1/menus/{productId}", ID_VALUE).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))
+        //then
+        this.mockMvc.perform(get("/api/v1/menus/{productId}", ID_VALUE)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("id", is(ID_VALUE)));
     }
 
     @Test
     void deleteProductById() throws Exception {
+        //when
         when(menuService.deleteProductById(ID_VALUE)).thenReturn(menuDTO);
+        //then
         this.mockMvc.perform(delete("/api/v1/menus/{productId}", menuDTO.getId()))
                 .andExpect(status().is2xxSuccessful());
         verify(menuService, times(1)).deleteProductById(ID_VALUE);
@@ -90,12 +102,13 @@ class MenuControllerTest {
 
     @Test
     void updateProductById() throws Exception {
+        //given
         ObjectMapper mapper = new ObjectMapper();
         MenuDTO toUpdate = new MenuDTO();
         toUpdate.setPrice(65);
-
+        //when
         when(menuService.update(any(), anyInt())).thenReturn(toUpdate);
-
+        //then
         this.mockMvc.perform(put("/api/v1/menus/{productId}", menuDTO.getId().toString())
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(mapper.writeValueAsString(toUpdate)))
@@ -105,10 +118,13 @@ class MenuControllerTest {
     }
     @Test
     void createProduct() throws Exception {
+        //given
         MenuDTO toCreate=new MenuDTO();
         toCreate.setPrice(85);
         toCreate.setId(ID_VALUE);
+        //when
         when(menuService.createProduct(Mockito.any(MenuDTO.class))).thenReturn(toCreate);
+        //then
         MockHttpServletRequestBuilder builder= MockMvcRequestBuilders.post("/api/v1/menus").
                 contentType(MediaType.APPLICATION_JSON_VALUE).accept(MediaType.APPLICATION_JSON).characterEncoding("UTF-8")
                 .content(this.mapper.writeValueAsBytes(toCreate));

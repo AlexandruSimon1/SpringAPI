@@ -43,10 +43,13 @@ class MenuServiceImplTest {
 
     @Test
     void getAllProducts() {
+        //given
         List<Menu> getAllProducts = new ArrayList<>();
         getAllProducts.add(defaultMenu);
+        //when
         when(menuRepository.findAll()).thenReturn(getAllProducts);
         List<MenuDTO> menuDTOS = menuService.getAllProducts();
+        //then
         assertEquals(menuDTOS.size(), getAllProducts.size());
         verify(menuRepository, times(1)).findAll();
     }
@@ -55,6 +58,7 @@ class MenuServiceImplTest {
     void getProductById() {
         Menu menuTest=new Menu();
         menuTest.setId(ID_VALUE);
+
         when(menuRepository.findById(ID_VALUE)).thenReturn(Optional.of(menuTest));
         MenuDTO menuDTO = menuService.getProductById(ID_VALUE);
 
@@ -64,10 +68,12 @@ class MenuServiceImplTest {
 
     @Test
     void deleteProductById() {
+        //when
         when(menuRepository.findById(ID_VALUE)).thenReturn(Optional.of(defaultMenu));
         menuRepository.deleteById(ID_VALUE);
-        verify(menuRepository, times(1)).deleteById(ID_VALUE);
         MenuDTO menuDTO = menuService.deleteProductById(ID_VALUE);
+        //then
+        verify(menuRepository, times(1)).deleteById(ID_VALUE);
         assertEquals(menuDTO.getId(), defaultMenu.getId());
     }
 
@@ -81,8 +87,8 @@ class MenuServiceImplTest {
 
         when(menuRepository.findById(ID_VALUE)).thenReturn(Optional.of(defaultMenu));
         when(menuRepository.save(defaultMenu)).thenReturn(defaultMenu);
-
         MenuDTO updatedMenu = menuService.update(updateProduct, ID_VALUE);
+
         assertEquals(updatedMenu.getId(), defaultMenu.getId());
         assertEquals(updatedMenu.getName(), updateProduct.getName());
         assertEquals(updatedMenu.getDescription(), updateProduct.getDescription());
@@ -104,9 +110,10 @@ class MenuServiceImplTest {
         createdProduct.setDescription("Ice cream with couple of chocolate");
         createdProduct.setCategoryType(CategoryType.DESSERT);
         createdProduct.setPrice(85);
-        when(menuRepository.save(createProductMenu)).thenReturn(createProductMenu);
 
+        when(menuRepository.save(createProductMenu)).thenReturn(createProductMenu);
         MenuDTO finalProduct = menuService.createProduct(createdProduct);
+
         assertEquals(finalProduct.getId(), createProductMenu.getId());
         assertEquals(finalProduct.getName(), createProductMenu.getName());
         assertEquals(finalProduct.getDescription(), createProductMenu.getDescription());

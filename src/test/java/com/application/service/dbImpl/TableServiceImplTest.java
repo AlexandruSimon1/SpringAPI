@@ -37,10 +37,13 @@ class TableServiceImplTest {
 
     @Test
     void getAllTables() {
+        //given
         List<Table> tables = new ArrayList<>();
         tables.add(table);
+        //when
         when(tableRepository.findAll()).thenReturn(tables);
         List<TableDTO> getAllTables = tableService.getAllTable();
+        //then
         assertNotNull(getAllTables);
         assertEquals(tables.size(),getAllTables.size());
         verify(tableRepository, times(1)).findAll();
@@ -90,8 +93,8 @@ class TableServiceImplTest {
         confirmTable.setNumber(ID_VALUE);
 
         when(tableRepository.save(createTable)).thenReturn(createTable);
-
         TableDTO createdTable = tableService.createTable(confirmTable);
+
         assertNotNull(createdTable);
         assertEquals(createdTable.getId(), createTable.getId());
         assertEquals(createdTable.getNumber(), createTable.getNumber());

@@ -53,13 +53,14 @@ class AdministratorServiceImplTest {
 
     @Test
     void getAllAdministrators() {
+        //given
         List<Administrator> getAllAdmins = new ArrayList<>();
         getAllAdmins.add(firstAdministrator);
         getAllAdmins.add(secondAdministrator);
-
+        //when
         when(administratorRepository.findAll()).thenReturn(getAllAdmins);
-
         List<AdminDTO> adminDTOS = administratorService.getAllAdministrators();
+        //then
         assertEquals(getAllAdmins.size(), adminDTOS.size());
         verify(administratorRepository, times(1)).findAll();
     }
@@ -71,6 +72,7 @@ class AdministratorServiceImplTest {
 
         when(administratorRepository.findById(ID_VALUE)).thenReturn(Optional.of(getAdmin));
         AdminDTO adminDTO = administratorService.getAdministratorById(ID_VALUE);
+
         assertEquals(getAdmin.getId(), adminDTO.getId());
         verify(administratorRepository, times(1)).findById(ID_VALUE);
     }
@@ -147,7 +149,6 @@ class AdministratorServiceImplTest {
         assertEquals(updateAdministratorById.getAddress(), updatedAdmin.getAddress());
         assertEquals(updateAdministratorById.getPhoneNumber(), updatedAdmin.getPhoneNumber());
         assertEquals(updateAdministratorById.getEmail(), updatedAdmin.getEmail());
-
         verify(administratorRepository, times(1)).save(updateAdministratorById);
     }
 }
