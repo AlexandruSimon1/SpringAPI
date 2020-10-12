@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +21,6 @@ public class AdministratorController {
     private final AdministratorService administratorService;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('developers:read')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET ALL ADMINISTRATORS", notes = "\n" + "This operation gets all administrators")
     public List<AdminDTO> getAllAdministrators() {
@@ -30,7 +28,6 @@ public class AdministratorController {
     }
 
     @GetMapping(value = "/{administratorId}")
-    @PreAuthorize("hasAuthority('developers:read')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "GET ADMINISTRATOR BY ID", notes = "\n" + "This operation get an administrator by id")
     public AdminDTO getAdministratorById(@PathVariable int administratorId) {
@@ -38,7 +35,6 @@ public class AdministratorController {
     }
 
     @DeleteMapping(value = "/{administratorId}")
-    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ApiOperation(value = "DELETE ADMINISTRATOR BY ID", notes = "\n" + "This operation deletes an administrator by id")
     public AdminDTO deleteAdministratorById(@PathVariable Integer administratorId) {
@@ -46,7 +42,6 @@ public class AdministratorController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiOperation(value = "CREATE ADMINISTRATOR", notes = "\n" + "This operation creates an administrator")
     public AdminDTO createAdmin(@RequestBody AdminDTO adminDTO) {
@@ -54,7 +49,6 @@ public class AdministratorController {
     }
 
     @PutMapping(value = "/{administratorId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.OK)
     @ApiOperation(value = "UPDATE ADMINISTRATOR BY ID", notes = "\n" + "This operation update an administrator by id")
     public AdminDTO updateAdministratorById(@PathVariable Integer administratorId, @RequestBody AdminDTO adminDTO) {
