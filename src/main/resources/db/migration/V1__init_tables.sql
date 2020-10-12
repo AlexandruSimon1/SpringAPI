@@ -1,3 +1,4 @@
+# This type of implementation of My SQL is used for FlyWay in order to create automatically our data base
 CREATE TABLE administrators(
 ID INT PRIMARY KEY AUTO_INCREMENT,
 FIRST_NAME VARCHAR(30),
