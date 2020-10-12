@@ -132,53 +132,6 @@ class OrderServiceImplTest {
 
     @Test
     void findAllProductByOrderId() {
-        order.setMenus(menuList);
-
-        when(orderRepository.findById(ID_VALUE)).thenReturn(Optional.of(order));
-        menuDTOList = orderService.findAllProductByOrderId(ID_VALUE);
-
-        assertFalse(menuDTOList.isEmpty());
-        assertEquals(menuDTOList.size(), menuList.size());
-    }
-
-    @Test
-    void updateProductByOrderId() {
-        order.setMenus(menuList);
-
-        when(orderRepository.findById(ID_VALUE)).thenReturn(Optional.of(order));
-        Menu menu = new Menu();
-        menu.setId(ID_VALUE);
-        menu.setPrice(95);
-
-        MenuDTO menuDTO = new MenuDTO();
-        menuDTO.setId(ID_VALUE);
-        menuDTO.setPrice(95);
-
-        when(menuRepository.save(menu)).thenReturn(menu);
-        MenuDTO updated = orderService.updateProductByOrderId(ID_VALUE, ID_VALUE, menuDTO);
-
-        assertNotNull(updated);
-        assertEquals(95, updated.getPrice());
-    }
-    @Test
-    void deleteProductByOrderId(){
-        List<Menu>menuListDelete=new ArrayList<>();
-        Menu menu=new Menu();
-        menu.setId(ID_VALUE);
-        menu.setPrice(95);
-        menuListDelete.add(menu);
-        order.setMenus(menuListDelete);
-        when(orderRepository.findById(ID_VALUE)).thenReturn(Optional.of(order));
-
-        when(menuRepository.findById(ID_VALUE)).thenReturn(Optional.of(menu));
-
-        MenuDTO deleted=orderService.deleteProductByOrderId(ID_VALUE,ID_VALUE);
-        assertNotNull(deleted);
-        assertEquals(ID_VALUE, deleted.getId());
-    }
-
-    @Test
-    void findAllProductByOrderId() {
         //given
         order.setMenus(menuList);
         //when
