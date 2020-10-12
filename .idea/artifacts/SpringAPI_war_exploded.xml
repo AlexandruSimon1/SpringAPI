@@ -14,6 +14,10 @@
           <element id="module-output" name="SpringAPI" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.3.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot:2.3.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:5.2.8.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.2.8.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-thymeleaf:2.3.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter:2.3.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-logging:2.3.2.RELEASE" />
@@ -52,8 +56,6 @@
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-jpa:2.3.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:2.3.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-orm:5.2.8.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-context:5.2.8.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.2.8.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.2.8.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aspects:5.2.8.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-starter-web:2.3.2.RELEASE" />
@@ -73,8 +75,6 @@
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-config:5.3.3.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:5.3.3.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.security:spring-security-web:5.3.3.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot:2.3.2.RELEASE" />
-          <element id="library" level="project" name="Maven: org.springframework.boot:spring-boot-autoconfigure:2.3.2.RELEASE" />
           <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.21" />
           <element id="library" level="project" name="Maven: org.flywaydb:flyway-core:6.4.4" />
           <element id="library" level="project" name="Maven: org.mapstruct:mapstruct-jdk8:1.2.0.Final" />
