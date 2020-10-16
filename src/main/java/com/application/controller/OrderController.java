@@ -54,13 +54,6 @@ public class OrderController {
         return orderService.update(orderDTO, orderId);
     }
 
-    @GetMapping("/{orderId}/menus")
-    @ResponseStatus(HttpStatus.OK)
-    @ApiOperation(value = "GET ALL PRODUCT BY ORDER NUMBER", notes = "\n" + "This operation gets all products from order number")
-    public List<MenuDTO> getAllProductByOrderId(@PathVariable int orderId) {
-        return orderService.findAllProductByOrderId(orderId);
-    }
-
     @PutMapping("/{orderId}/menus/{removed_productId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @ApiOperation(value = "UPDATE PRODUCT BY ORDER NUMBER", notes = "\n" + "This operation updates products from existing order by order number")

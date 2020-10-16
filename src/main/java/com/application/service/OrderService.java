@@ -17,8 +17,6 @@ public interface OrderService {
 
     OrderDTO update(OrderDTO orderDTO, int orderNumber);
 
-    List<MenuDTO> findAllProductByOrderId(int orderNumber);
-
     MenuDTO updateProductByOrderId(int orderNumber, int removed_productId, MenuDTO newMenuDTO);
 
     MenuDTO deleteProductByOrderId(int orderNumber, int removed_productId);

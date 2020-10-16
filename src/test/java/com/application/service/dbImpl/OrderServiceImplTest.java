@@ -33,13 +33,11 @@ class OrderServiceImplTest {
     private OrderRepository orderRepository;
     @Mock
     private MenuRepository menuRepository;
-    @Mock
-    private TableRepository tableRepository;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.initMocks(this);
-        orderService = new OrderServiceImpl(orderRepository, menuRepository, tableRepository);
+        orderService = new OrderServiceImpl(orderRepository, menuRepository);
 
         order = new Order();
         order.setId(ID_VALUE);
@@ -131,18 +129,6 @@ class OrderServiceImplTest {
         assertEquals(createOrder.getOrderNumber(), existingOrder.getOrderNumber());
 
 
-    }
-
-    @Test
-    void findAllProductByOrderId() {
-        //given
-        order.setMenus(menuList);
-        //when
-        when(orderRepository.findById(ID_VALUE)).thenReturn(Optional.of(order));
-        menuDTOList = orderService.findAllProductByOrderId(ID_VALUE);
-        //then
-        assertFalse(menuDTOList.isEmpty());
-        assertEquals(menuDTOList.size(), menuList.size());
     }
 
     @Test

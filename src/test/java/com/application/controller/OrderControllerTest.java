@@ -150,17 +150,6 @@ class OrderControllerTest {
     }
 
     @Test
-    void getAllProductByOrderId() throws Exception {
-        //when
-        when(orderService.findAllProductByOrderId(ID_VALUE)).thenReturn(menuDTO);
-        //then
-        this.mockMvc.perform(get("/api/v1/orders/{orderId}/menus", ID_VALUE)).andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$", hasSize(1)));
-    }
-
-    @Test
     void updateProductByOrderId() throws Exception {
         //when
         Mockito.when(orderService.updateProductByOrderId(ID_VALUE, ID_VALUE, testMenuDTO)).thenReturn(testMenuDTO);
